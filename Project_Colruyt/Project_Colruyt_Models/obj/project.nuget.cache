@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "7cHm8/q6nKg5LV48aH9zACQcajhFcMunEzh7Np4iBePxHv6U+Ued4K15mOo8wuNLhCqZ5L4TTjlg6tfCNb7P3Q==",
+  "success": true,
+  "projectFilePath": "D:\\2020-2021 Programmeren\\Agile en Testing\\ProjectColruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\dries\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
