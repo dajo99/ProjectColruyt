@@ -1,9 +1,0 @@
-﻿<Application x:Class="Project_Colruyt_WPF.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Project_Colruyt_WPF"
-             Startup ="Application_Startup">
-    <Application.Resources>
-         
-    </Application.Resources>
-</Application>
