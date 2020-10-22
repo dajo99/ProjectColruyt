@@ -178,23 +178,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dries\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\alain\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\2020-2021 Programmeren\\Agile en Testing\\ProjectColruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj",
+      "projectUniqueName": "C:\\Users\\alain\\Desktop\\Colruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj",
       "projectName": "Project_Colruyt_Models",
-      "projectPath": "D:\\2020-2021 Programmeren\\Agile en Testing\\ProjectColruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj",
-      "packagesPath": "C:\\Users\\dries\\.nuget\\packages\\",
-      "outputPath": "D:\\2020-2021 Programmeren\\Agile en Testing\\ProjectColruyt\\Project_Colruyt\\Project_Colruyt_Models\\obj\\",
+      "projectPath": "C:\\Users\\alain\\Desktop\\Colruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj",
+      "packagesPath": "C:\\Users\\alain\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\alain\\Desktop\\Colruyt\\Project_Colruyt\\Project_Colruyt_Models\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\dries\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\alain\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
