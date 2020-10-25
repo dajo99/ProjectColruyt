@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alain\\Desktop\\Colruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj": {}
+    "C:\\Users\\guigi\\OneDrive\\Bureaublad\\ProjectColruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\alain\\Desktop\\Colruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj": {
+    "C:\\Users\\guigi\\OneDrive\\Bureaublad\\ProjectColruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alain\\Desktop\\Colruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj",
+        "projectUniqueName": "C:\\Users\\guigi\\OneDrive\\Bureaublad\\ProjectColruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj",
         "projectName": "Project_Colruyt_Models",
-        "projectPath": "C:\\Users\\alain\\Desktop\\Colruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj",
-        "packagesPath": "C:\\Users\\alain\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alain\\Desktop\\Colruyt\\Project_Colruyt\\Project_Colruyt_Models\\obj\\",
+        "projectPath": "C:\\Users\\guigi\\OneDrive\\Bureaublad\\ProjectColruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj",
+        "packagesPath": "C:\\Users\\guigi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\guigi\\OneDrive\\Bureaublad\\ProjectColruyt\\Project_Colruyt\\Project_Colruyt_Models\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\alain\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\guigi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
