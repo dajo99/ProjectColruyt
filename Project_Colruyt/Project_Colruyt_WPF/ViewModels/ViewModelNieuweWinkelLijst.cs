@@ -37,6 +37,11 @@ namespace Project_Colruyt_WPF.ViewModels
             }
         }
 
+        public ViewModelNieuweWinkelLijst()
+        {
+
+        }
+
         ///Komende sprints hieraan werken
         public override string this[string columnName] => throw new NotImplementedException();
 
@@ -54,7 +59,7 @@ namespace Project_Colruyt_WPF.ViewModels
 
         public void Verwijderen()
         {
-            ///Code die een item uit het huidige lijstje verwijdert. kan nog meer inkomen te staan
+            ///Code die een item uit het huidige lijstje verwijdert. kan nog meer in komen te staan
             Lijstje.Remove(SelectItem);
         }
         public override bool CanExecute(object parameter)
