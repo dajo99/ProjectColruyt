@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 namespace Project_Colruyt_WPF.ViewModels
 {
    public class MainViewModel
-    {
-    }
+   {
+        
+
+   }
+
+    
 }

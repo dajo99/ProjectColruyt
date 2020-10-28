@@ -1,0 +1,103 @@
+﻿<Window x:Class="Project_Colruyt_WPF.Views.NieuweLijstView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project_Colruyt_WPF.Usercontrols"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
+        Title="NieuweLijstView" Height="520" Width="800" Loaded="Window_Loaded" >
+    <Grid>
+        <Grid.Resources>
+            <DataTemplate x:Key="buttontemplate">
+                <DockPanel>
+                    <Button
+                        DockPanel.Dock="Left"
+                        Margin="0"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                        <materialDesign:PackIcon Kind="TrashCanOutline" Height="18" Width="18"/>
+                    </Button>
+                </DockPanel>
+            </DataTemplate>
+            <DataTemplate x:Key="naamtemplate">
+                <TextBlock VerticalAlignment="Bottom" Text="{Binding Naam}" Margin="18 10 0 0"/>
+            </DataTemplate>
+            <DataTemplate x:Key="prijstemplate">
+                <TextBlock VerticalAlignment="Bottom" Text="{Binding Prijs}" Margin="18 10 0 0"/>
+            </DataTemplate>
+            <DataTemplate x:Key="aantaltemplate">
+                <TextBlock VerticalAlignment="Bottom" Text="{Binding Aantal}"  Margin="30 10 0 0">
+                </TextBlock>
+            </DataTemplate>
+            <!--<DataTemplate x:Key="myHeaderTemplate">
+                <DockPanel>
+                    <TextBlock Margin="-18 0 0 0" FontSize="16" >
+                        <TextBlock.Text>
+                            <Binding/>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DockPanel>
+            </DataTemplate>-->
+
+
+
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <local:Navbar_Usercontrol_Back Grid.Row="0"></local:Navbar_Usercontrol_Back>
+        
+        
+        <Grid Background="#D4EAEE" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            
+            <ListView 
+                Margin="70 20"
+                x:Name="LVproducten"
+                Grid.Row="0">
+                <ListView.View>
+                    <GridView ><!--ColumnHeaderTemplate="{ StaticResource myHeaderTemplate}"-->
+                        <GridViewColumn Width="110" 
+                        CellTemplate="{StaticResource aantaltemplate}"   
+                        Header="Aantal"/>
+                        <GridViewColumn Width="340" 
+                        CellTemplate="{StaticResource naamtemplate}"   
+                        Header="product" />
+                        <GridViewColumn Width="110"
+                        CellTemplate="{StaticResource prijstemplate}"   
+                        Header="Prijs" />
+                        <GridViewColumn
+                        CellTemplate="{StaticResource buttontemplate}"                       
+                        Header="" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <StackPanel Orientation="Horizontal" Width="440" Grid.Row="1">
+                <Button x:Name="btnToevoegen" Width="180" Height="35"
+                        Margin="20" Padding="0"
+                        Visibility="Visible"
+                        Content="product toevoegen"
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+                <Button x:Name="btn" Width="180" Height="35"
+                        Margin="20" Padding="0"
+                        Visibility="Visible"
+                        Content="winkellijst opslaan"
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

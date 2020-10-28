@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Project_Colruyt_WPF.Views"
+        xmlns:local="clr-namespace:Project_Colruyt_WPF.Usercontrols"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -11,8 +11,42 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
-        Title="MainView" Height="450" Width="800">
+        Title="Winlelijstjes" Height="450" Width="800" ResizeMode="CanMinimize">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <local:Navbar_Usercontrol Grid.Row="0" Loaded="Navbar_Usercontrol_Loaded"/>
+        <StackPanel Background="#D4EAEE" Grid.Row="1"  >
+            <ScrollViewer Grid.Row="2" materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True" Margin="20">
+                <ListView>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn>
+                                <TextBlock FontSize="16" Text="Winkellijst Fred"  VerticalAlignment="Center" HorizontalAlignment="Left" />
+                            </GridViewColumn>
+                            
+                            <GridViewColumn>
+                                <TextBlock Text="12/11/2020" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            </GridViewColumn>
+                            
+                            <GridViewColumn >
+                                <Button
+                                Margin="20 0 0 0"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                    <materialDesign:PackIcon Kind="TrashCanOutline" Height="24" Width="24" />
+                                </Button>
+                            </GridViewColumn>
+                            
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </StackPanel>
+
     </Grid>
 </Window>

@@ -18,7 +18,7 @@ namespace Project_Colruyt_WPF
          private void Application_Startup(object sender, StartupEventArgs e)
         {
             MainViewModel viewmodel = new MainViewModel();
-            Views.MainView view = new Views.MainView();
+            Views.NieuweLijstView view = new Views.NieuweLijstView();
             view.DataContext = viewmodel;
             view.Show();
 

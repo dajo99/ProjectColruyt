@@ -10,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Project_Colruyt_WPF.Views
+namespace Project_Colruyt_WPF.Usercontrols
 {
     /// <summary>
-    /// Interaction logic for MainView.xaml
+    /// Interaction logic for Navbar_Usercontrol.xaml
     /// </summary>
-    public partial class MainView : Window
+    public partial class Navbar_Usercontrol : UserControl
     {
-        public MainView()
+        public Navbar_Usercontrol()
         {
             InitializeComponent();
-        }
-
-        private void Navbar_Usercontrol_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
