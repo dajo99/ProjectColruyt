@@ -17,21 +17,21 @@ namespace Project_Colruyt_WPF.ViewModels
 
         private ObservableCollection<string> _inOnsLijstje;
 
-        private string _item;
+        private string _nieuwItem;
 
         private string _type;
 
         private string _selectedComboboxType;
-        public string Item {
+        public string NieuwItem {
 
             get
             {
-                return _item;
+                return _nieuwItem;
             }
 
             set
             {
-                _item = value;
+                _nieuwItem = value;
                 NotifyPropertyChanged();
             }
         }
@@ -116,7 +116,7 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             ///code voor terug te gaan naar het overzicht van onze lijst
         }
-        public override string this[string columnName] => throw new NotImplementedException();
+        public override string this [string columnName] => throw new NotImplementedException();
 
         public override bool CanExecute(object parameter)
         {
