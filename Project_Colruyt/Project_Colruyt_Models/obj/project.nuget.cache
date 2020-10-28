@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "RpZMyuCBm3+6j2rEAD3kUw+t6bpGOFoy3A+HNqusigxe56MQTn1LpLXGJk8kYNja559aG2HBE6Kg13A7D1z9Eg==",
+  "dgSpecHash": "rth3LYgbFTmidLFgF4F2jzEXFmRKheaPGYZsDdW0bRDVAHh3uRluE4OMx2xVx3gp6Iin6epfgqLL00PapYAw0Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\alain\\Desktop\\Colruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj",
+  "projectFilePath": "F:\\Thomas More\\Year 2\\Agile en testing\\Project Colruyt\\ProjectColruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\alain\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\alain\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Users\\mitch\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\mitch\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
   ],
   "logs": []
 }

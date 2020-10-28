@@ -1,21 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\alain\\Desktop\\Colruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj": {}
+    "F:\\Thomas More\\Year 2\\Agile en testing\\Project Colruyt\\ProjectColruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj": {}
   },
   "projects": {
-    "C:\\Users\\alain\\Desktop\\Colruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj": {
+    "F:\\Thomas More\\Year 2\\Agile en testing\\Project Colruyt\\ProjectColruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\alain\\Desktop\\Colruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj",
+        "projectUniqueName": "F:\\Thomas More\\Year 2\\Agile en testing\\Project Colruyt\\ProjectColruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj",
         "projectName": "Project_Colruyt_Models",
-        "projectPath": "C:\\Users\\alain\\Desktop\\Colruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj",
-        "packagesPath": "C:\\Users\\alain\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\alain\\Desktop\\Colruyt\\Project_Colruyt\\Project_Colruyt_Models\\obj\\",
+        "projectPath": "F:\\Thomas More\\Year 2\\Agile en testing\\Project Colruyt\\ProjectColruyt\\Project_Colruyt\\Project_Colruyt_Models\\Project_Colruyt_Models.csproj",
+        "packagesPath": "C:\\Users\\mitch\\.nuget\\packages\\",
+        "outputPath": "F:\\Thomas More\\Year 2\\Agile en testing\\Project Colruyt\\ProjectColruyt\\Project_Colruyt\\Project_Colruyt_Models\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\alain\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\mitch\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
