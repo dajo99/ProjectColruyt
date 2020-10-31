@@ -10,21 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Project_Colruyt_WPF.Views
+namespace Project_Colruyt_WPF.Usercontrols
 {
     /// <summary>
-    /// Interaction logic for MainView.xaml
+    /// Interaction logic for LijstOverzicht_usercontrol.xaml
     /// </summary>
-    public partial class MainView : Window
+    public partial class LijstOverzicht_usercontrol : UserControl
     {
-        public MainView()
+        public LijstOverzicht_usercontrol()
         {
             InitializeComponent();
         }
 
-        private void LijstOverzicht_usercontrol_Loaded(object sender, RoutedEventArgs e)
+        private void LVOverzichtLijsten_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
