@@ -11,7 +11,7 @@
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
-        Title="Winlelijstjes" Height="450" Width="800" ResizeMode="CanMinimize">
+        Title="Winlelijstjes" Height="450" Width="800" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -38,7 +38,7 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
@@ -46,6 +46,8 @@
                     <Button x:Name="btnBack"
                         Margin="20 0" Padding="0 0 10 0"
                         Visibility="Visible"
+                        HorizontalAlignment="Left"
+                        Width="118"
                         Style="{StaticResource MaterialDesignOutlinedButton}"
                         Foreground="WhiteSmoke"
                         BorderBrush="WhiteSmoke" BorderThickness="1">
@@ -72,7 +74,9 @@
                     Visibility="Visible"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Foreground="#FFF" 
-                    Width="auto" Margin="0"  Grid.Column="2" Grid.Row="0"                    
+                    HorizontalAlignment="Right"
+                    Width="118" Margin="20 0"  
+                    Grid.Column="2" Grid.Row="0"                    
                     x:Name="btnLogOut" Command="{Binding}" CommandParameter="LogOut">
                         <Button.Content>
                             <StackPanel Orientation="Horizontal">
