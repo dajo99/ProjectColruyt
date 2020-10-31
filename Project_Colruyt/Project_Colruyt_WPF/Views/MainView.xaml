@@ -13,6 +13,7 @@
         FontFamily="{materialDesign:MaterialDesignFont}"
         Title="Winlelijstjes" Height="450" Width="800" >
     <Grid>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>

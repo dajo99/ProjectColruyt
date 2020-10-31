@@ -67,13 +67,18 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+
     <Compile Include="Usercontrols\LijstOverzicht_usercontrol.xaml.cs">
       <DependentUpon>LijstOverzicht_usercontrol.xaml</DependentUpon>
     </Compile>
     <Compile Include="Usercontrols\NieuweLijst_usercontrol.xaml.cs">
       <DependentUpon>NieuweLijst_usercontrol.xaml</DependentUpon>
     </Compile>
+
+    <Compile Include="ViewModels\BasisViewModel.cs" />
+
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelNieuweWinkelLijst.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
