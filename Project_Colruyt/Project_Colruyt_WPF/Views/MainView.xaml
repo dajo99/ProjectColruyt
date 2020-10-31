@@ -20,33 +20,86 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <local:Navbar_Usercontrol Grid.Row="0" Loaded="Navbar_Usercontrol_Loaded"/>
-        <StackPanel Background="#D4EAEE" Grid.Row="1"  >
-            <ScrollViewer Grid.Row="2" materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True" Margin="20">
-                <ListView>
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn>
-                                <TextBlock FontSize="16" Text="Winkellijst Fred"  VerticalAlignment="Center" HorizontalAlignment="Left" />
-                            </GridViewColumn>
-                            
-                            <GridViewColumn>
-                                <TextBlock Text="12/11/2020" VerticalAlignment="Center" HorizontalAlignment="Center" />
-                            </GridViewColumn>
-                            
-                            <GridViewColumn >
-                                <Button
-                                Margin="20 0 0 0"
-                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
-                                    <materialDesign:PackIcon Kind="TrashCanOutline" Height="24" Width="24" />
-                                </Button>
-                            </GridViewColumn>
-                            
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </ScrollViewer>
-        </StackPanel>
+        
+        <!--navbar-->
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <materialDesign:ColorZone
+            Grid.Row="0"
+            Margin="0" 
+            Height="75"
+            Mode="PrimaryLight"
+            Padding="0 15">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- top left buttons. visibility depending on usercontrol added in -->
+                    <Button x:Name="btnBack"
+                        Margin="20 0" Padding="0 0 10 0"
+                        Visibility="Visible"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                        Foreground="WhiteSmoke"
+                        BorderBrush="WhiteSmoke" BorderThickness="1">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="MenuLeftOutline" VerticalAlignment="Center"/>
+                            <TextBlock>Back</TextBlock>
+                        </StackPanel>
+
+                    </Button>
+                    
+                    <!--Titel, WindowTitle binding-->
+                    <StackPanel Orientation="Vertical" Grid.Column="1" Margin="0" VerticalAlignment="Center">
+                        <Label
+                        materialDesign:ShadowAssist.ShadowEdges="All"
+                        materialDesign:ShadowAssist.ShadowDepth="Depth5"
+                        Foreground="WhiteSmoke" FontSize="22"                        
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom" 
+                        Content="{Binding WindowTitle}"/>
+                    </StackPanel>
+                    
+                    <!--Top right navbar buttons, visibility depending on usercontrol added in-->
+                    <Button
+                    Visibility="Visible"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Foreground="#FFF" 
+                    Width="auto" Margin="0"  Grid.Column="2" Grid.Row="0"                    
+                    x:Name="btnLogOut" Command="{Binding}" CommandParameter="LogOut">
+                        <Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Log out" VerticalAlignment="Bottom"/>
+                                <materialDesign:PackIcon Kind="MenuRightOutline" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Button.Content>
+                    </Button>
+
+                    <Button
+                      Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}"
+                      Foreground="#FFF" Visibility="Hidden"
+                        Margin="0"  Grid.Column="2" Grid.Row="0"   Width="30" Height="30"                 
+                        x:Name="btnKlaar" Command="{Binding}" CommandParameter="Klaar">
+                        <materialDesign:PackIcon
+                        Kind="Check"
+                        Height="18"
+                        Width="18" />
+                    </Button>
+                </Grid>
+            </materialDesign:ColorZone>
+        </Grid>
+        
+        <!--usercontrol grid-->
+        <Grid Background="#D4EAEE" Grid.Row="1"  >
+            <local:LijstOverzicht_usercontrol Loaded="LijstOverzicht_usercontrol_Loaded"/>
+        </Grid>
 
     </Grid>
 </Window>

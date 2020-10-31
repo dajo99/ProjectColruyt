@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Project_Colruyt_WPF.Usercontrols
 {
     /// <summary>
-    /// Interaction logic for Navbar_Usercontrol_Back.xaml
+    /// Interaction logic for NieuweLijst_usercontrol.xaml
     /// </summary>
-    public partial class Navbar_Usercontrol_Back : UserControl
+    public partial class NieuweLijst_usercontrol : UserControl
     {
-        public Navbar_Usercontrol_Back()
+        public NieuweLijst_usercontrol()
         {
             InitializeComponent();
         }

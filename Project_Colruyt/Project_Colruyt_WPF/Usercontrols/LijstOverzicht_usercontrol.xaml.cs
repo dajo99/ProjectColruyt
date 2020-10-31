@@ -16,13 +16,18 @@ using System.Windows.Shapes;
 namespace Project_Colruyt_WPF.Usercontrols
 {
     /// <summary>
-    /// Interaction logic for Navbar_Usercontrol.xaml
+    /// Interaction logic for LijstOverzicht_usercontrol.xaml
     /// </summary>
-    public partial class Navbar_Usercontrol : UserControl
+    public partial class LijstOverzicht_usercontrol : UserControl
     {
-        public Navbar_Usercontrol()
+        public LijstOverzicht_usercontrol()
         {
             InitializeComponent();
+        }
+
+        private void LVOverzichtLijsten_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Project_Colruyt_WPF.Views
             InitializeComponent();
         }
 
-        private void Navbar_Usercontrol_Loaded(object sender, RoutedEventArgs e)
+        private void LijstOverzicht_usercontrol_Loaded(object sender, RoutedEventArgs e)
         {
 
         }
