@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_Colruyt_WPF.Views;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Project_Colruyt_WPF.ViewModels
@@ -48,12 +50,20 @@ namespace Project_Colruyt_WPF.ViewModels
 
         public void OpenToevoegen()
         {
-            ///Code voor naar de usercontrole van toevoegen te gaan
-        }
+            ///Code usercontroles en de context van mainview te vernieuwen
+            MainView view = (MainView)Application.Current.MainWindow;
+            MainViewModel mainModel = new MainViewModel();
+            mainModel.WindowTitle = "Producten toevoegen";
+            view.DataContext = mainModel;
+            view.GridMain.Children.Clear();
 
-        public void Annuleren()
-        {
-            ///Code voor naar de usercontrole van het overzicht met alle lijstjes te gaan en het huidige lijstje ongedaan maakt
+            //user control voor nieuwe lijst initialiseren en datacontext instellen
+            /*voorbeeld
+              UsercontrolToevoegen usc = new UsercontrolToevoegen();
+              ViewModelToevoegen vm = new ViewModelToevoegen();
+              usc.datacontext = vm;
+              view.GridMain.Children.Add(usc);
+            */
         }
 
         public void Verwijderen()
@@ -67,8 +77,7 @@ namespace Project_Colruyt_WPF.ViewModels
             {
                 case "Toevoegen":
                     return true;
-                case "Annuleren":
-                    return true;
+
                 case "Verwijderen":
                     return true;
             }
@@ -81,9 +90,6 @@ namespace Project_Colruyt_WPF.ViewModels
             {
                 case "Toevoegen":
                     OpenToevoegen();
-                    break;
-                case "Annuleren":
-                    Annuleren();
                     break;
                 case "Verwijderen":
                     Verwijderen();

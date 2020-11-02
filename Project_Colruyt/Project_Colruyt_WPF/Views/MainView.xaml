@@ -102,7 +102,7 @@
         </Grid>
         
         <!--usercontrol grid-->
-        <Grid Background="#D4EAEE" Grid.Row="1"  >
+        <Grid Background="#D4EAEE" Grid.Row="1"  x:Name="GridMain" >
             <local:LijstOverzicht_usercontrol Loaded="LijstOverzicht_usercontrol_Loaded"/>
         </Grid>
 
