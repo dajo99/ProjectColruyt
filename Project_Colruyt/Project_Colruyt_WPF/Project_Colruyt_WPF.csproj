@@ -67,16 +67,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-
     <Compile Include="Usercontrols\LijstOverzicht_usercontrol.xaml.cs">
       <DependentUpon>LijstOverzicht_usercontrol.xaml</DependentUpon>
     </Compile>
     <Compile Include="Usercontrols\NieuweLijst_usercontrol.xaml.cs">
       <DependentUpon>NieuweLijst_usercontrol.xaml</DependentUpon>
     </Compile>
-
+    <Compile Include="Usercontrols\NieuwProduct_usercontrol.xaml.cs">
+      <DependentUpon>NieuwProduct_usercontrol.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BasisViewModel.cs" />
-
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelNieuweWinkelLijst.cs" />
     <Compile Include="Views\MainView.xaml.cs">
@@ -116,6 +116,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Usercontrols\NieuweLijst_usercontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Usercontrols\NieuwProduct_usercontrol.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
