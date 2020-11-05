@@ -77,6 +77,7 @@
       <DependentUpon>NieuwProduct_usercontrol.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BasisViewModel.cs" />
+    <Compile Include="ViewModels\LijstOverzichtViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelNieuweWinkelLijst.cs" />
     <Compile Include="Views\MainView.xaml.cs">

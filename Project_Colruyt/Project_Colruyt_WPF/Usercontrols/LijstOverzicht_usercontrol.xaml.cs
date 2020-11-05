@@ -29,5 +29,10 @@ namespace Project_Colruyt_WPF.Usercontrols
         {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

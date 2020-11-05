@@ -1,4 +1,5 @@
-﻿using Project_Colruyt_WPF.Views;
+﻿using Project_Colruyt_WPF.Usercontrols;
+using Project_Colruyt_WPF.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -56,14 +57,10 @@ namespace Project_Colruyt_WPF.ViewModels
             mainModel.WindowTitle = "Producten toevoegen";
             view.DataContext = mainModel;
             view.GridMain.Children.Clear();
-
-            //user control voor nieuwe lijst initialiseren en datacontext instellen
-            /*voorbeeld
-              UsercontrolToevoegen usc = new UsercontrolToevoegen();
-              ViewModelToevoegen vm = new ViewModelToevoegen();
-              usc.datacontext = vm;
+            NieuwProduct_usercontrol usc = new NieuwProduct_usercontrol();
+            //viewmodel aanmaken voor het toevoegen van producten en de datacontext instellen
               view.GridMain.Children.Add(usc);
-            */
+            
         }
 
         public void Verwijderen()
@@ -75,7 +72,7 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             switch (parameter.ToString())
             {
-                case "Toevoegen":
+                case "ProductToevoegen":
                     return true;
 
                 case "Verwijderen":
@@ -88,7 +85,7 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             switch (parameter.ToString())
             {
-                case "Toevoegen":
+                case "ProductToevoegen":
                     OpenToevoegen();
                     break;
                 case "Verwijderen":

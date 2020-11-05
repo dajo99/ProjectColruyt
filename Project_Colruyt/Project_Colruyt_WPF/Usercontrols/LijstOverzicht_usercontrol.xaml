@@ -19,7 +19,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <ScrollViewer Grid.Row="0" materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True" Margin="30 20">
-            <ListView x:Name="LVOverzichtLijsten">
+            <ListView x:Name="LVOverzichtLijsten" ItemsSource="{Binding Lijst}">
                 
                 <ListView.View>
                     <GridView>
@@ -33,9 +33,11 @@
 
                         <GridViewColumn Width="auto" >
                             <Button
+                                Command="{Binding}" CommandParameter="Verwijderen"
                                 Margin="20 0 0 0"
                                 Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
                                 <materialDesign:PackIcon Kind="TrashCanOutline" Height="24" Width="24" />
+                             
                             </Button>
                         </GridViewColumn>
 
@@ -47,7 +49,7 @@
         <Button
             Style="{StaticResource MaterialDesignFloatingActionLightButton}"
             Grid.Row="1" HorizontalAlignment="Right"
-            Margin="40 20">
+            Margin="40 20" Command="{Binding}" CommandParameter="Toevoegen">
             <materialDesign:PackIcon
                 Kind="Plus"
                 Height="26"
