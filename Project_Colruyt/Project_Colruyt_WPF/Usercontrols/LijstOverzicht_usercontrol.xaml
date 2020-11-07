@@ -19,16 +19,16 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <ScrollViewer Grid.Row="0" materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True" Margin="30 20">
-            <ListView x:Name="LVOverzichtLijsten" ItemsSource="{Binding Lijst}">
+            <ListView x:Name="LVOverzichtLijsten" ItemsSource="{Binding Userlists}" SelectedItem="{Binding GeselecteerdeUser}">
                 
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Width="460">
-                            <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding Lijstnaam}"  VerticalAlignment="Center" HorizontalAlignment="Left" />
+                            <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding ListName}"  VerticalAlignment="Center" HorizontalAlignment="Left" />
                         </GridViewColumn>
 
                         <GridViewColumn Width="auto" >
-                            <TextBlock Text="{Binding Datum}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                            <TextBlock Text="{Binding Date}" VerticalAlignment="Center" HorizontalAlignment="Center" />
                         </GridViewColumn>
 
                         <GridViewColumn Width="auto" >

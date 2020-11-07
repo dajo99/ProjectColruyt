@@ -21,6 +21,7 @@ namespace Project_Colruyt_WPF
          {
             MainViewModel viewmodel = new MainViewModel();
             Views.MainView view = new Views.MainView();
+            view.GridMain.Children.Clear();
             LijstOverzicht_usercontrol usc = new LijstOverzicht_usercontrol();
             view.DataContext = viewmodel;
             view.GridMain.Children.Clear();

@@ -1,4 +1,6 @@
-﻿using Project_Colruyt_WPF.Usercontrols;
+﻿using MongoDB.Driver;
+using Project_Colruyt_DAL.Partials;
+using Project_Colruyt_WPF.Usercontrols;
 using Project_Colruyt_WPF.Views;
 using System;
 using System.Collections.Generic;
@@ -14,34 +16,58 @@ namespace Project_Colruyt_WPF.ViewModels
     {
         MainView view = (MainView)Application.Current.MainWindow;
 
-        private ObservableCollection<string> _lijst;
-        public DateTime Datum { get; set; }
-        public string Lijstnaam { get; set; }
-        public ObservableCollection<string> Lijst
-        { 
-            get 
-            {
-                return _lijst;
-            }
+        static MongoClient client = new MongoClient("mongodb+srv://dbdajo:vandoninck@cluster0.zvqn2.gcp.mongodb.net/Colruyt?retryWrites=true&w=majority");
+        static IMongoDatabase database = client.GetDatabase("Colruyt");
+        IMongoCollection<Userlist> collection = database.GetCollection<Userlist>("Userlists");
+        public DateTime Date { get; set; }
+        private string _foutmelding;
+        private ObservableCollection<Userlist> _userlists;
+        private Userlist _geselecteerdeUserlist;
+        private Userlist _userlistRecord;
 
-            set 
+
+        public string Foutmelding
+        {
+            get { return _foutmelding; }
+            set { _foutmelding = value; NotifyPropertyChanged(); }
+        }
+
+        public ObservableCollection<Userlist> Userlists
+        {
+            get { return _userlists; }
+            set
             {
-                _lijst= value;
+                _userlists = value;
                 NotifyPropertyChanged();
-            } 
+            }
+        }
+
+        public Userlist GeselecteerdeUserlist
+        {
+            get { return _geselecteerdeUserlist; }
+            set
+            {
+                _geselecteerdeUserlist = value;
+                UserRecordInstellen();
+                NotifyPropertyChanged();
+
+            }
+        }
+
+        public Userlist UserlistRecord
+        {
+            get { return _userlistRecord; }
+            set
+            {
+                _userlistRecord = value;
+                NotifyPropertyChanged();
+
+            }
         }
 
         public LijstOverzichtViewModel()
         {
-            /////Lijst = (de methode gebruikt om lijsten op te halen uit mongoDB
-            //if (Lijst.Count > 0)
-            //{
-            //    foreach (var item in Lijst)
-            //    {
-            //        //Datum = item.Datum;
-            //        //Lijstnaam = item.Naam;
-            //    }
-            //}
+            
         }
 
         public void LijstToevoegen()
@@ -75,6 +101,24 @@ namespace Project_Colruyt_WPF.ViewModels
                     LijstVerwijderen();
                     break;
             }
+        }
+        private void UserRecordInstellen()
+        {
+            if (GeselecteerdeUserlist != null)
+            {
+                UserlistRecord = GeselecteerdeUserlist;
+            }
+            else
+            {
+                UserlistRecord = new Userlist();
+            }
+        }
+
+        public void Wissen()
+        {
+            GeselecteerdeUserlist = null;
+            UserRecordInstellen();
+            Foutmelding = "";
         }
     }
 }
