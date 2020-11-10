@@ -105,16 +105,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
     <Compile Include="BasisModels\Basisklasse.cs" />
-    <Compile Include="Partials\TestUserDocument.cs" />
-=======
-    <Compile Include="DatabaseOperations.cs" />
-    <Compile Include="Partials\Location.cs" />
-    <Compile Include="Partials\Product.cs" />
-    <Compile Include="Partials\User.cs" />
-    <Compile Include="Partials\Userlist.cs" />
->>>>>>> Stashed changes
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

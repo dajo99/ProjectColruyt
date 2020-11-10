@@ -1,5 +1,6 @@
-﻿using MongoDB.Driver;
-using Project_Colruyt_DAL.Partials;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,7 +26,23 @@ namespace Project_Colruyt_WPF.ViewModels
 
 
         private TestUserDocument _geselecteerdeUser;
+        public class TestUserDocument
+        {
+            [BsonId]
+            public ObjectId Id { get; set; }
 
+            [BsonElement("username")]
+            public string username { get; set; }
+
+            [BsonElement("password")]
+            public string password { get; set; }
+
+            /*public TestUserDocument(string username, string password)
+            {
+                this.username = username;
+                this.password = password;
+            }*/
+        }
 
         public string Foutmelding
         {
