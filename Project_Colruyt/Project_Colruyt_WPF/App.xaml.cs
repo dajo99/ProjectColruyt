@@ -20,8 +20,16 @@ namespace Project_Colruyt_WPF
             MainViewModel viewmodel = new MainViewModel();
             Views.MainView view = new Views.MainView();
             view.DataContext = viewmodel;
+<<<<<<< Updated upstream
+=======
+            LijstOverzicht_usercontrol usc = new LijstOverzicht_usercontrol();
+            LijstOverzichtViewModel lijstOverzichtVm = new LijstOverzichtViewModel();
+            usc.DataContext = lijstOverzichtVm;
+            view.GridMain.Children.Add(usc);
+>>>>>>> Stashed changes
             view.Show();
 
          }
+
     }
 }
