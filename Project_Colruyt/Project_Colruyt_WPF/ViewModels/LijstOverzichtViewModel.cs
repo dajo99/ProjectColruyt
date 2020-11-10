@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using Project_Colruyt_DAL;
 using Project_Colruyt_DAL.Partials;
 using Project_Colruyt_WPF.Usercontrols;
 using Project_Colruyt_WPF.Views;
@@ -16,9 +17,7 @@ namespace Project_Colruyt_WPF.ViewModels
     {
         MainView view = (MainView)Application.Current.MainWindow;
 
-        static MongoClient client = new MongoClient("mongodb+srv://dbdajo:vandoninck@cluster0.zvqn2.gcp.mongodb.net/Colruyt?retryWrites=true&w=majority");
-        static IMongoDatabase database = client.GetDatabase("Colruyt");
-        IMongoCollection<Userlist> collection = database.GetCollection<Userlist>("Userlists");
+       
         public DateTime Date { get; set; }
         private string _foutmelding;
         private ObservableCollection<Userlist> _userlists;
@@ -67,7 +66,15 @@ namespace Project_Colruyt_WPF.ViewModels
 
         public LijstOverzichtViewModel()
         {
-            
+            List<Userlist> resultList = DatabaseOperations.OphalenUserlist();
+            // Bind result data to WPF view.
+            if (resultList.Count() > 0)
+            {
+                Userlists = new ObservableCollection<Userlist>(resultList);
+
+            }
+
+            UserlistRecord = new Userlist();
         }
 
         public void LijstToevoegen()

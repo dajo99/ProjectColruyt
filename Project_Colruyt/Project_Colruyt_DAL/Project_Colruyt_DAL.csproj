@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="DatabaseOperations.cs" />
     <Compile Include="Partials\Location.cs" />
     <Compile Include="Partials\Product.cs" />
     <Compile Include="Partials\User.cs" />
