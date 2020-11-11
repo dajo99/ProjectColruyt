@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
+using Project_Colruyt_DAL;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,41 +9,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using static Project_Colruyt_DAL.DatabaseOperations;
 
 namespace Project_Colruyt_WPF.ViewModels
 {
     public class TestViewModel : BasisViewModel
     {
-        static MongoClient client = new MongoClient("mongodb+srv://dbdajo:vandoninck@cluster0.zvqn2.gcp.mongodb.net/Colruyt?retryWrites=true&w=majority");
-        static IMongoDatabase database = client.GetDatabase("Colruyt");
-        IMongoCollection<TestUserDocument> collection = database.GetCollection<TestUserDocument>("testuser");
+        //MongoClient client = new MongoClient(DatabaseOperations.Connectionstring);
+
+        //IMongoDatabase database = client.GetDatabase("Colruyt");
+
+        //IMongoCollection<TestUserDocument> collection = database.GetCollection<TestUserDocument>("testuser");
+
+        IMongoCollection<TestUserDocument> collection = DatabaseOperations.GetUsers();
 
         private TestUserDocument _userRecord;
         private string _foutmelding;
 
         private ObservableCollection<TestUserDocument> _users;
 
-
-
-
         private TestUserDocument _geselecteerdeUser;
-        public class TestUserDocument
-        {
-            [BsonId]
-            public ObjectId Id { get; set; }
 
-            [BsonElement("username")]
-            public string username { get; set; }
+        //public class TestUserDocument
+        //{
+        //    [BsonId]
+        //    public ObjectId Id { get; set; }
 
-            [BsonElement("password")]
-            public string password { get; set; }
+        //    [BsonElement("username")]
+        //    public string username { get; set; }
 
-            /*public TestUserDocument(string username, string password)
-            {
-                this.username = username;
-                this.password = password;
-            }*/
-        }
+        //    [BsonElement("password")]
+        //    public string password { get; set; }
+
+        //    /*public TestUserDocument(string username, string password)
+        //    {
+        //        this.username = username;
+        //        this.password = password;
+        //    }*/
+        //}
 
         public string Foutmelding
         {
