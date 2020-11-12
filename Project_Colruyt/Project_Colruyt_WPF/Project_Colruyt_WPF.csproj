@@ -67,6 +67,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Usercontrols\Aanmelden_usercontrol.xaml.cs">
+      <DependentUpon>Aanmelden_usercontrol.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Usercontrols\LijstOverzicht_usercontrol.xaml.cs">
       <DependentUpon>LijstOverzicht_usercontrol.xaml</DependentUpon>
     </Compile>
@@ -75,6 +78,9 @@
     </Compile>
     <Compile Include="Usercontrols\NieuwProduct_usercontrol.xaml.cs">
       <DependentUpon>NieuwProduct_usercontrol.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Usercontrols\RegistrerenUsercontrol.xaml.cs">
+      <DependentUpon>RegistrerenUsercontrol.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\BasisViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -111,6 +117,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Usercontrols\Aanmelden_usercontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Usercontrols\LijstOverzicht_usercontrol.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -120,6 +130,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Usercontrols\NieuwProduct_usercontrol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Usercontrols\RegistrerenUsercontrol.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
