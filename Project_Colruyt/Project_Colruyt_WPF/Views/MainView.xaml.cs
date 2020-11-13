@@ -23,10 +23,5 @@ namespace Project_Colruyt_WPF.Views
         {
             InitializeComponent();
         }
-
-        private void LijstOverzicht_usercontrol_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

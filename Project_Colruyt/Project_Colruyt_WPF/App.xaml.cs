@@ -1,4 +1,5 @@
-﻿using Project_Colruyt_WPF.ViewModels;
+﻿using Project_Colruyt_DAL;
+using Project_Colruyt_WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -19,6 +20,9 @@ namespace Project_Colruyt_WPF
          {
             MainViewModel viewmodel = new MainViewModel();
             Views.MainView view = new Views.MainView();
+            Usercontrols.RegistrerenUsercontrol usc = new Usercontrols.RegistrerenUsercontrol();
+            usc.DataContext = new RegistreerViewModel();
+            view.GridMain.Children.Add(usc);
             view.DataContext = viewmodel;
             view.Show();
 

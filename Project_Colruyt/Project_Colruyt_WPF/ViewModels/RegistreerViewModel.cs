@@ -1,13 +1,18 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using Project_Colruyt_DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Project_Colruyt_DAL.DatabaseOperations;
 
 namespace Project_Colruyt_WPF.ViewModels
 {
     public class RegistreerViewModel : BasisViewModel
     {
+
+        IMongoCollection<Gebruikers> collection = DatabaseOperations.GetUsers();
         private string _email;
         private string _wachtwoord;
         private string _herhaal;
@@ -50,7 +55,16 @@ namespace Project_Colruyt_WPF.ViewModels
                 NotifyPropertyChanged();
             }
         }
+          public void Toevoegen()
+        {
+  
+                Gebruikers user = new Gebruikers();
+                user.email = Email;
+                user.lists = new string[] { };
+                user.password = Wachtwoord;
+                collection.InsertOne(user);
 
+        }
         public override string this [string columnName] {
             get
             {
@@ -71,12 +85,15 @@ namespace Project_Colruyt_WPF.ViewModels
 
         public override bool CanExecute(object parameter)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public override void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            if (parameter.ToString() == "Registreer")
+            {
+                Toevoegen();
+            }
         }
     }
 }
