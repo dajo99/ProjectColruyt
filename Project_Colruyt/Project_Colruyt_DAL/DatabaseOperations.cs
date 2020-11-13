@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project_Colruyt_DAL
 {
-    public class Class1
+    public class DatabaseOperations
     {
     }
 }

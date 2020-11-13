@@ -21,25 +21,25 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBox x:Name="txtEmail" 
+        <TextBox x:Name="txtEmail"  Text="{Binding Email, ValidatesOnDataErrors=True}"
             materialDesign:HintAssist.Hint="e-mail adres"
             Grid.Row="0"
             Width="500"
             Margin="0 20"/>
 
-        <TextBox x:Name="txtWachtwoord" 
+        <TextBox x:Name="txtWachtwoord" Text="{Binding Wachtwoord, ValidatesOnDataErrors=True}"
             materialDesign:HintAssist.Hint="wachtwoord"
             Grid.Row="1"
             Width="500"
             Margin="0 20"/>
 
-        <TextBox x:Name="txtHerhalingWachtwoord" 
+        <TextBox x:Name="txtHerhalingWachtwoord" Text="{Binding Herhaal, ValidatesOnDataErrors=True}"
             materialDesign:HintAssist.Hint="herhaal wachtwoord"
             Grid.Row="2"
             Width="500"
             Margin="0 20"/>
 
-        <Button Grid.Row="3"
+        <Button Grid.Row="3" Command="{Binding}" CommandParameter="Registreer"
             Margin="0 20"
             Width="400" Height="50"
             Style="{StaticResource MaterialDesignRaisedLightButton}"
