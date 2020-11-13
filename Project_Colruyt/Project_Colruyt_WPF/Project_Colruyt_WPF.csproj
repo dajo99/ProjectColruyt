@@ -76,8 +76,12 @@
     <Compile Include="Usercontrols\NieuwProduct_usercontrol.xaml.cs">
       <DependentUpon>NieuwProduct_usercontrol.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Usercontrols\RegistrerenUsercontrol.xaml.cs">
+      <DependentUpon>RegistrerenUsercontrol.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\BasisViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\RegistreerViewModel.cs" />
     <Compile Include="ViewModels\ViewModelNieuweWinkelLijst.cs" />
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
@@ -122,6 +126,10 @@
     <Page Include="Usercontrols\NieuwProduct_usercontrol.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Usercontrols\RegistrerenUsercontrol.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
