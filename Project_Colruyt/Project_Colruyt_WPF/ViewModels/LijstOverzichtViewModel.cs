@@ -17,7 +17,8 @@ namespace Project_Colruyt_WPF.ViewModels
     {
         MainView view = (MainView)Application.Current.MainWindow;
 
-       
+        IMongoCollection<Userlist> collection = DatabaseOperations.GetUserlists();
+
         public DateTime Date { get; set; }
         private string _foutmelding;
         private ObservableCollection<Userlist> _userlists;
@@ -66,7 +67,7 @@ namespace Project_Colruyt_WPF.ViewModels
 
         public LijstOverzichtViewModel()
         {
-            List<Userlist> resultList = DatabaseOperations.OphalenUserlist();
+            List<Userlist> resultList = collection.AsQueryable().ToList<Userlist>();
             // Bind result data to WPF view.
             if (resultList.Count() > 0)
             {

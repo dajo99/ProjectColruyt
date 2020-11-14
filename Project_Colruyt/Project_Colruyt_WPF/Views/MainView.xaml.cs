@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Project_Colruyt_WPF.Usercontrols;
+using Project_Colruyt_WPF.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +25,6 @@ namespace Project_Colruyt_WPF.Views
         {
             InitializeComponent();
         }
-
-
+       
     }
 }
