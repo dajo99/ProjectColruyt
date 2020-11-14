@@ -11,21 +11,12 @@ namespace Project_Colruyt_DAL
 {
     public static class DatabaseOperations
     {
-        public static MongoClient client;
-
-
-        public static IMongoDatabase database;
-        
-
-        static DatabaseOperations()
-        {
-            client = new MongoClient("mongodb+srv://dbdajo:vandoninck@cluster0.zvqn2.gcp.mongodb.net/Colruyt?retryWrites=true&w=majority");
-            database = client.GetDatabase("Colruyt");
-        }
+        public static string connectionstring = "mongodb+srv://dbdajo:vandoninck@cluster0.zvqn2.gcp.mongodb.net/Colruyt?retryWrites=true&w=majority";
 
 
         public static List<Userlist> OphalenUserlist()
         {
+            IMongoClient client = new MongoClient(connectionString);
             IMongoCollection<Userlist> collection = database.GetCollection<Userlist>("Userlists");
             List<Userlist>  resultList = collection.AsQueryable().ToList<Userlist>();
 
