@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Project_Colruyt_WPF.ViewModels;
+using Project_Colruyt_WPF.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,10 +26,10 @@ namespace Project_Colruyt_WPF.Usercontrols
         {
             InitializeComponent();
         }
-
+        
         private void LVOverzichtLijsten_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

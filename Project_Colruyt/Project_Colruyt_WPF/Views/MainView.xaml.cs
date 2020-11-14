@@ -25,6 +25,14 @@ namespace Project_Colruyt_WPF.Views
         {
             InitializeComponent();
         }
-       
+
+        private void LijstOverzicht_usercontrol_Loaded(object sender, RoutedEventArgs e)
+        {
+            LijstOverzicht_usercontrol usc = new LijstOverzicht_usercontrol();
+            LijstOverzichtViewModel lijstOverzichtVm = new LijstOverzichtViewModel();
+            usc.DataContext = lijstOverzichtVm;
+            GridMain.Children.Add(usc);
+            Show();
+        }
     }
 }
