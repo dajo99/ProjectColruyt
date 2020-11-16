@@ -13,13 +13,18 @@ namespace Project_Colruyt_DAL.Partials
         [BsonId]
         public ObjectId Id { get; set; }
 
-        [BsonElement("ListName")]
+        [BsonElement("Name")]
         public string Name { get; set; }
 
         [BsonElement("Date")]
         public DateTime Date { get; set; }
 
         [BsonElement("Products")]
-        public List<Product> Products { get; set; }
+        public ICollection<BsonObjectId> Products { get; set; }
+
+        
+        
+
+
     }
 }

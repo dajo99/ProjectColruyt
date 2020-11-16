@@ -19,11 +19,14 @@ namespace Project_Colruyt_WPF.ViewModels
 
         IMongoCollection<Userlist> collection = DatabaseOperations.GetUserlists();
 
-        public DateTime Date { get; set; }
         private string _foutmelding;
         private ObservableCollection<Userlist> _userlists;
         private Userlist _geselecteerdeUserlist;
         private Userlist _userlistRecord;
+
+        public string Name { get; set; }
+        public DateTime Date { get; set; }
+
 
 
         public string Foutmelding

@@ -23,12 +23,12 @@
                 
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Width="460">
-                            <TextBlock FontSize="18" FontWeight="SemiBold" Text="{Binding ListName}"  VerticalAlignment="Center" HorizontalAlignment="Left" />
+                        <GridViewColumn Width="460" DisplayMemberBinding="{Binding Name}">
+                            <!--<TextBlock FontSize="18" FontWeight="SemiBold"   VerticalAlignment="Center" HorizontalAlignment="Left" />-->
                         </GridViewColumn>
 
-                        <GridViewColumn Width="auto" >
-                            <TextBlock Text="{Binding Date}" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <GridViewColumn Width="auto" DisplayMemberBinding="{Binding Date}">
+                            <!--<TextBlock Text="{Binding Date}" VerticalAlignment="Center" HorizontalAlignment="Center" />-->
                         </GridViewColumn>
 
                         <GridViewColumn Width="auto" >
