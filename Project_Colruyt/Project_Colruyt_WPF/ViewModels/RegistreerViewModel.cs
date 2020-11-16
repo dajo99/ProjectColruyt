@@ -57,24 +57,29 @@ namespace Project_Colruyt_WPF.ViewModels
         }
           public void Toevoegen()
         {
-  
+            if (this.IsGeldig())
+            {
                 Gebruikers user = new Gebruikers();
                 user.email = Email;
                 user.lists = new string[] { };
                 user.password = Wachtwoord;
                 collection.InsertOne(user);
-
+            }
         }
         public override string this [string columnName] {
             get
             {
-                if (columnName == "Email")
+                if (Email != null && columnName == "Email" && !Email.Contains("@"))
                 {
                     return "Vul een correct email adress in";
                 }
-                else if (columnName == "Wachtwoord")
+                else if (Wachtwoord != null && columnName == "Wachtwoord" && Wachtwoord.Length < 8) 
                 {
-                    return "Vul een correct wachtwoord in";
+                    return "Vul een correct wachtwoord in van minimum 8 karakters";
+                }
+                else if(Herhaal != null && columnName == "Herhaal" && Herhaal != Wachtwoord)
+                {
+                    return "Zorg ervoor dat beide wachtwoorden overeen komen";
                 }
                 return "";
             }
