@@ -92,7 +92,8 @@
                     materialDesign:HintAssist.Hint="Productnaam"/>
 
                 <Button
-                    x:Name="btnProductToevoegen"
+                    Command="{Binding}"
+                    CommandParameter="Toevoegen"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Width="28" Height="28"

@@ -142,6 +142,7 @@
     </Compile>
     <Compile Include="ViewModels\BasisViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\NieuwProductViewModel.cs" />
     <Compile Include="ViewModels\RegistreerViewModel.cs" />
     <Compile Include="ViewModels\ViewModelNieuweWinkelLijst.cs" />
     <Compile Include="Views\MainView.xaml.cs">
