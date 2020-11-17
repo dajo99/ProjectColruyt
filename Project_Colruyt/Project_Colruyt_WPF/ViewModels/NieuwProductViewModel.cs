@@ -64,7 +64,7 @@ namespace Project_Colruyt_WPF.ViewModels
             set
             {
                 _geselecteerdeLocation = value;
-                //Zoeken();
+                Zoeken();
             }
         }
 
@@ -119,12 +119,12 @@ namespace Project_Colruyt_WPF.ViewModels
 
 
 
-        /*
+       
         private void Zoeken()
         {
             if (GeselecteerdeLocation != null)
             {
-                List<Employee> lijstemployees = DatabaseOperations.OphalenWerknemersViaUitgeverID(GeselecteerdeUitgever.pub_id);
+                List<Product> lijstproducts = DatabaseOperations.GetProductsViaLocation(GeselecteerdeLocation.LocationID);
                 Werknemers = new ObservableCollection<Employee>(lijstemployees);
             }
         }
@@ -158,37 +158,9 @@ namespace Project_Colruyt_WPF.ViewModels
 
         }
 
-        public void Aanpassen()
-        {
-            if (GeselecteerdeWerknemer != null)
-            {
-                if (GeselecteerdeWerknemer.IsGeldig())
-                {
+        
 
-
-                    int ok = DatabaseOperations.AanpassenWerknemer(GeselecteerdeWerknemer);
-                    if (ok > 0)
-                    {
-                        Werknemers = new ObservableCollection<Employee>(DatabaseOperations.OphalenWerknemersViaUitgeverID(GeselecteerdeWerknemer.pub_id));
-                        Wissen();
-                    }
-                    else
-                    {
-                        Foutmelding = "Werknemer is niet aangepast!";
-                    }
-                }
-
-
-            }
-            else
-            {
-                Foutmelding = "Eerst een werknemer selecteren!";
-            }
-
-
-        }
-
-
+        /*
         public void Verwijder()
         {
 

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Project_Colruyt_DAL
 {
-    public class Locations
+    public class Location
     {
         [BsonId]
-        public ObjectId Id { get; set; }
+        public ObjectId LocationID { get; set; }
 
 
         [BsonElement("Category")]
