@@ -16,5 +16,7 @@ namespace Project_Colruyt_DAL
 
         [BsonElement("Category")]
         public string Category { get; set; }
+
+       
     }
 }

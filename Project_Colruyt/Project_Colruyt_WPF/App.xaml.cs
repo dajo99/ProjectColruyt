@@ -20,8 +20,8 @@ namespace Project_Colruyt_WPF
          {
             MainViewModel viewmodel = new MainViewModel();
             Views.MainView view = new Views.MainView();
-            Usercontrols.RegistrerenUsercontrol usc = new Usercontrols.RegistrerenUsercontrol();
-            usc.DataContext = new RegistreerViewModel();
+            Usercontrols.NieuwProduct_usercontrol usc = new Usercontrols.NieuwProduct_usercontrol();
+            usc.DataContext = new NieuwProductViewModel();
             view.GridMain.Children.Add(usc);
             view.DataContext = viewmodel;
             view.Show();

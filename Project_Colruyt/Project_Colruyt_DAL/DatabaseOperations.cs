@@ -64,19 +64,20 @@ namespace Project_Colruyt_DAL
             return collection;
         }
 
-        public static IMongoCollection<Product> GetProductsViaLocation(Location location)
+        public static IMongoCollection<Location> GetLocations()
         {
 
             MongoClient client = new MongoClient(Connectionstring);
 
             IMongoDatabase database = client.GetDatabase("Colruyt");
-            IMongoCollection<Product> collection = (IMongoCollection<Product>)database.GetCollection<Product>("Products").Find(x => x.LocationID == location.LocationID);
-            
+            IMongoCollection<Location> collection = database.GetCollection<Location>("Locations"); ;
 
             //Environment.Exit(1);
 
             return collection;
         }
+
+
 
     }
 

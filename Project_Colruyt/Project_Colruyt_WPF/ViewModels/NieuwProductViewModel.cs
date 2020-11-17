@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Project_Colruyt_WPF.ViewModels
 {
@@ -15,7 +16,8 @@ namespace Project_Colruyt_WPF.ViewModels
         private string _foutmelding;
 
 
-        IMongoCollection<Product> collection = DatabaseOperations.GetProducts();
+        IMongoCollection<Product> collectionProducts = DatabaseOperations.GetProducts();
+        IMongoCollection<Location> collectionLocations = DatabaseOperations.GetLocations();
 
 
 
@@ -64,7 +66,7 @@ namespace Project_Colruyt_WPF.ViewModels
             set
             {
                 _geselecteerdeLocation = value;
-                //Zoeken();
+                Zoeken();
             }
         }
 
@@ -74,7 +76,6 @@ namespace Project_Colruyt_WPF.ViewModels
             set
             {
                 _geselecteerdeProduct = value;
-                //WerknemerRecordInstellen();
                 NotifyPropertyChanged();
 
             }
@@ -92,11 +93,13 @@ namespace Project_Colruyt_WPF.ViewModels
         }
         public NieuwProductViewModel()
         {
-            List<Product> resultList = collection.AsQueryable().ToList<Product>();
+            List<Location> locationList = collectionLocations.AsQueryable().ToList<Location>();
+            List<Product> productList = collectionProducts.AsQueryable().ToList<Product>();
             // Bind result data to WPF view.
-            if (resultList.Count() > 0)
+            if (productList.Count() > 0)
             {
-                Products = new ObservableCollection<Product>(resultList);
+                Products = new ObservableCollection<Product>(productList);
+                Locations = new ObservableCollection<Location>(locationList);
 
             }
 
@@ -120,14 +123,15 @@ namespace Project_Colruyt_WPF.ViewModels
 
 
        
-        //private void Zoeken()
-        //{
-        //    if (GeselecteerdeLocation != null)
-        //    {
-        //        List<Product> lijstproducts = DatabaseOperations.GetProductsViaLocation(GeselecteerdeLocation.LocationID);
-        //        Werknemers = new ObservableCollection<Employee>(lijstemployees);
-        //    }
-        //}
+        private void Zoeken()
+        {
+            if (GeselecteerdeLocation != null)
+            {
+                List<Product> lijstproducts = DatabaseOperations.GetProducts().AsQueryable().Where(x => x.LocationID == GeselecteerdeLocation.LocationID).ToList();
+                Products = new ObservableCollection<Product>(lijstproducts);
+            }
+            
+        }
 
         //public void Toevoegen()
         //{

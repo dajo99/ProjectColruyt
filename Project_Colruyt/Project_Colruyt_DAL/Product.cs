@@ -18,10 +18,11 @@ namespace Project_Colruyt_DAL
 
         [BsonElement("Name")]
         public string Name { get; set; }
-        public ObjectId LocationID { get; set; }
 
         [BsonElement("Location")]
-        public Location Location { get; set; }
+        public ObjectId LocationID { get; set; }
+
+        
 
 
     }
