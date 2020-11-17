@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseOperations.cs" />
+    <Compile Include="Foutlogger.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Product.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

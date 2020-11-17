@@ -64,7 +64,7 @@ namespace Project_Colruyt_WPF.ViewModels
             set
             {
                 _geselecteerdeLocation = value;
-                Zoeken();
+                //Zoeken();
             }
         }
 
@@ -120,43 +120,43 @@ namespace Project_Colruyt_WPF.ViewModels
 
 
        
-        private void Zoeken()
-        {
-            if (GeselecteerdeLocation != null)
-            {
-                List<Product> lijstproducts = DatabaseOperations.GetProductsViaLocation(GeselecteerdeLocation.LocationID);
-                Werknemers = new ObservableCollection<Employee>(lijstemployees);
-            }
-        }
+        //private void Zoeken()
+        //{
+        //    if (GeselecteerdeLocation != null)
+        //    {
+        //        List<Product> lijstproducts = DatabaseOperations.GetProductsViaLocation(GeselecteerdeLocation.LocationID);
+        //        Werknemers = new ObservableCollection<Employee>(lijstemployees);
+        //    }
+        //}
 
-        public void Toevoegen()
-        {
+        //public void Toevoegen()
+        //{
 
-            if (GeselecteerdeUitgever != null)
-            {
-                WerknemerRecord.pub_id = GeselecteerdeUitgever.pub_id;
-                WerknemerRecord.hire_date = DateTime.Now;
+        //    if (GeselecteerdeUitgever != null)
+        //    {
+        //        WerknemerRecord.pub_id = GeselecteerdeUitgever.pub_id;
+        //        WerknemerRecord.hire_date = DateTime.Now;
 
-                if (WerknemerRecord.IsGeldig())
-                {
-                    int ok = DatabaseOperations.ToevoegenWerknemer(WerknemerRecord);
-                    if (ok > 0)
-                    {
-                        Werknemers = new ObservableCollection<Employee>(DatabaseOperations.OphalenWerknemersViaUitgeverID(GeselecteerdeUitgever.pub_id));
-                        Wissen();
-                    }
-                    else
-                    {
-                        Foutmelding = "Werknemer is niet toegevoegd!";
-                    }
-                }
-
-
-            }
+        //        if (WerknemerRecord.IsGeldig())
+        //        {
+        //            int ok = DatabaseOperations.ToevoegenWerknemer(WerknemerRecord);
+        //            if (ok > 0)
+        //            {
+        //                Werknemers = new ObservableCollection<Employee>(DatabaseOperations.OphalenWerknemersViaUitgeverID(GeselecteerdeUitgever.pub_id));
+        //                Wissen();
+        //            }
+        //            else
+        //            {
+        //                Foutmelding = "Werknemer is niet toegevoegd!";
+        //            }
+        //        }
 
 
+        //    }
 
-        }
+
+
+        //}
 
         
 
@@ -215,7 +215,7 @@ namespace Project_Colruyt_WPF.ViewModels
             //instelling via CommandParameter in xaml
             switch (parameter.ToString())
             {
-                case "Toevoegen": Toevoegen(); break;
+                case "Toevoegen": /*Toevoegen();*/ break;
                 
             }
         }
