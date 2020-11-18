@@ -51,6 +51,34 @@ namespace Project_Colruyt_DAL
             return collection;
         }
 
+        public static IMongoCollection<Product> GetProducts()
+        {
+
+            MongoClient client = new MongoClient(Connectionstring);
+
+            IMongoDatabase database = client.GetDatabase("Colruyt");
+            IMongoCollection<Product> collection = database.GetCollection<Product>("Products"); ;
+
+            //Environment.Exit(1);
+
+            return collection;
+        }
+
+        public static IMongoCollection<Location> GetLocations()
+        {
+
+            MongoClient client = new MongoClient(Connectionstring);
+
+            IMongoDatabase database = client.GetDatabase("Colruyt");
+            IMongoCollection<Location> collection = database.GetCollection<Location>("Locations"); ;
+
+            //Environment.Exit(1);
+
+            return collection;
+        }
+
+
+
     }
 
 }

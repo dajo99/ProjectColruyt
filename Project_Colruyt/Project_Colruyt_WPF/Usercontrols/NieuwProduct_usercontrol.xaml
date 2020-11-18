@@ -39,60 +39,62 @@
                 </StackPanel>
             </DataTemplate>
         </Grid.Resources>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        
+
         <ComboBox
           x:Name="cmbAfdeling"
           Grid.Row="0"
           MinWidth="72"
           Margin="100 5 100 0"
           VerticalAlignment="Bottom"
-          materialDesign:HintAssist.Hint="Afdeling">
+          materialDesign:HintAssist.Hint="Afdeling"
+            ItemsSource="{Binding Locations}"
+            DisplayMemberPath= "Category"
+            SelectedItem="{Binding GeselecteerdeLocation}">
         </ComboBox>
 
-        <ScrollViewer Grid.Row="1" materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True" Margin="70 20">
-            <ListView 
-                
-                x:Name="LVproducten">
-                <ListView.View>
-                    <GridView >
-                        <!--ColumnHeaderTemplate="{ StaticResource myHeaderTemplate}"-->
-                        <GridViewColumn Width="340"                       
-                    Header="Productnaam"/>
-                        <GridViewColumn Width="200"  
-                    Header="Eenheidsprijs" />
-                        <GridViewColumn
-                    CellTemplate="{StaticResource AantalTemplate}"                       
-                    Width="120"
-                    Header="Aantal" />
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </ScrollViewer>
+        <DataGrid x:Name="border"  Grid.Row="1" ItemsSource="{Binding Products}" Margin="100 10 100 0" SelectedItem="{Binding GeselecteerdeProduct}" IsReadOnly="True" AutoGenerateColumns="False" BorderThickness="4" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*"                       
+                    Header="Productnaam" Binding="{Binding Name}"/>
+                <DataGridTextColumn Width="*"  
+                    Header="Eenheidsprijs" Binding="{Binding Price}" />
+                <DataGridTextColumn                       
+                    Width="0.5*"
+                    Header="Aantal"  />
+            </DataGrid.Columns>
+        </DataGrid>
+
+
 
         <StackPanel Grid.Row="2" Margin="100 0 100 10">
             <TextBlock 
                 Text="Nieuw item toevoegen:" 
                 Margin="0 10"
                 FontSize="16"/>
-            
+
             <StackPanel Orientation="Horizontal">
                 <ComboBox 
                     x:Name="cmbNieuwProductAfdeling" 
                     MinWidth="250"
-                    materialDesign:HintAssist.Hint="Afdeling"/>
-                
+                    materialDesign:HintAssist.Hint="Afdeling"
+                    ItemsSource="{Binding Locations}"
+                    DisplayMemberPath="Category"
+                    SelectedValue="{Binding ProductRecord.LocationID, ValidatesOnDataErrors=True}"/>
+
                 <TextBox  
                     Margin="20 0" MinWidth="250"
-                    materialDesign:HintAssist.Hint="Productnaam"/>
+                    materialDesign:HintAssist.Hint="Productnaam"
+                    Text="{Binding ProductRecord.Name, ValidatesOnDataErrors=True}"/>
 
                 <Button
-                    x:Name="btnProductToevoegen"
+                    Command="{Binding}"
+                    CommandParameter="Toevoegen"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Width="28" Height="28"
@@ -101,8 +103,8 @@
                     <materialDesign:PackIcon Kind="Plus" Height="16" Width="16"/>
                 </Button>
             </StackPanel>
-            
+
         </StackPanel>
-        
+
     </Grid>
 </UserControl>
