@@ -12,6 +12,11 @@
              TextElement.FontSize="14"
              FontFamily="{materialDesign:MaterialDesignFont}"
              d:DesignHeight="500" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="CenterGridHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.Resources>
             <DataTemplate x:Key="AantalTemplate">
@@ -61,12 +66,39 @@
         <DataGrid x:Name="border"  Grid.Row="1" ItemsSource="{Binding Products}" Margin="100 10 100 0" SelectedItem="{Binding GeselecteerdeProduct}" IsReadOnly="True" AutoGenerateColumns="False" BorderThickness="4" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*"                       
-                    Header="Productnaam" Binding="{Binding Name}"/>
+                    Header="Productnaam" Binding="{Binding Name}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
                 <DataGridTextColumn Width="*"  
-                    Header="Eenheidsprijs" Binding="{Binding Price}" />
-                <DataGridTextColumn                       
-                    Width="0.5*"
-                    Header="Aantal"  />
+                    Header="Eenheidsprijs" Binding="{Binding Price}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <DataGridTemplateColumn Width="*" Header="Aantal" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Command="{Binding}" CommandParameter="Min" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="20" Margin="10 0" Style="{StaticResource MaterialDesignFloatingActionMiniButton}">
+                                    <materialDesign:PackIcon Kind="Remove" Height="16" Width="16"/>
+                                </Button>
+                                <TextBox BorderBrush="Black" Width="20" Height="20" HorizontalAlignment="Center"/>
+                                <Button Command="{Binding}" CommandParameter="Plus" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="20" Margin="10 0" Style="{StaticResource MaterialDesignFloatingActionMiniButton}">
+                                    <materialDesign:PackIcon Kind="Plus" Height="16" Width="16"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
+
+                </DataGridTemplateColumn>
+
             </DataGrid.Columns>
         </DataGrid>
 
@@ -78,14 +110,13 @@
                 Margin="0 10"
                 FontSize="16"/>
 
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" >
                 <ComboBox 
-                    x:Name="cmbNieuwProductAfdeling" 
                     MinWidth="250"
                     materialDesign:HintAssist.Hint="Afdeling"
                     ItemsSource="{Binding Locations}"
                     DisplayMemberPath="Category"
-                    SelectedValue="{Binding ProductRecord.LocationID, ValidatesOnDataErrors=True}"/>
+                    SelectedItem="{Binding NieuwLocation}"/>
 
                 <TextBox  
                     Margin="20 0" MinWidth="250"

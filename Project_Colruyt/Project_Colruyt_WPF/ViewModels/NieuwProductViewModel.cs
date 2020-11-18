@@ -29,6 +29,7 @@ namespace Project_Colruyt_WPF.ViewModels
 
 
         private Location _geselecteerdeLocation;
+        private Location _nieuwLocation;
         private Product _geselecteerdeProduct;
 
 
@@ -70,7 +71,17 @@ namespace Project_Colruyt_WPF.ViewModels
             }
         }
 
-        public Product GeselecteerdeWerknemer
+        public Location NieuwLocation
+        {
+            get { return _nieuwLocation; }
+            set
+            {
+                _nieuwLocation = value;
+                
+            }
+        }
+
+        public Product GeselecteerdeProduct
         {
             get { return _geselecteerdeProduct; }
             set
@@ -133,80 +144,55 @@ namespace Project_Colruyt_WPF.ViewModels
             
         }
 
-        //public void Toevoegen()
-        //{
-
-        //    if (GeselecteerdeUitgever != null)
-        //    {
-        //        WerknemerRecord.pub_id = GeselecteerdeUitgever.pub_id;
-        //        WerknemerRecord.hire_date = DateTime.Now;
-
-        //        if (WerknemerRecord.IsGeldig())
-        //        {
-        //            int ok = DatabaseOperations.ToevoegenWerknemer(WerknemerRecord);
-        //            if (ok > 0)
-        //            {
-        //                Werknemers = new ObservableCollection<Employee>(DatabaseOperations.OphalenWerknemersViaUitgeverID(GeselecteerdeUitgever.pub_id));
-        //                Wissen();
-        //            }
-        //            else
-        //            {
-        //                Foutmelding = "Werknemer is niet toegevoegd!";
-        //            }
-        //        }
-
-
-        //    }
-
-
-
-        //}
-
-        
-
-        /*
-        public void Verwijder()
+        public void Toevoegen()
         {
+            Product product = new Product();
+            product.Name = ProductRecord.Name;
+            product.Price = 0.00;
+            product.LocationID = NieuwLocation.LocationID;
 
-            if (GeselecteerdeWerknemer != null)
+            bool resultaat = DatabaseOperations.ProductToevoegen(product);
+
+            if (resultaat == true)
             {
-                int ok = DatabaseOperations.VerwijderenWerknemer(GeselecteerdeWerknemer);
-                if (ok > 0)
-                {
-                    Werknemers = new ObservableCollection<Employee>(DatabaseOperations.OphalenWerknemersViaUitgeverID(GeselecteerdeUitgever.pub_id));
-                    Wissen();
-                }
-                else
-                {
-                    Foutmelding = "Werknemer is niet verwijderd!";
-                }
+                List<Product> productList = collectionProducts.AsQueryable().ToList<Product>();
+                Products = new ObservableCollection<Product>(productList);
+                MessageBox.Show($"{product.Name} is toegevoegd!");
             }
             else
             {
-                Foutmelding = "Eerst Werknemer selecteren!";
+                MessageBox.Show("Fout bij toevoegen!");
             }
+
+
+        }
+
+        public void Min()
+        {
+
+        }
+
+        public void Plus()
+        {
 
         }
 
 
-        private void WerknemerRecordInstellen()
+        
+
+        
+        
+        private void ProductRecordInstellen()
         {
-            if (GeselecteerdeWerknemer != null)
-            {
-                WerknemerRecord = GeselecteerdeWerknemer;
-            }
-            else
-            {
-                WerknemerRecord = new Employee();
-            }
+            
         }
 
         public void Wissen()
         {
-            GeselecteerdeWerknemer = null;
-            WerknemerRecordInstellen();
+            GeselecteerdeProduct = null;
+            ProductRecordInstellen();
             Foutmelding = "";
-        }*/
+        }
 
         public override bool CanExecute(object parameter)
         {
@@ -219,7 +205,9 @@ namespace Project_Colruyt_WPF.ViewModels
             //instelling via CommandParameter in xaml
             switch (parameter.ToString())
             {
-                case "Toevoegen": /*Toevoegen();*/ break;
+                case "Toevoegen": Toevoegen(); break;
+                case "Min": Min(); break;
+                case "Plus": Plus(); break;
                 
             }
         }
