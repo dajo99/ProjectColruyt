@@ -27,11 +27,19 @@
             Width="500"
             Margin="0 20"/>
 
-        <TextBox x:Name="txtWachtwoord" 
+        <local:WachtwoordUsercontrol
+            Wachtwoord="{Binding Wachtwoord, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             materialDesign:HintAssist.Hint="wachtwoord"
             Grid.Row="1"
             Width="500"
             Margin="0 20"/>
+
+        <!--<PasswordBox x:Name="PBWachtwoord" 
+            materialDesign:HintAssist.Hint="wachtwoord"
+            Password="{Binding Wachtwoord, UpdateSourceTrigger=PropertyChanged}"
+            Grid.Row="1"
+            Width="500"
+            Margin="0 20"/>-->
 
         <Button x:Name="txtWachtoordVergeten"
             Padding="2"
@@ -64,8 +72,9 @@
         <Button Grid.Row="4"
             Margin="0 20"
             Width="400" Height="50"
+            Command="{Binding}" CommandParameter="Aanmelden"
             Style="{StaticResource MaterialDesignRaisedLightButton}"
-            Content="Registreer"
+            Content="Aanmelden"
             FontSize="18"/>
     </Grid>
 </UserControl>
