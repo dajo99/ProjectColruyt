@@ -37,13 +37,12 @@ namespace Project_Colruyt_DAL
 
         // CONNECTIONSTRING TOEVOEGEN VOOR HET STARTEN VAN DATABASEOPERATIONS (connectionstring.txt)!!! 
 
-        public static string Connectionstring = "mongodb+srv://dbdajo:vandoninck@cluster0.zvqn2.gcp.mongodb.net/Colruyt?retryWrites=true&w=majority";
-        public static IMongoClient client = new MongoClient(Connectionstring);
 
+        public static string Connectionstring = "";
+        public static MongoClient client = new MongoClient(Connectionstring);
         public static IMongoCollection<Gebruikers> GetUsers()
         {
 
-            
 
             IMongoDatabase database = client.GetDatabase("Colruyt");
             IMongoCollection<Gebruikers> collection = database.GetCollection<Gebruikers>("Users"); 
@@ -56,8 +55,6 @@ namespace Project_Colruyt_DAL
         public static IMongoCollection<Product> GetProducts()
         {
 
-           
-
             IMongoDatabase database = client.GetDatabase("Colruyt");
             IMongoCollection<Product> collection = database.GetCollection<Product>("Products"); 
 
@@ -69,8 +66,6 @@ namespace Project_Colruyt_DAL
         public static IMongoCollection<Location> GetLocations()
         {
 
-            
-
             IMongoDatabase database = client.GetDatabase("Colruyt");
             IMongoCollection<Location> collection = database.GetCollection<Location>("Locations"); 
 
@@ -81,8 +76,6 @@ namespace Project_Colruyt_DAL
 
         public static Gebruikers GetUserByEmail(string email)
         {
-
-           
 
             IMongoDatabase database = client.GetDatabase("Colruyt");
             IMongoCollection<Gebruikers> collection = database.GetCollection<Gebruikers>("Users");
