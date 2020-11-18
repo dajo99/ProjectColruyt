@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using Project_Colruyt_DAL;
+using Project_Colruyt_WPF.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,17 @@ namespace Project_Colruyt_WPF.ViewModels
 
         private string _email;
         private string _wachtwoord;
+        private string _melding;
+
+        public string Melding
+        {
+            get { return _melding; }
+            set { 
+                _melding = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         public string Email
         {
@@ -33,11 +45,29 @@ namespace Project_Colruyt_WPF.ViewModels
             }
         }
 
-       
+        Gebruikers gebruiker;
         public void Authenticeer()
         {
-            
+            gebruiker = DatabaseOperations.GetUserByEmail(Email);
+
+            if (gebruiker == null)
+            {
+                Melding = "Een gebruiker met dit emailadres bestaat niet!";
+            }
+
+            if(gebruiker.password == Wachtwoord)
+            {
+                Melding = "Succesvol aangemeld!";
+            }
+            else
+            {
+                Melding = "Fout wachtwoord!";
+            }
+
+
         }
+
+        
 
         public override string this[string columnName]
         {

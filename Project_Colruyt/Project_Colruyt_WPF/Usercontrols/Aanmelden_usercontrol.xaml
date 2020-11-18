@@ -12,24 +12,28 @@
              TextElement.FontSize="14"
              FontFamily="{materialDesign:MaterialDesignFont}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="0 30">
+    <Grid Margin="0 20">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <TextBox x:Name="txtEmail" 
-            materialDesign:HintAssist.Hint="e-mail adres"
+            materialDesign:HintAssist.Hint="e-mailadres"
+            materialDesign:HintAssist.Foreground="#468DA7"
+            materialDesign:TextFieldAssist.UnderlineBrush="#468DA7"
+            Text="{Binding Email, ValidatesOnDataErrors=True}"
             Grid.Row="0"
             Width="500"
             Margin="0 20"/>
 
         <local:WachtwoordUsercontrol
-            Wachtwoord="{Binding Wachtwoord, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            materialDesign:HintAssist.Hint="wachtwoord"
+            Wachtwoord="{Binding Wachtwoord, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }"
+            materialDesign:HintAssist.Hint="wachtwoord"        
             Grid.Row="1"
             Width="500"
             Margin="0 20"/>
@@ -76,5 +80,9 @@
             Style="{StaticResource MaterialDesignRaisedLightButton}"
             Content="Aanmelden"
             FontSize="18"/>
+
+        <TextBlock Grid.Row="5"
+            Text="{Binding Melding}"
+            Width="400" Height="50"/>
     </Grid>
 </UserControl>

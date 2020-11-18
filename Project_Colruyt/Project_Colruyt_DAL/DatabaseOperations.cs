@@ -35,8 +35,9 @@ namespace Project_Colruyt_DAL
 
 
 
+        // CONNECTIONSTRING TOEVOEGEN VOOR HET STARTEN VAN DATABASEOPERATIONS (connectionstring.txt)!!! 
 
-        public static string Connectionstring = "mongodb+srv://dbdajo:vandoninck@cluster0.zvqn2.gcp.mongodb.net/Colruyt?retryWrites=true&w=majority";
+        public static string Connectionstring = "";
 
         public static IMongoCollection<Gebruikers> GetUsers()
         {
@@ -44,7 +45,7 @@ namespace Project_Colruyt_DAL
             MongoClient client = new MongoClient(Connectionstring);
 
             IMongoDatabase database = client.GetDatabase("Colruyt");
-            IMongoCollection<Gebruikers> collection = database.GetCollection<Gebruikers>("Users"); ;
+            IMongoCollection<Gebruikers> collection = database.GetCollection<Gebruikers>("Users"); 
 
             //Environment.Exit(1);
 
@@ -57,7 +58,7 @@ namespace Project_Colruyt_DAL
             MongoClient client = new MongoClient(Connectionstring);
 
             IMongoDatabase database = client.GetDatabase("Colruyt");
-            IMongoCollection<Product> collection = database.GetCollection<Product>("Products"); ;
+            IMongoCollection<Product> collection = database.GetCollection<Product>("Products"); 
 
             //Environment.Exit(1);
 
@@ -70,14 +71,26 @@ namespace Project_Colruyt_DAL
             MongoClient client = new MongoClient(Connectionstring);
 
             IMongoDatabase database = client.GetDatabase("Colruyt");
-            IMongoCollection<Location> collection = database.GetCollection<Location>("Locations"); ;
+            IMongoCollection<Location> collection = database.GetCollection<Location>("Locations"); 
 
             //Environment.Exit(1);
 
             return collection;
         }
 
+        public static Gebruikers GetUserByEmail(string email)
+        {
 
+            MongoClient client = new MongoClient(Connectionstring);
+
+            IMongoDatabase database = client.GetDatabase("Colruyt");
+            IMongoCollection<Gebruikers> collection = database.GetCollection<Gebruikers>("Users");
+            Gebruikers gebruiker =  collection.Find(x => x.email == email).FirstOrDefault();
+
+            //Environment.Exit(1);
+
+            return gebruiker;
+        }
 
     }
 
