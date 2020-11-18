@@ -57,6 +57,7 @@ namespace Project_Colruyt_WPF.ViewModels
             }
         }
 
+        
         public static string EncryptString(string encr)
         {
             //array van bytes (tussen 0 en 255) opvullen met een code van chars in bytes
@@ -115,9 +116,9 @@ namespace Project_Colruyt_WPF.ViewModels
                 {
                     return "Vul een correct email adress in";
                 }
-                else if (Wachtwoord != null && columnName == "Wachtwoord" && Wachtwoord.Length < 8)
+                else if (Wachtwoord != null && columnName == "Wachtwoord" && Wachtwoord.Length < 4)
                 {
-                    return "Vul een correct wachtwoord in van minimum 8 karakters";
+                    return "Vul een correct wachtwoord in van minimum 4 karakters";
                 }
                 else if (Herhaal != null && columnName == "Herhaal" && Herhaal != Wachtwoord)
                 {
@@ -127,7 +128,7 @@ namespace Project_Colruyt_WPF.ViewModels
             }
               }
   
-
+        
 
 
         public override bool CanExecute(object parameter)

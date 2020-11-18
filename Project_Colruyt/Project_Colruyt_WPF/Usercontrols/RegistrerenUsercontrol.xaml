@@ -27,11 +27,13 @@
             Width="500"
             Margin="0 20"/>
 
-        <TextBox x:Name="txtWachtwoord" Text="{Binding Wachtwoord, ValidatesOnDataErrors=True}"
+        <TextBox x:Name="txtWachtwoord"  Text="{Binding Wachtwoord, ValidatesOnDataErrors=True}"
             materialDesign:HintAssist.Hint="wachtwoord"
             Grid.Row="1"
             Width="500"
-            Margin="0 20"/>
+            Margin="0 20"></TextBox>
+        
+        
 
         <TextBox x:Name="txtHerhalingWachtwoord" Text="{Binding Herhaal, ValidatesOnDataErrors=True}"
             materialDesign:HintAssist.Hint="herhaal wachtwoord"
