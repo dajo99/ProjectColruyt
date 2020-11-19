@@ -38,7 +38,7 @@ namespace Project_Colruyt_DAL
         // CONNECTIONSTRING TOEVOEGEN VOOR HET STARTEN VAN DATABASEOPERATIONS (connectionstring.txt)!!! 
 
 
-        public static string Connectionstring = "";
+        public static string Connectionstring = "mongodb+srv://dbdajo:vandoninck@cluster0.zvqn2.gcp.mongodb.net/Colruyt?retryWrites=true&w=majority";
         public static MongoClient client = new MongoClient(Connectionstring);
         public static IMongoCollection<Gebruikers> GetUsers()
         {
