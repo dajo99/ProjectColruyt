@@ -18,8 +18,26 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+
+        <DataGrid ItemsSource="{Binding Lijst}" Grid.Row="0" Margin="30 20" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Lijstnaam" Binding="{Binding Lijstnaam}"/>
+                <DataGridTextColumn Header="Datum" Binding="{Binding Datum,  StringFormat=dd-MM-yyyy}"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Margin="20 0 0 0"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                <materialDesign:PackIcon Kind="TrashCanOutline" Height="24" Width="24"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--
         <ScrollViewer Grid.Row="0" materialDesign:ScrollViewerAssist.IsAutoHideEnabled="True" Margin="30 20">
-            <ListView x:Name="LVOverzichtLijsten">
+            <ListView x:Name="LVOverzichtLijsten" ItemsSource="{Binding Lijst}">
                 
                 <ListView.View>
                     <GridView>
@@ -43,7 +61,7 @@
                 </ListView.View>
             </ListView>
         </ScrollViewer>
-
+-->
         <Button
             Style="{StaticResource MaterialDesignFloatingActionLightButton}"
             Grid.Row="1" HorizontalAlignment="Right"

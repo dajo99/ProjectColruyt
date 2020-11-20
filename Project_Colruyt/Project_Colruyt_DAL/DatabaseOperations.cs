@@ -3,6 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,22 +16,48 @@ namespace Project_Colruyt_DAL
         public class Gebruikers
         {
             [BsonId]
-            public ObjectId Id { get; set; }
+            public BsonObjectId Id { get; set; }
 
             [BsonElement("Email")]
-            public string email { get; set; }
+            public BsonString email { get; set; }
 
             [BsonElement("Password")]
-            public string password { get; set; }
+            public BsonString password { get; set; }
 
             [BsonElement("Lists")]
-            public string[] lists { get; set; }
+            public BsonValue[] lists { get; set; }
 
             /*public TestUserDocument(string username, string password)
             {
                 this.username = username;
                 this.password = password;
             }*/
+        }
+
+        public class GebruikerLijst
+        {
+            [BsonId]
+            public BsonObjectId Id { get; set; }
+
+            [BsonElement("Name")]
+            public BsonString Lijstnaam { get; set; }
+
+            [BsonElement("Date")]
+            public BsonDateTime Datum { get; set; }
+
+            [BsonElement("Products")]
+            public BsonValue[] Producten { get; set; }
+
+            /*public TestUserDocument(string username, string password)
+            {
+                this.username = username;
+                this.password = password;
+            }*/
+            public override string ToString()
+            {
+                
+                return Datum.ToString() + Lijstnaam.ToString();
+            }
         }
 
 
@@ -61,6 +88,27 @@ namespace Project_Colruyt_DAL
             //Environment.Exit(1);
 
             return collection;
+        }
+        public static ObservableCollection<GebruikerLijst> lijst = new ObservableCollection<GebruikerLijst>();
+        public static ObservableCollection<GebruikerLijst> GetListByUserId(BsonObjectId id)
+        {
+
+            IMongoDatabase database = client.GetDatabase("Colruyt");
+            IMongoCollection<Gebruikers> collection = database.GetCollection<Gebruikers>("Users");
+            Gebruikers gebruiker = collection.Find(x => x.Id == id).FirstOrDefault();
+            var list = database.GetCollection<GebruikerLijst>("Userlists");
+            foreach (var item in gebruiker.lists)
+            {
+                GebruikerLijst gbl = new GebruikerLijst();
+                if (item.IsObjectId)
+                {
+                    gbl = list.Find(x => x.Id == item.AsObjectId).SingleOrDefault();
+                }
+                lijst.Add(gbl);
+            }
+            //Environment.Exit(1);
+            return lijst;
+            
         }
 
         public static IMongoCollection<Location> GetLocations()

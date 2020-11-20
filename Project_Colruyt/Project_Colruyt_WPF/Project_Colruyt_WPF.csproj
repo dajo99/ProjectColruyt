@@ -148,6 +148,7 @@
     </Compile>
     <Compile Include="ViewModels\AanmeldenViewModel.cs" />
     <Compile Include="ViewModels\BasisViewModel.cs" />
+    <Compile Include="ViewModels\LijstOverzichtViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\NieuwProductViewModel.cs" />
     <Compile Include="ViewModels\RegistreerViewModel.cs" />
@@ -214,6 +215,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ProjectColruyt_MODELS\ProjectColruyt_MODELS.csproj">
+      <Project>{65D0D0F3-432C-4510-B089-BDF508709175}</Project>
+      <Name>ProjectColruyt_MODELS</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Project_Colruyt_DAL\Project_Colruyt_DAL.csproj">
       <Project>{EA6CF909-EA2D-42B9-BF42-FD937D32E786}</Project>
       <Name>Project_Colruyt_DAL</Name>

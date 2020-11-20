@@ -1,5 +1,8 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using Project_Colruyt_DAL;
+using Project_Colruyt_WPF.Views;
+using ProjectColruyt_MODELS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,9 +88,15 @@ namespace Project_Colruyt_WPF.ViewModels
             {
                 Gebruikers user = new Gebruikers();
                 user.email = Email;
-                user.lists = new string[] { };
+                user.lists = new BsonValue[] { };
                 user.password = EncryptString(Wachtwoord);
                 collection.InsertOne(user);
+                GebruikerStatic.Gebruiker = user;
+                MainView view = (MainView)App.Current.MainWindow;
+                view.GridMain.Children.Clear();
+                Usercontrols.LijstOverzicht_usercontrol usc = new Usercontrols.LijstOverzicht_usercontrol();
+                usc.DataContext = new LijstOverzichtViewModel();
+                view.GridMain.Children.Add(usc);
             }
         }
         public override string this [string columnName] {
