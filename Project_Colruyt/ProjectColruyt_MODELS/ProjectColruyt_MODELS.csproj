@@ -31,6 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,6 +44,7 @@
   <ItemGroup>
     <Compile Include="GebruikerStatic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControlHelp\Switch.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project_Colruyt_DAL\Project_Colruyt_DAL.csproj">

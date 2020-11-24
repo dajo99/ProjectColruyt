@@ -102,9 +102,9 @@
         </Grid>
         
         <!--usercontrol grid-->
-        <Grid Background="#D4EAEE" Grid.Row="1"  x:Name="GridMain" >
+        <ContentControl Content="{Binding Control}" Background="#D4EAEE" Grid.Row="1">
             
-        </Grid>
+        </ContentControl>
 
     </Grid>
 </Window>

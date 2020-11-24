@@ -54,8 +54,8 @@ namespace Project_Colruyt_WPF.ViewModels
             MainView view = (MainView)Application.Current.MainWindow;
             MainViewModel mainModel = new MainViewModel();
             mainModel.WindowTitle = "Producten toevoegen";
-            view.DataContext = mainModel;
-            view.GridMain.Children.Clear();
+            //view.DataContext = mainModel;
+            //view.GridMain.Children.Clear();
 
             //user control voor nieuwe lijst initialiseren en datacontext instellen
             /*voorbeeld

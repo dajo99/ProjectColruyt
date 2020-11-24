@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using Project_Colruyt_DAL;
 using Project_Colruyt_WPF.Views;
 using ProjectColruyt_MODELS;
+using ProjectColruyt_MODELS.UserControlHelp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -92,11 +93,10 @@ namespace Project_Colruyt_WPF.ViewModels
                 user.password = EncryptString(Wachtwoord);
                 collection.InsertOne(user);
                 GebruikerStatic.Gebruiker = user;
-                MainView view = (MainView)App.Current.MainWindow;
-                view.GridMain.Children.Clear();
+                
                 Usercontrols.LijstOverzicht_usercontrol usc = new Usercontrols.LijstOverzicht_usercontrol();
                 usc.DataContext = new LijstOverzichtViewModel();
-                view.GridMain.Children.Add(usc);
+                ControlSwitch.InvokeSwitch(usc);
             }
         }
         public override string this [string columnName] {

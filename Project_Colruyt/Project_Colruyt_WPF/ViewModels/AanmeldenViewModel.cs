@@ -2,6 +2,7 @@
 using Project_Colruyt_DAL;
 using Project_Colruyt_WPF.Views;
 using ProjectColruyt_MODELS;
+using ProjectColruyt_MODELS.UserControlHelp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,11 +63,9 @@ namespace Project_Colruyt_WPF.ViewModels
             else
             {
                 GebruikerStatic.Gebruiker = gebruiker;
-                MainView view = (MainView)App.Current.MainWindow;
-                view.GridMain.Children.Clear();
                 Usercontrols.LijstOverzicht_usercontrol usc = new Usercontrols.LijstOverzicht_usercontrol();
                 usc.DataContext = new LijstOverzichtViewModel();
-                view.GridMain.Children.Add(usc);
+                Switch.InvokeSwitch(usc);
             }
 
         }

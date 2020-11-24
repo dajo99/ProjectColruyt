@@ -29,8 +29,7 @@ namespace Project_Colruyt_WPF
 
             //Usercontrols.RegistrerenUsercontrol usc = new Usercontrols.RegistrerenUsercontrol();
             //usc.DataContext = new RegistreerViewModel();
-
-            view.GridMain.Children.Add(usc);
+            viewmodel.Control = usc;
             view.DataContext = viewmodel;
             view.Show();
 
