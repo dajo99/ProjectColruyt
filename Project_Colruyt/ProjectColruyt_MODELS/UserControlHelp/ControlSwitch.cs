@@ -8,7 +8,7 @@ using System.Windows.Controls;
 namespace ProjectColruyt_MODELS.UserControlHelp
 {
      public delegate void ColruytDelegate(UserControl usc);
-    public static class Switch
+    public static class ControlSwitch
     {
         public static event ColruytDelegate UscEvent;
 

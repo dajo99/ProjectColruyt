@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="GebruikerStatic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControlHelp\Switch.cs" />
+    <Compile Include="UserControlHelp\ControlSwitch.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project_Colruyt_DAL\Project_Colruyt_DAL.csproj">

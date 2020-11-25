@@ -65,7 +65,7 @@ namespace Project_Colruyt_WPF.ViewModels
                 GebruikerStatic.Gebruiker = gebruiker;
                 Usercontrols.LijstOverzicht_usercontrol usc = new Usercontrols.LijstOverzicht_usercontrol();
                 usc.DataContext = new LijstOverzichtViewModel();
-                Switch.InvokeSwitch(usc);
+                ControlSwitch.InvokeSwitch(usc);
             }
 
         }
