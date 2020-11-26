@@ -27,6 +27,10 @@ namespace Project_Colruyt_WPF
             Usercontrols.Aanmelden_usercontrol usc = new Usercontrols.Aanmelden_usercontrol();
             usc.DataContext = new AanmeldenViewModel();
 
+            viewmodel.WindowTitle = "Welkom";
+            viewmodel.LogoutVisibility = "Hidden";
+            viewmodel.BackVisibility = "Hidden";
+
             //Usercontrols.RegistrerenUsercontrol usc = new Usercontrols.RegistrerenUsercontrol();
             //usc.DataContext = new RegistreerViewModel();
             viewmodel.Control = usc;

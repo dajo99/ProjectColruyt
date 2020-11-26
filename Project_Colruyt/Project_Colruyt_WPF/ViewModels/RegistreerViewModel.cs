@@ -96,7 +96,7 @@ namespace Project_Colruyt_WPF.ViewModels
                 
                 Usercontrols.LijstOverzicht_usercontrol usc = new Usercontrols.LijstOverzicht_usercontrol();
                 usc.DataContext = new LijstOverzichtViewModel();
-                ControlSwitch.InvokeSwitch(usc);
+                ControlSwitch.InvokeSwitch(usc, "Winkellijsten");
             }
         }
         public override string this [string columnName] {

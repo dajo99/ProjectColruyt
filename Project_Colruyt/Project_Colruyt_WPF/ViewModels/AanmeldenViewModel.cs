@@ -47,6 +47,14 @@ namespace Project_Colruyt_WPF.ViewModels
             }
         }
 
+        public delegate void SwitchUsercontrolEvent(string title); 
+        public event SwitchUsercontrolEvent setViewTitle;
+        
+        public AanmeldenViewModel()
+        {
+            setViewTitle?.Invoke("Aanmelden");
+        }
+
         Gebruikers gebruiker;
         public void Authenticeer()
         {
@@ -65,7 +73,7 @@ namespace Project_Colruyt_WPF.ViewModels
                 GebruikerStatic.Gebruiker = gebruiker;
                 Usercontrols.LijstOverzicht_usercontrol usc = new Usercontrols.LijstOverzicht_usercontrol();
                 usc.DataContext = new LijstOverzichtViewModel();
-                ControlSwitch.InvokeSwitch(usc);
+                ControlSwitch.InvokeSwitch(usc, "Winkellijsten");
             }
 
         }

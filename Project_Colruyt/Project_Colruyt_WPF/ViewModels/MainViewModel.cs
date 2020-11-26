@@ -15,12 +15,35 @@ namespace Project_Colruyt_WPF.ViewModels
    {
         private string _windowTitle;
         private UserControl _control;
+
+        private string _logoutVisibility;
+
+        private string _backVisibility;
+
+        public string BackVisibility
+        {
+            get { return _backVisibility; }
+            set { _backVisibility = value; }
+        }
+
+
+        public string LogoutVisibility
+        {
+            get { return _logoutVisibility; }
+            set { 
+                _logoutVisibility = value; 
+                NotifyPropertyChanged();
+            }
+        }
+
+
         public string WindowTitle
         {
             get {return _windowTitle; }
             set {
                 _windowTitle = value;
-                }
+                NotifyPropertyChanged();
+            }
         }
 
         public UserControl Control
@@ -37,14 +60,20 @@ namespace Project_Colruyt_WPF.ViewModels
             }
         }
 
+
         public MainViewModel()
         {
+
             ControlSwitch.UscEvent += SwitchControl;
+
+
         }
 
-        public void SwitchControl(UserControl usc)
+        
+        public void SwitchControl(UserControl usc, string title)
         {
             Control = usc;
+            WindowTitle = title;
         }
 
         public override string this[string columnName] => throw new NotImplementedException();

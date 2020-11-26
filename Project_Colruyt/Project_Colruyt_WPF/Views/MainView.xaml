@@ -46,7 +46,7 @@
                     <!-- top left buttons. visibility depending on usercontrol added in -->
                     <Button x:Name="btnBack"
                         Margin="20 0" Padding="0 0 10 0"
-                        Visibility="Visible"
+                        Visibility="{Binding BackVisibility}"
                         HorizontalAlignment="Left"
                         Width="118"
                         Style="{StaticResource MaterialDesignOutlinedButton}"
@@ -72,7 +72,7 @@
                     
                     <!--Top right navbar buttons, visibility depending on usercontrol added in-->
                     <Button
-                    Visibility="Visible"
+                    Visibility="{Binding LogoutVisibility}"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     Foreground="#FFF" 
                     HorizontalAlignment="Right"
