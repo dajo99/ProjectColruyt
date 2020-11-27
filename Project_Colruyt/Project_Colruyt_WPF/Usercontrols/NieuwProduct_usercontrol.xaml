@@ -63,12 +63,12 @@
             SelectedItem="{Binding GeselecteerdeLocation}">
         </ComboBox>
 
-        <DataGrid x:Name="border"  Grid.Row="1" ItemsSource="{Binding Products}" Margin="100 10 100 0" SelectedItem="{Binding GeselecteerdeProduct}" IsReadOnly="True" AutoGenerateColumns="False" BorderThickness="4" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
+        <DataGrid  Grid.Row="1" ItemsSource="{Binding Products}" Margin="100 10 100 0" SelectedItem="{Binding GeselecteerdeProductAantal}" AutoGenerateColumns="False" BorderThickness="4" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="*"                       
-                    Header="Productnaam" Binding="{Binding Name}" HeaderStyle="{StaticResource CenterGridHeaderStyle}"/>
+                    Header="Productnaam" Binding="{Binding Product.Name}" HeaderStyle="{StaticResource CenterGridHeaderStyle}" IsReadOnly="True"/>
                 <DataGridTextColumn Width="*"  
-                    Header="Eenheidsprijs" Binding="{Binding Price}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                    Header="Eenheidsprijs" Binding="{Binding Product.Price}" HeaderStyle="{StaticResource CenterGridHeaderStyle}" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Center" />
@@ -76,14 +76,20 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
 
-                <DataGridTemplateColumn Width="*" Header="Aantal" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
-                    <DataGridTemplateColumn.CellTemplate>
+                <DataGridTextColumn Width="*" Header="Aantal" Binding="{Binding Quantity}" HeaderStyle="{StaticResource CenterGridHeaderStyle}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                    <!--<DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
+                           
                             <StackPanel Orientation="Horizontal">
                                 <Button Command="{Binding}" CommandParameter="Min" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="20" Margin="10 0" Style="{StaticResource MaterialDesignFloatingActionMiniButton}">
                                     <materialDesign:PackIcon Kind="Remove" Height="16" Width="16"/>
                                 </Button>
-                                <TextBox BorderBrush="Black" Width="20" Height="20" HorizontalAlignment="Center"/>
+                                <Label Content="{Binding Quantity}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 <Button Command="{Binding}" CommandParameter="Plus" HorizontalAlignment="Center" VerticalAlignment="Center" Width="20" Height="20" Margin="10 0" Style="{StaticResource MaterialDesignFloatingActionMiniButton}">
                                     <materialDesign:PackIcon Kind="Plus" Height="16" Width="16"/>
                                 </Button>
@@ -95,9 +101,9 @@
                             <Setter Property="HorizontalAlignment" Value="Center"/>
                             
                         </Style>
-                    </DataGridTemplateColumn.CellStyle>
+                    </DataGridTemplateColumn.CellStyle>-->
 
-                </DataGridTemplateColumn>
+                </DataGridTextColumn>
 
             </DataGrid.Columns>
         </DataGrid>
@@ -112,14 +118,14 @@
 
             <StackPanel Orientation="Horizontal" >
                 <ComboBox 
-                    MinWidth="250"
+                    MinWidth="100"
                     materialDesign:HintAssist.Hint="Afdeling"
                     ItemsSource="{Binding Locations}"
                     DisplayMemberPath="Category"
                     SelectedItem="{Binding NieuwLocation}"/>
 
                 <TextBox  
-                    Margin="20 0" MinWidth="250"
+                    Margin="20 0" MinWidth="170"
                     materialDesign:HintAssist.Hint="Productnaam"
                     Text="{Binding ProductRecord.Name, ValidatesOnDataErrors=True}"/>
 
@@ -129,10 +135,15 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Width="28" Height="28"
-                    Margin="10 0"
+                    Margin="5 0 60 0"
                     Style="{StaticResource MaterialDesignFloatingActionMiniButton}">
                     <materialDesign:PackIcon Kind="Plus" Height="16" Width="16"/>
                 </Button>
+                <Button 
+            Width="195" Height="25"
+            Command="{Binding}" CommandParameter="AanwinkellijstToevoegen"
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            Content="Aan winkellijst toevoegen"/>
             </StackPanel>
 
         </StackPanel>

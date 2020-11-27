@@ -14,9 +14,9 @@ namespace Project_Colruyt_DAL.Models
         public BsonObjectId Id { get; set; }
 
         [BsonElement("Product")]
-        public BsonValue Product { get; set; }
+        public Product Product { get; set; }
 
         [BsonElement("Quantity")]
-        public BsonInt32 Quantity { get; set; }
+        public int Quantity { get; set; }
     }
 }

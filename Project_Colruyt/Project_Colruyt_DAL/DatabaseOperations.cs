@@ -115,6 +115,23 @@ namespace Project_Colruyt_DAL
            
         }
 
+        public static bool ProductAantalToevoegen(ProductAantal product)
+        {
+            try
+            {
+                IMongoDatabase database = client.GetDatabase("Colruyt");
+                IMongoCollection<ProductAantal> collection = database.GetCollection<ProductAantal>("ProductQuantitys");
+                collection.InsertOne(product);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                FileOperations.Foutloggen(ex);
+                return false;
+            }
+
+        }
+
     }
 
 }

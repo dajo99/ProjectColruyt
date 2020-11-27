@@ -1,12 +1,15 @@
 ﻿using MongoDB.Driver;
 using Project_Colruyt_DAL;
+using Project_Colruyt_DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Project_Colruyt_WPF.ViewModels
 {
@@ -24,13 +27,16 @@ namespace Project_Colruyt_WPF.ViewModels
 
         private ObservableCollection<Location> _locations;
 
-        private ObservableCollection<Product> _products;
+        private ObservableCollection<ProductAantal> _products;
         
 
 
         private Location _geselecteerdeLocation;
         private Location _nieuwLocation;
-        private Product _geselecteerdeProduct;
+        private ProductAantal _geselecteerdeProductAantal;
+       
+        private string _quantity;
+
 
 
         public string Foutmelding
@@ -40,7 +46,7 @@ namespace Project_Colruyt_WPF.ViewModels
         }
 
 
-        public ObservableCollection<Product> Products
+        public ObservableCollection<ProductAantal> Products
         {
             get { return _products; }
             set
@@ -81,12 +87,23 @@ namespace Project_Colruyt_WPF.ViewModels
             }
         }
 
-        public Product GeselecteerdeProduct
+        public ProductAantal GeselecteerdeProduct
         {
-            get { return _geselecteerdeProduct; }
+            get { return _geselecteerdeProductAantal; }
             set
             {
-                _geselecteerdeProduct = value;
+                _geselecteerdeProductAantal = value;
+                NotifyPropertyChanged();
+                
+            }
+        }
+
+        public string Quantity
+        {
+            get { return _quantity; }
+            set
+            {
+                _quantity = value;
                 NotifyPropertyChanged();
 
             }
@@ -106,10 +123,19 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             List<Location> locationList = collectionLocations.AsQueryable().ToList<Location>();
             List<Product> productList = collectionProducts.AsQueryable().ToList<Product>();
-            // Bind result data to WPF view.
-            if (productList.Count() > 0)
+            List<ProductAantal> productAantalList = new List<ProductAantal>();
+            for (int i = 0; i < productList.Count; i++)
             {
-                Products = new ObservableCollection<Product>(productList);
+                ProductAantal nieuw = new ProductAantal();
+                nieuw.Product = productList[i];
+                nieuw.Quantity = 0;
+
+                productAantalList.Add(nieuw);
+            }
+            // Bind result data to WPF view.
+            if (productAantalList.Count() > 0)
+            {
+                Products = new ObservableCollection<ProductAantal>(productAantalList);
                 Locations = new ObservableCollection<Location>(locationList);
 
             }
@@ -139,7 +165,21 @@ namespace Project_Colruyt_WPF.ViewModels
             if (GeselecteerdeLocation != null)
             {
                 List<Product> lijstproducts = DatabaseOperations.GetProducts().AsQueryable().Where(x => x.LocationID == GeselecteerdeLocation.LocationID).ToList();
-                Products = new ObservableCollection<Product>(lijstproducts);
+                List<ProductAantal> productAantalList = new List<ProductAantal>();
+                for (int i = 0; i < lijstproducts.Count; i++)
+                {
+                    ProductAantal nieuw = new ProductAantal();
+                    nieuw.Product = lijstproducts[i];
+                    nieuw.Quantity = 0;
+
+                    productAantalList.Add(nieuw);
+                }
+                // Bind result data to WPF view.
+                if (productAantalList.Count() > 0)
+                {
+                    Products = new ObservableCollection<ProductAantal>(productAantalList);
+
+                }
             }
             
         }
@@ -156,7 +196,21 @@ namespace Project_Colruyt_WPF.ViewModels
             if (resultaat == true)
             {
                 List<Product> productList = collectionProducts.AsQueryable().ToList<Product>();
-                Products = new ObservableCollection<Product>(productList);
+                List<ProductAantal> productAantalList = new List<ProductAantal>();
+                for (int i = 0; i < productList.Count; i++)
+                {
+                    ProductAantal nieuw = new ProductAantal();
+                    nieuw.Product = productList[i];
+                    nieuw.Quantity = 0;
+
+                    productAantalList.Add(nieuw);
+                }
+                // Bind result data to WPF view.
+                if (productAantalList.Count() > 0)
+                {
+                    Products = new ObservableCollection<ProductAantal>(productAantalList);
+
+                }
                 MessageBox.Show($"{product.Name} is toegevoegd!");
             }
             else
@@ -167,21 +221,28 @@ namespace Project_Colruyt_WPF.ViewModels
 
         }
 
-        public void Min()
+        public void AanwinkellijstToevoegen()
+        {
+            
+
+        }
+
+        /*public void Min()
         {
 
         }
 
         public void Plus()
         {
+            
 
-        }
+        }*/
 
 
-        
 
-        
-        
+
+
+
         private void ProductRecordInstellen()
         {
             
@@ -206,8 +267,8 @@ namespace Project_Colruyt_WPF.ViewModels
             switch (parameter.ToString())
             {
                 case "Toevoegen": Toevoegen(); break;
-                case "Min": Min(); break;
-                case "Plus": Plus(); break;
+                case "AanwinkellijstToevoegen": AanwinkellijstToevoegen() ; break;
+                case "Plus": ; break;
                 
             }
         }
