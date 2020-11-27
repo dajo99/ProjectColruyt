@@ -71,20 +71,20 @@ namespace Project_Colruyt_WPF.ViewModels
             Producten = new ObservableCollection<ProductAantal>();
             Lijstje = GetListByObjectId(id);
 
-            //foreach (var productQuantity in Lijstje.Producten)
-            //{
-            //    Producten.Add(GetProductAantaltById(productQuantity.AsObjectId));
+            foreach (var productQuantity in Lijstje.Producten)
+            {
+                Producten.Add(GetProductAantaltById(productQuantity.AsObjectId));
 
-            //}
+            }
 
-            //foreach (var product in Producten)
-            //{
-            //    Product item = new Product();
-            //    item.Price = GetProductPriceById(product.Product.AsObjectId);
-            //    product.Product= GetProductNameById(product.Product);
+            foreach (var product in Producten)
+            {
+                Product item = new Product();
+                item.Price = GetProductPriceById(product.Product.ProductID);
+                //product.Product = GetProductNameById(product.Product);
 
-            //    product.TotalPrice = (double)item.Price * (int)product.Quantity;
-            //}
+                //product.TotalPrice = item.Price * product.Quantity;
+            }
 
         }
 
