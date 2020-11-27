@@ -1,6 +1,8 @@
 ﻿using MongoDB.Bson;
+using Project_Colruyt_DAL;
 using Project_Colruyt_DAL.Models;
 using Project_Colruyt_WPF.Views;
+using ProjectColruyt_MODELS;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,9 +20,20 @@ namespace Project_Colruyt_WPF.ViewModels
     public class ViewModelNieuweWinkelLijst : BasisViewModel
     {
 
-        private GebruikerLijst _selectItem;
+        private ObservableCollection<ProductAantal> _producten;
         public  GebruikerLijst _lijstje;
+        private string _naam;
 
+        public string Naam
+        {
+            get
+            { return _naam; }
+            set
+            {
+                _naam = value;
+                NotifyPropertyChanged();
+            }
+        }
         //Properties
         public GebruikerLijst Lijstje
         {
@@ -32,54 +45,85 @@ namespace Project_Colruyt_WPF.ViewModels
         }
 
 
+        public ObservableCollection<ProductAantal> Producten
+        {
+            get 
+            { 
+                return _producten; 
+            }
+            set
+            {
+                _producten = value;
+                NotifyPropertyChanged();
+            }
+        }
+
 
         public ViewModelNieuweWinkelLijst()
         {
+            Producten = new ObservableCollection<ProductAantal>();
             Lijstje = new GebruikerLijst();
+
         }
 
         public ViewModelNieuweWinkelLijst(BsonObjectId id)
         {
+            Producten = new ObservableCollection<ProductAantal>();
             Lijstje = GetListByObjectId(id);
+
+            //foreach (var productQuantity in Lijstje.Producten)
+            //{
+            //    Producten.Add(GetProductAantaltById(productQuantity.AsObjectId));
+
+            //}
+
+            //foreach (var product in Producten)
+            //{
+            //    Product item = new Product();
+            //    item.Price = GetProductPriceById(product.Product.AsObjectId);
+            //    product.Product= GetProductNameById(product.Product);
+
+            //    product.TotalPrice = (double)item.Price * (int)product.Quantity;
+            //}
+
         }
 
         ///Komende sprints hieraan werken
         public override string this[string columnName] => throw new NotImplementedException();
 
-
-
-        public void OpenToevoegen()
+        public void Opslagen()
         {
-            ///Code usercontroles en de context van mainview te vernieuwen
-            MainView view = (MainView)Application.Current.MainWindow;
-            MainViewModel mainModel = new MainViewModel();
-            mainModel.WindowTitle = "Producten toevoegen";
-            //view.DataContext = mainModel;
-            //view.GridMain.Children.Clear();
-
-            //user control voor nieuwe lijst initialiseren en datacontext instellen
-            /*voorbeeld
-              UsercontrolToevoegen usc = new UsercontrolToevoegen();
-              ViewModelToevoegen vm = new ViewModelToevoegen();
-              usc.datacontext = vm;
-              view.GridMain.Children.Add(usc);
-            */
+            if (Lijstje.Id == null)
+            {
+                ///enkel nog product toevoegen hierin regelen
+                Lijstje.Id = new BsonObjectId(ObjectId.GenerateNewId());
+                Lijstje.Datum = DateTime.Now;
+                Lijstje.Lijstnaam = Naam;
+                bool check = LijstToevoegen(Lijstje, GebruikerStatic.Gebruiker);
+                if (check)
+                {
+                    MessageBox.Show("succes!");
+                }
+            }
         }
 
-        public void Verwijderen()
-        {
-            ///Code die een item uit het huidige lijstje verwijdert. kan nog meer in komen te staan
-           
-        }
+   
         public override bool CanExecute(object parameter)
         {
             switch (parameter.ToString())
             {
-                case "Toevoegen":
+                case "Opslagen":
                     return true;
+                   
 
                 case "Verwijderen":
-                    return true;
+                    if (Lijstje.Id != null)
+                    {
+                        return true;
+                    }
+                    return false;
+                    
+                    
             }
             return true;
         }
@@ -88,11 +132,12 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             switch (parameter.ToString())
             {
-                case "Toevoegen":
-                    OpenToevoegen();
+                case "Opslagen":
+                    Opslagen();
+
                     break;
                 case "Verwijderen":
-                    Verwijderen();
+           
                     break;
                     
             }

@@ -20,7 +20,7 @@ namespace Project_Colruyt_DAL.Models
         public BsonString password { get; set; }
 
         [BsonElement("Lists")]
-        public BsonValue[] lists { get; set; }
+        public BsonObjectId[] lists { get; set; }
 
         /*public TestUserDocument(string username, string password)
         {

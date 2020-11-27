@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,9 @@ namespace Project_Colruyt_DAL.Models
         public Product Product { get; set; }
 
         [BsonElement("Quantity")]
-        public int Quantity { get; set; }
+        public BsonInt32 Quantity { get; set; }
+
+        public double? TotalPrice { get; set; }
+
     }
 }
