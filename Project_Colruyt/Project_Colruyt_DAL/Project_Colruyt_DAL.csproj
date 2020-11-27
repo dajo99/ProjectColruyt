@@ -107,8 +107,11 @@
     <Compile Include="DatabaseOperations.cs" />
     <Compile Include="FileOperations.cs" />
     <Compile Include="Foutlogger.cs" />
-    <Compile Include="Location.cs" />
-    <Compile Include="Product.cs" />
+    <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\Gebruiker.cs" />
+    <Compile Include="Models\GebruikerLijst.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductAantal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
