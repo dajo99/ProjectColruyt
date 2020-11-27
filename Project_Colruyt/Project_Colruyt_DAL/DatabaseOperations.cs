@@ -3,7 +3,6 @@ using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using Project_Colruyt_DAL.Models;
 using System;
-using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;

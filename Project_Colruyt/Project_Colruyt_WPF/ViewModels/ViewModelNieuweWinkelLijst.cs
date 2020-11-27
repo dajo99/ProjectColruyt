@@ -100,18 +100,14 @@ namespace Project_Colruyt_WPF.ViewModels
                 Lijstje.Datum = DateTime.Now;
                 Lijstje.Lijstnaam = Naam;
                 bool check = LijstToevoegen(Lijstje, GebruikerStatic.Gebruiker);
+                if (check)
+                {
+                    MessageBox.Show("succes!");
+                }
             }
         }
 
-        public void Verwijderen()
-        {
-            bool check = LijstVerwijderen(Lijstje, GebruikerStatic.Gebruiker);
-            if (check)
-            {
-                MessageBox.Show("succes!");
-            }
-           
-        }
+   
         public override bool CanExecute(object parameter)
         {
             switch (parameter.ToString())
@@ -141,7 +137,7 @@ namespace Project_Colruyt_WPF.ViewModels
 
                     break;
                 case "Verwijderen":
-                    Verwijderen();
+           
                     break;
                     
             }

@@ -19,15 +19,15 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <DataGrid ItemsSource="{Binding Lijst}" Grid.Row="0" Margin="30 20" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" SelectedItem="{Binding SelectItem}">
+        <DataGrid ItemsSource="{Binding Lijst, Mode=TwoWay}" Grid.Row="0" Margin="30 20" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" SelectedItem="{Binding SelectItem}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Lijstnaam" Binding="{Binding Lijstnaam}"/>
                 <DataGridTextColumn Header="Datum" Binding="{Binding Datum,  StringFormat=dd-MM-yyyy}"/>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel>
-                            <Button Margin="20 0 0 0" Command="{Binding}" CommandParameter="Verwijderen" 
+                            <StackPanel Background="Transparent">
+                            <Button Margin="20 0 0 0" Command="{Binding}" CommandParameter="Verwijder" 
                                 Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
                                 <materialDesign:PackIcon Kind="TrashCanOutline" Height="24" Width="24"/>
                             </Button>
@@ -37,7 +37,6 @@
                     <DataGridTemplateColumn.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="HorizontalAlignment" Value="Center"/>
-
                         </Style>
                     </DataGridTemplateColumn.CellStyle>
                 </DataGridTemplateColumn>
@@ -78,6 +77,17 @@
                 Kind="Plus"
                 Height="26"
                 Width="26"/>
+        </Button>
+        <Button  Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+            Grid.Row="1" HorizontalAlignment="Right"
+            Margin="0,20.4,688,19.6" Command="{Binding}" CommandParameter="Voegtoe" Content="Open">
+           
+        </Button>
+
+        <Button  Style="{StaticResource MaterialDesignFloatingActionLightButton}"
+            Grid.Row="1" HorizontalAlignment="Right"
+            Margin="0,20.4,365,19.6" Command="{Binding}" CommandParameter="Verwijder" Content="Remove">
+
         </Button>
 
     </Grid>

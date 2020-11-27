@@ -35,11 +35,27 @@ namespace Project_Colruyt_WPF.ViewModels
             set
             {
                 _selectItem = value;
-                OpenLijstje();    
+                //OpenLijstje();    
                 NotifyPropertyChanged();
             }
         }
+        public void Verwijder()
+        {
+            if (SelectItem != null)
+            {
+                GebruikerLijst lijst = GetListByObjectId(SelectItem.Id);
+                bool check = LijstVerwijderen(lijst, GebruikerStatic.Gebruiker);
+                if (check)
+                {
+                    //rare bug waardoor view niet updatete
 
+                    ControlSwitch.InvokeSwitch(new LijstOverzicht_usercontrol() { DataContext = new LijstOverzichtViewModel() }, "Overzicht");
+                    
+                }
+                
+            }
+           
+        }
 
         public void OpenLijstje()
         {
@@ -74,8 +90,11 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             if (parameter.ToString() == "VoegToe")
             {
-                _selectItem = null;
                 OpenLijstje();
+            }
+            if (parameter.ToString() == "Verwijder")
+            {
+                Verwijder();
             }
         }
     }
