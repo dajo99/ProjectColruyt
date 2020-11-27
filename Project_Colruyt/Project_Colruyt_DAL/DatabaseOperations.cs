@@ -111,6 +111,18 @@ namespace Project_Colruyt_DAL
             
         }
 
+
+        public static GebruikerLijst GetListByObjectId(BsonObjectId id)
+        {
+
+            IMongoDatabase database = client.GetDatabase("Colruyt");
+            var collection = database.GetCollection<GebruikerLijst>("Userlists");
+            GebruikerLijst gebruikerLijst = collection.Find(x => x.Id == id).FirstOrDefault();
+
+            return gebruikerLijst;
+
+        }
+
         public static IMongoCollection<Location> GetLocations()
         {
 

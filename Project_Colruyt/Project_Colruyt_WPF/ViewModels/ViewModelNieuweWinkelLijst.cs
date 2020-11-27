@@ -1,4 +1,5 @@
-﻿using Project_Colruyt_WPF.Views;
+﻿using MongoDB.Bson;
+using Project_Colruyt_WPF.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,17 +10,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using static Project_Colruyt_DAL.DatabaseOperations;
 
 namespace Project_Colruyt_WPF.ViewModels
 {
     public class ViewModelNieuweWinkelLijst : BasisViewModel
     {
 
-        private string _selectItem;
-        public ObservableCollection<string> _lijstje;
+        private GebruikerLijst _selectItem;
+        public  GebruikerLijst _lijstje;
 
         //Properties
-        public ObservableCollection<string> Lijstje
+        public GebruikerLijst Lijstje
         {
             get { return _lijstje; }
             set { 
@@ -28,19 +30,16 @@ namespace Project_Colruyt_WPF.ViewModels
             }
         }
 
-        public string SelectItem
-        {
-            get { return _selectItem; }
-            set
-            {
-                _selectItem = value;
-                NotifyPropertyChanged();
-            }
-        }
+
 
         public ViewModelNieuweWinkelLijst()
         {
+            Lijstje = new GebruikerLijst();
+        }
 
+        public ViewModelNieuweWinkelLijst(BsonObjectId id)
+        {
+            Lijstje = GetListByObjectId(id);
         }
 
         ///Komende sprints hieraan werken
@@ -69,7 +68,7 @@ namespace Project_Colruyt_WPF.ViewModels
         public void Verwijderen()
         {
             ///Code die een item uit het huidige lijstje verwijdert. kan nog meer in komen te staan
-            Lijstje.Remove(SelectItem);
+           
         }
         public override bool CanExecute(object parameter)
         {

@@ -19,7 +19,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <DataGrid ItemsSource="{Binding Lijst}" Grid.Row="0" Margin="30 20" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
+        <DataGrid ItemsSource="{Binding Lijst}" Grid.Row="0" Margin="30 20" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" SelectedItem="{Binding SelectItem}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Lijstnaam" Binding="{Binding Lijstnaam}"/>
                 <DataGridTextColumn Header="Datum" Binding="{Binding Datum,  StringFormat=dd-MM-yyyy}"/>
@@ -65,7 +65,7 @@
         <Button
             Style="{StaticResource MaterialDesignFloatingActionLightButton}"
             Grid.Row="1" HorizontalAlignment="Right"
-            Margin="40 20">
+            Margin="40 20" Command="{Binding}" CommandParameter="VoegToe">
             <materialDesign:PackIcon
                 Kind="Plus"
                 Height="26"

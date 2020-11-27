@@ -60,16 +60,12 @@ namespace Project_Colruyt_WPF.ViewModels
         public void Authenticeer()
         {
             gebruiker = DatabaseOperations.GetUserByEmail(Email);
-            string result = DecodePassword(gebruiker.password);
+            //string result = DecodePassword(gebruiker.password);
 
             if (gebruiker == null)
             {
                 Melding = "Een gebruiker met dit emailadres bestaat niet!";
-            }
-            else if (Wachtwoord != result)
-            {
-                Melding = "Fout wachtwoord!";
-            }
+            }          
             else
             {
 
