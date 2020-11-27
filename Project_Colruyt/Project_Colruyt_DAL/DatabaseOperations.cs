@@ -3,6 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
 using Project_Colruyt_DAL.Models;
 using System;
+using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Project_Colruyt_DAL
 
 
             IMongoDatabase database = client.GetDatabase("Colruyt");
-            IMongoCollection<Gebruiker> collection = database.GetCollection<Gebruiker>("Users"); 
+            IMongoCollection<Gebruiker> collection = database.GetCollection<Gebruiker>("Users");
 
             //Environment.Exit(1);
 
@@ -35,7 +36,7 @@ namespace Project_Colruyt_DAL
         {
 
             IMongoDatabase database = client.GetDatabase("Colruyt");
-            IMongoCollection<Product> collection = database.GetCollection<Product>("Products"); 
+            IMongoCollection<Product> collection = database.GetCollection<Product>("Products");
 
             //Environment.Exit(1);
 
@@ -60,7 +61,7 @@ namespace Project_Colruyt_DAL
             }
             //Environment.Exit(1);
             return lijst;
-            
+
         }
 
 
@@ -75,11 +76,37 @@ namespace Project_Colruyt_DAL
 
         }
 
+        public static BsonDouble GetProductPriceById(BsonObjectId id)
+        {
+
+            IMongoDatabase database = client.GetDatabase("Colruyt");
+            var collection = database.GetCollection<Product>("Products");
+            Product product = collection.Find(x => x.ProductID == id).SingleOrDefault();
+            return product.Price;
+
+        }
+
+        public static ProductAantal GetProductAantaltById(BsonObjectId id)
+        {
+
+            IMongoDatabase database = client.GetDatabase("Colruyt");
+            var collection = database.GetCollection<ProductAantal>("ProductQuantitys");
+            ProductAantal productQuantity = collection.Find(x => x.Id == id).SingleOrDefault();
+            return productQuantity;
+
+        }
+        public static BsonString GetProductNameById(BsonValue id)
+        {
+            IMongoDatabase database = client.GetDatabase("Colruyt");
+            var collection = database.GetCollection<Product>("Products");
+            Product product = collection.Find(x => x.ProductID == id.AsObjectId).SingleOrDefault();
+            return product.Name;
+        }
         public static IMongoCollection<Location> GetLocations()
         {
 
             IMongoDatabase database = client.GetDatabase("Colruyt");
-            IMongoCollection<Location> collection = database.GetCollection<Location>("Locations"); 
+            IMongoCollection<Location> collection = database.GetCollection<Location>("Locations");
 
             //Environment.Exit(1);
 
@@ -91,7 +118,7 @@ namespace Project_Colruyt_DAL
 
             IMongoDatabase database = client.GetDatabase("Colruyt");
             IMongoCollection<Gebruiker> collection = database.GetCollection<Gebruiker>("Users");
-            Gebruiker gebruiker =  collection.Find(x => x.email == email).FirstOrDefault();
+            Gebruiker gebruiker = collection.Find(x => x.email == email).FirstOrDefault();
 
             //Environment.Exit(1);
 
@@ -107,13 +134,70 @@ namespace Project_Colruyt_DAL
                 collection.InsertOne(product);
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 FileOperations.Foutloggen(ex);
                 return false;
             }
-           
+
         }
+
+        public static bool LijstToevoegen(GebruikerLijst gebruikerLijst, Gebruiker gebruiker)
+        {
+            try
+            {
+
+                IMongoDatabase database = client.GetDatabase("Colruyt");
+                IMongoCollection<Gebruiker> gebruikers = database.GetCollection<Gebruiker>("Users");
+                IMongoCollection<GebruikerLijst> collection = database.GetCollection<GebruikerLijst>("Userlists");
+                collection.InsertOne(gebruikerLijst);
+
+
+                var filter = Builders<Gebruiker>.Filter.Eq("_id", gebruiker.Id);
+
+                var update = Builders<Gebruiker>.Update
+                    .Push<BsonObjectId>(e => e.lists, gebruikerLijst.Id);
+
+                gebruikers.FindOneAndUpdate(filter, update);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                FileOperations.Foutloggen(ex);
+                return false;
+            }
+
+        }
+
+        public static bool LijstVerwijderen(GebruikerLijst gebruikerLijst, Gebruiker gebruiker)
+        {
+           try
+            {
+
+                IMongoDatabase database = client.GetDatabase("Colruyt");
+                IMongoCollection<Gebruiker> gebruikers = database.GetCollection<Gebruiker>("Users");
+                IMongoCollection<GebruikerLijst> collection = database.GetCollection<GebruikerLijst>("Userlists");
+                var filterDelete = Builders<GebruikerLijst>.Filter.Eq("_id", gebruikerLijst.Id);
+                collection.DeleteOne(filterDelete);
+
+
+                var filter = Builders<Gebruiker>.Filter.Eq("_id", gebruiker.Id);
+
+                var update = Builders<Gebruiker>.Update
+                    .Pull<BsonObjectId>(e => e.lists, gebruikerLijst.Id);
+
+                gebruikers.FindOneAndUpdate(filter, update);
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                FileOperations.Foutloggen(ex);
+                return false;
+            }
+        }
+
+
 
     }
 

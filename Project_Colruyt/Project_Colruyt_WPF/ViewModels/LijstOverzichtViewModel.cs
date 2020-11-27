@@ -49,7 +49,11 @@ namespace Project_Colruyt_WPF.ViewModels
             {
                 viewModel = new ViewModelNieuweWinkelLijst(_selectItem.Id);
             }
-            viewModel = new ViewModelNieuweWinkelLijst();
+            else
+            {
+                viewModel = new ViewModelNieuweWinkelLijst();
+            }
+            
             usc.DataContext = viewModel;
             ControlSwitch.InvokeSwitch(usc, "Winkellijst");
         }

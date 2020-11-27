@@ -53,28 +53,41 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <ListView 
-            Margin="70 20"
-            x:Name="LVproducten"
-            Grid.Row="0">
-            <ListView.View>
-                <GridView >
-                    <!--ColumnHeaderTemplate="{ StaticResource myHeaderTemplate}"-->
-                    <GridViewColumn Width="110" 
-                    CellTemplate="{StaticResource aantaltemplate}"   
-                    Header="Aantal"/>
-                    <GridViewColumn Width="340" 
-                    CellTemplate="{StaticResource naamtemplate}"   
-                    Header="product" />
-                    <GridViewColumn Width="110"
-                    CellTemplate="{StaticResource prijstemplate}"   
-                    Header="Prijs" />
-                    <GridViewColumn
-                    CellTemplate="{StaticResource buttontemplate}"                       
-                    Header="" />
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <DataGrid x:Name="border"  Grid.Row="0" ItemsSource="{Binding Producten}" Margin="100 10 100 0" IsReadOnly="True" AutoGenerateColumns="False" BorderThickness="4" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
+            <DataGrid.Columns>
+                <DataGridTextColumn                     
+                    Header="Productnaam" Binding="{Binding Product}"/>
+                <DataGridTextColumn
+                    Header="Aantal" Binding="{Binding Quantity}" >
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+           
+                    <DataGridTextColumn
+                    Header="Totaal prijs" Binding="{Binding TotalPrice}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Margin="20 0 0 0" Command="{Binding}" CommandParameter="Verwijderen"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                <materialDesign:PackIcon Kind="TrashCanOutline" Height="24" Width="24"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
 
         <Button Grid.Row="1"
                     Command="{Binding}" CommandParameter="ProductToevoegen"
@@ -94,10 +107,10 @@
         </Button>
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Width="180">
             <Label Content="Naam Winkellijstje" HorizontalAlignment="Center"/>
-            <TextBox HorizontalAlignment="Center" Margin="0 0 0 20" Width="180" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="20" />
+            <TextBox HorizontalAlignment="Center" Margin="0 0 0 20" Width="180" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding Naam}" FontSize="20" />
 
         </StackPanel>
-        <Button Grid.Row="1" x:Name="btn" Width="180" Height="35"
+        <Button Grid.Row="1" x:Name="btn" Width="180" Height="35" Command="{Binding}" CommandParameter="Opslagen"
                     Margin="20" Padding="0"
                     Visibility="Visible"
                 HorizontalAlignment="Right"

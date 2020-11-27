@@ -90,7 +90,7 @@ namespace Project_Colruyt_WPF.ViewModels
             {
                 Gebruiker user = new Gebruiker();
                 user.email = Email;
-                user.lists = new BsonValue[] { };
+                user.lists = new BsonObjectId[] { };
                 user.password = EncryptString(Wachtwoord);
                 collection.InsertOne(user);
                 GebruikerStatic.Gebruiker = user;

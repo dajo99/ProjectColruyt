@@ -26,12 +26,20 @@
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Margin="20 0 0 0"
+                            <StackPanel>
+                            <Button Margin="20 0 0 0" Command="{Binding}" CommandParameter="Verwijderen" 
                                 Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
                                 <materialDesign:PackIcon Kind="TrashCanOutline" Height="24" Width="24"/>
                             </Button>
+                            </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+
+                        </Style>
+                    </DataGridTemplateColumn.CellStyle>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
