@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using Project_Colruyt_DAL;
+using Project_Colruyt_DAL.Models;
 using Project_Colruyt_WPF.Views;
 using ProjectColruyt_MODELS;
 using ProjectColruyt_MODELS.UserControlHelp;
@@ -15,7 +16,7 @@ namespace Project_Colruyt_WPF.ViewModels
 {
     class AanmeldenViewModel: BasisViewModel
     {
-        IMongoCollection<Gebruikers> collection = DatabaseOperations.GetUsers();
+        IMongoCollection<Gebruiker> collection = DatabaseOperations.GetUsers();
 
         private string _email;
         private string _wachtwoord;
@@ -56,7 +57,7 @@ namespace Project_Colruyt_WPF.ViewModels
             setViewTitle?.Invoke("Aanmelden");
         }
 
-        Gebruikers gebruiker;
+        Gebruiker gebruiker;
         public void Authenticeer()
         {
             gebruiker = DatabaseOperations.GetUserByEmail(Email);
@@ -65,7 +66,14 @@ namespace Project_Colruyt_WPF.ViewModels
             if (gebruiker == null)
             {
                 Melding = "Een gebruiker met dit emailadres bestaat niet!";
+
             }          
+            
+            /*else if (Wachtwoord != result)
+            {
+                Melding = "Fout wachtwoord!";
+            }*/
+
             else
             {
 

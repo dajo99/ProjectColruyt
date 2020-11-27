@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;
+using Project_Colruyt_DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,66 +14,17 @@ namespace Project_Colruyt_DAL
     public static class DatabaseOperations
     {
 
-        public class Gebruikers
-        {
-            [BsonId]
-            public BsonObjectId Id { get; set; }
-
-            [BsonElement("Email")]
-            public BsonString email { get; set; }
-
-            [BsonElement("Password")]
-            public BsonString password { get; set; }
-
-            [BsonElement("Lists")]
-            public BsonValue[] lists { get; set; }
-
-            /*public TestUserDocument(string username, string password)
-            {
-                this.username = username;
-                this.password = password;
-            }*/
-        }
-
-        public class GebruikerLijst
-        {
-            [BsonId]
-            public BsonObjectId Id { get; set; }
-
-            [BsonElement("Name")]
-            public BsonString Lijstnaam { get; set; }
-
-            [BsonElement("Date")]
-            public BsonDateTime Datum { get; set; }
-
-            [BsonElement("Products")]
-            public BsonValue[] Producten { get; set; }
-
-            /*public TestUserDocument(string username, string password)
-            {
-                this.username = username;
-                this.password = password;
-            }*/
-            public override string ToString()
-            {
-                
-                return Datum.ToString() + Lijstnaam.ToString();
-            }
-        }
-
-
-
         // CONNECTIONSTRING TOEVOEGEN VOOR HET STARTEN VAN DATABASEOPERATIONS (connectionstring.txt)!!! 
 
 
         public static string Connectionstring = "mongodb+srv://dbdajo:vandoninck@cluster0.zvqn2.gcp.mongodb.net/Colruyt?retryWrites=true&w=majority";
         public static MongoClient client = new MongoClient(Connectionstring);
-        public static IMongoCollection<Gebruikers> GetUsers()
+        public static IMongoCollection<Gebruiker> GetUsers()
         {
 
 
             IMongoDatabase database = client.GetDatabase("Colruyt");
-            IMongoCollection<Gebruikers> collection = database.GetCollection<Gebruikers>("Users"); 
+            IMongoCollection<Gebruiker> collection = database.GetCollection<Gebruiker>("Users"); 
 
             //Environment.Exit(1);
 
@@ -94,8 +46,8 @@ namespace Project_Colruyt_DAL
         {
 
             IMongoDatabase database = client.GetDatabase("Colruyt");
-            IMongoCollection<Gebruikers> collection = database.GetCollection<Gebruikers>("Users");
-            Gebruikers gebruiker = collection.Find(x => x.Id == id).FirstOrDefault();
+            IMongoCollection<Gebruiker> collection = database.GetCollection<Gebruiker>("Users");
+            Gebruiker gebruiker = collection.Find(x => x.Id == id).FirstOrDefault();
             var list = database.GetCollection<GebruikerLijst>("Userlists");
             foreach (var item in gebruiker.lists)
             {
@@ -134,12 +86,12 @@ namespace Project_Colruyt_DAL
             return collection;
         }
 
-        public static Gebruikers GetUserByEmail(string email)
+        public static Gebruiker GetUserByEmail(string email)
         {
 
             IMongoDatabase database = client.GetDatabase("Colruyt");
-            IMongoCollection<Gebruikers> collection = database.GetCollection<Gebruikers>("Users");
-            Gebruikers gebruiker =  collection.Find(x => x.email == email).FirstOrDefault();
+            IMongoCollection<Gebruiker> collection = database.GetCollection<Gebruiker>("Users");
+            Gebruiker gebruiker =  collection.Find(x => x.email == email).FirstOrDefault();
 
             //Environment.Exit(1);
 

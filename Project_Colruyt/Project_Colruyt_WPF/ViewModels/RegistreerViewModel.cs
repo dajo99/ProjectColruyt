@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
 using Project_Colruyt_DAL;
+using Project_Colruyt_DAL.Models;
 using Project_Colruyt_WPF.Views;
 using ProjectColruyt_MODELS;
 using ProjectColruyt_MODELS.UserControlHelp;
@@ -17,7 +18,7 @@ namespace Project_Colruyt_WPF.ViewModels
     public class RegistreerViewModel : BasisViewModel
     {
 
-        IMongoCollection<Gebruikers> collection = DatabaseOperations.GetUsers();
+        IMongoCollection<Gebruiker> collection = DatabaseOperations.GetUsers();
         private string _email;
         private string _wachtwoord;
         private string _herhaal;
@@ -87,7 +88,7 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             if (this.IsGeldig())
             {
-                Gebruikers user = new Gebruikers();
+                Gebruiker user = new Gebruiker();
                 user.email = Email;
                 user.lists = new BsonValue[] { };
                 user.password = EncryptString(Wachtwoord);

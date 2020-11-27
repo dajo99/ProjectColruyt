@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson;
+using Project_Colruyt_DAL.Models;
 using Project_Colruyt_WPF.Views;
 using System;
 using System.Collections.Generic;
