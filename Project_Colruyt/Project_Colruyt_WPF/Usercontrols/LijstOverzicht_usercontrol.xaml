@@ -19,7 +19,7 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <DataGrid ItemsSource="{Binding Lijst, Mode=TwoWay}" Grid.Row="0" Margin="30 20" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" SelectedItem="{Binding SelectItem}">
+        <DataGrid ItemsSource="{Binding Lijst}" Grid.Row="0" Margin="30 20" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" SelectedItem="{Binding SelectItem}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Lijstnaam" Binding="{Binding Lijstnaam}"/>
                 <DataGridTextColumn Header="Datum" Binding="{Binding Datum,  StringFormat=dd-MM-yyyy}"/>

@@ -41,6 +41,17 @@ namespace Project_Colruyt_DAL
 
             return collection;
         }
+
+        public static IMongoCollection<GebruikerLijst> LolGetListByObjectId()
+        {
+
+            IMongoDatabase database = client.GetDatabase("Colruyt");
+            IMongoCollection<GebruikerLijst> collection = database.GetCollection<GebruikerLijst>("Userlists");
+
+
+            return collection;
+
+        }
         public static ObservableCollection<GebruikerLijst> lijst = new ObservableCollection<GebruikerLijst>();
         public static ObservableCollection<GebruikerLijst> GetListByUserId(BsonObjectId id)
         {

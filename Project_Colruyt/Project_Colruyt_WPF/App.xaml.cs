@@ -21,15 +21,15 @@ namespace Project_Colruyt_WPF
             MainViewModel viewmodel = new MainViewModel();
             Views.MainView view = new Views.MainView();
 
-            Usercontrols.NieuwProduct_usercontrol usc = new Usercontrols.NieuwProduct_usercontrol();
-            usc.DataContext = new NieuwProductViewModel();
+            //Usercontrols.NieuwProduct_usercontrol usc = new Usercontrols.NieuwProduct_usercontrol();
+            //usc.DataContext = new NieuwProductViewModel();
 
-            //Usercontrols.Aanmelden_usercontrol usc = new Usercontrols.Aanmelden_usercontrol();
-            //usc.DataContext = new AanmeldenViewModel();
+            Usercontrols.Aanmelden_usercontrol usc = new Usercontrols.Aanmelden_usercontrol();
+            usc.DataContext = new AanmeldenViewModel();
 
-            //viewmodel.WindowTitle = "Welkom";
-            //viewmodel.LogoutVisibility = "Hidden";
-            //viewmodel.BackVisibility = "Hidden";
+            viewmodel.WindowTitle = "Welkom";
+            viewmodel.LogoutVisibility = "Hidden";
+            viewmodel.BackVisibility = "Hidden";
 
             //Usercontrols.RegistrerenUsercontrol usc = new Usercontrols.RegistrerenUsercontrol();
             //usc.DataContext = new RegistreerViewModel();
