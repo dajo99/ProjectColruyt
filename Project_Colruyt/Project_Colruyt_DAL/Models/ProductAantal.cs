@@ -20,7 +20,6 @@ namespace Project_Colruyt_DAL.Models
         [BsonElement("Quantity")]
         public int Quantity { get; set; }
 
-        public double? TotalPrice { get; set; }
 
     }
 }

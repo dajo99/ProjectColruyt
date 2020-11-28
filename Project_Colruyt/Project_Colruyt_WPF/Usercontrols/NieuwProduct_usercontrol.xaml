@@ -68,7 +68,7 @@
                 <DataGridTextColumn Width="*"                       
                     Header="Productnaam" Binding="{Binding Product.Name}" HeaderStyle="{StaticResource CenterGridHeaderStyle}" IsReadOnly="True"/>
                 <DataGridTextColumn Width="*"  
-                    Header="Eenheidsprijs" Binding="{Binding Product.Price}" HeaderStyle="{StaticResource CenterGridHeaderStyle}" IsReadOnly="True">
+                    Header="Eenheidsprijs" Binding="{Binding Product.Price, StringFormat={}{0:N2}}" HeaderStyle="{StaticResource CenterGridHeaderStyle}" IsReadOnly="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Center" />

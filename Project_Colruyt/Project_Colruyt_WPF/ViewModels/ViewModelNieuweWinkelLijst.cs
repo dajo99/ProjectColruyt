@@ -80,7 +80,7 @@ namespace Project_Colruyt_WPF.ViewModels
             foreach (var product in Producten)
             {
                 Product item = new Product();
-                item.Price = GetProductPriceById(product.Product.ProductID);
+                //item.Price = GetProductPriceById(product.Product.ProductID);
                 //product.Product = GetProductNameById(product.Product);
 
                 //product.TotalPrice = item.Price * product.Quantity;
