@@ -1,5 +1,6 @@
 ﻿using Project_Colruyt_WPF.Usercontrols;
 using Project_Colruyt_WPF.Views;
+using ProjectColruyt_MODELS;
 using ProjectColruyt_MODELS.UserControlHelp;
 using System;
 using System.Collections.Generic;
@@ -17,13 +18,23 @@ namespace Project_Colruyt_WPF.ViewModels
         private UserControl _control;
 
         private string _logoutVisibility;
-
         private string _backVisibility;
+        private string _saveVisibility;
+
+        public string SaveVisibility
+        {
+            get { return _saveVisibility; }
+            set { _saveVisibility = value; }
+        }
+
 
         public string BackVisibility
         {
             get { return _backVisibility; }
-            set { _backVisibility = value; }
+            set { 
+                _backVisibility = value;
+                NotifyPropertyChanged();
+            }
         }
 
 
@@ -55,7 +66,6 @@ namespace Project_Colruyt_WPF.ViewModels
             set
             {
                 _control = value;
-
                 NotifyPropertyChanged();
             }
         }
@@ -63,10 +73,8 @@ namespace Project_Colruyt_WPF.ViewModels
 
         public MainViewModel()
         {
-
             ControlSwitch.UscEvent += SwitchControl;
-
-
+            ControlSwitch.ButtonVisibilityEvent += ChangeButtonPropertyVisibility;
         }
 
         
@@ -74,6 +82,22 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             Control = usc;
             WindowTitle = title;
+        }
+
+        public void ChangeButtonPropertyVisibility(string visibility, string buttonProperty)
+        {
+            switch (buttonProperty.ToLower())
+            {
+                case "back":
+                    BackVisibility = visibility;
+                    break;
+                case "save":
+                    SaveVisibility = visibility;
+                    break;
+                case "logout":
+                    LogoutVisibility = visibility;
+                    break;
+            }          
         }
 
         public override string this[string columnName] => throw new NotImplementedException();
@@ -84,12 +108,30 @@ namespace Project_Colruyt_WPF.ViewModels
 
         public void Back()
         {
-            ///code voor terug te gaan naar een vorige view
-            
+            var datacontext = new FrameworkElement().DataContext;
+
+            switch (UserControlStatic.PreviousUsercontrol.GetType().Name)
+            {
+                case "Aanmelden_usercontrol":
+                    datacontext = new ViewModels.AanmeldenViewModel();
+                    WindowTitle = "Aanmelden";
+                    break;
+                case "LijstOverzicht_usercontrol":
+                    datacontext = new ViewModels.LijstOverzichtViewModel();
+                    WindowTitle = "Winkellijsten";
+                    break;
+            }
+
+            BackVisibility = "Hidden";
+            Control = UserControlStatic.PreviousUsercontrol;
+            Control.DataContext = datacontext;
+
+            UserControlStatic.PreviousUsercontrol = null;
         }
         public void LogOut()
         {
-            ///uitlog code
+            GebruikerStatic.Gebruiker = null;
+            SwitchControl(new Usercontrols.Aanmelden_usercontrol(), "Aanmelden");
         }
         public override void Execute(object parameter)
         {
@@ -101,7 +143,10 @@ namespace Project_Colruyt_WPF.ViewModels
                 case "LogOut":
                     LogOut();
                     break;
-                
+                case "Save":
+                    LogOut();
+                    break;
+
             }
         }
 

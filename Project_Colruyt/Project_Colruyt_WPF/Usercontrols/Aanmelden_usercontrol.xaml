@@ -12,7 +12,7 @@
              TextElement.FontSize="14"
              FontFamily="{materialDesign:MaterialDesignFont}"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="0 20">
+    <Grid Margin="0 20" >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -22,21 +22,36 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBox x:Name="txtEmail" 
+        <StackPanel Grid.Row="0">
+            <TextBox x:Name="txtEmail"                     
             materialDesign:HintAssist.Hint="e-mailadres"
             materialDesign:HintAssist.Foreground="#468DA7"
             materialDesign:TextFieldAssist.UnderlineBrush="#468DA7"
-            Text="{Binding Email, ValidatesOnDataErrors=True}"
-            Grid.Row="0"
+            Text="{Binding Email}"
             Width="500"
-            Margin="0 20"/>
+            Margin="0 20 0 0"/>
+            <Label x:Name="lblEmail"
+                Width="500"
+                Margin="0 0 0 10" 
+                Foreground="red"
+                FontSize="11"
+                Content="{Binding EmailMelding}"/>
+        </StackPanel>
 
-        <local:WachtwoordUsercontrol
-            Wachtwoord="{Binding Wachtwoord, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }"
-            materialDesign:HintAssist.Hint="wachtwoord"        
-            Grid.Row="1"
-            Width="500"
-            Margin="0 20"/>
+        <StackPanel Grid.Row="1">
+            <local:WachtwoordUsercontrol
+                Wachtwoord="{Binding Wachtwoord,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }"
+                materialDesign:HintAssist.Hint="wachtwoord"      
+                Width="500"
+                Margin="0 20 0 5"/>
+            <Label x:Name="lblWachtwoord"
+                Width="500"
+                Margin="0 0 0 10" 
+                Foreground="red"
+                FontSize="11"
+                Content="{Binding WachtwoordMelding}"/>
+        </StackPanel>
+        
 
         <!--<PasswordBox x:Name="PBWachtwoord" 
             materialDesign:HintAssist.Hint="wachtwoord"
@@ -46,6 +61,7 @@
             Margin="0 20"/>-->
 
         <Button x:Name="txtWachtoordVergeten"
+            Command="{Binding}" CommandParameter="WachtwoordVergeten"
             Padding="2"
             Content="wachtwoord vergeten"
             Foreground="#468DA7"
@@ -60,8 +76,9 @@
             Margin="0 20 0 5"/>
 
         <Button x:Name="txtRegistreren"
+            Command="{Binding}" CommandParameter="Registreer"
             Padding="2"
-            Content="Nog geen account? Registreer hier "
+            Content="Nog geen account? Registreer hier"
             Foreground="#468DA7"
             Background="Transparent"
             BorderThickness="0 0 0 1"

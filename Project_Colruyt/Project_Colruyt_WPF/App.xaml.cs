@@ -30,6 +30,7 @@ namespace Project_Colruyt_WPF
             viewmodel.WindowTitle = "Welkom";
             viewmodel.LogoutVisibility = "Hidden";
             viewmodel.BackVisibility = "Hidden";
+            viewmodel.SaveVisibility = "Hidden";
 
             //Usercontrols.RegistrerenUsercontrol usc = new Usercontrols.RegistrerenUsercontrol();
             //usc.DataContext = new RegistreerViewModel();
