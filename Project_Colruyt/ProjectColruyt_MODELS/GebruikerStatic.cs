@@ -10,5 +10,7 @@ namespace ProjectColruyt_MODELS
     public static class GebruikerStatic
     {
         public static Gebruiker Gebruiker { get; set; }
+
+        public static GebruikerLijst Lijst { get; set; }
     }
 }

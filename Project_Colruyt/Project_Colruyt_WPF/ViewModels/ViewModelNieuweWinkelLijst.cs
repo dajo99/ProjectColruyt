@@ -3,6 +3,7 @@ using Project_Colruyt_DAL;
 using Project_Colruyt_DAL.Models;
 using Project_Colruyt_WPF.Views;
 using ProjectColruyt_MODELS;
+using ProjectColruyt_MODELS.UserControlHelp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,6 +25,20 @@ namespace Project_Colruyt_WPF.ViewModels
         public  GebruikerLijst _lijstje;
         private string _naam;
 
+        private double _totalPrice;
+
+        public double TotalPrice
+        {
+            get
+            {
+                return _totalPrice;
+            }
+            set
+            {
+                _totalPrice = value;
+                NotifyPropertyChanged();
+            }
+        }
         public string Naam
         {
             get
@@ -84,7 +99,7 @@ namespace Project_Colruyt_WPF.ViewModels
                 item = GetProductPriceById(product.Product.ProductID);
                 product.Product = GetProductNameById(product.Product.ProductID);
 
-                product.TotalPrice = (double)item.Price * product.Quantity;
+                TotalPrice = (double)item.Price * product.Quantity;
 
             }
 
@@ -115,14 +130,20 @@ namespace Project_Colruyt_WPF.ViewModels
             }
         }
 
-   
+        public void Openen()
+        {
+            Usercontrols.NieuwProduct_usercontrol usc = new Usercontrols.NieuwProduct_usercontrol();
+            usc.DataContext = new NieuwProductViewModel();
+            GebruikerStatic.Lijst = Lijstje;
+            ControlSwitch.InvokeSwitch(usc, "Product toevoegen");
+        }
         public override bool CanExecute(object parameter)
         {
             switch (parameter.ToString())
             {
                 case "Opslagen":
                     return true;
-                   
+                
 
                 case "Verwijderen":
                     if (Lijstje.Id != null)
@@ -144,8 +165,9 @@ namespace Project_Colruyt_WPF.ViewModels
                     Opslagen();
 
                     break;
-                case "Verwijderen":
-           
+                
+                case "ProductToevoegen":
+                    Openen();
                     break;
                     
             }

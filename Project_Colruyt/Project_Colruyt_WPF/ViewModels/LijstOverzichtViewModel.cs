@@ -35,7 +35,6 @@ namespace Project_Colruyt_WPF.ViewModels
             set
             {
                 _selectItem = value;
-                //OpenLijstje();    
                 NotifyPropertyChanged();
             }
         }
@@ -93,6 +92,13 @@ namespace Project_Colruyt_WPF.ViewModels
 
         public override bool CanExecute(object parameter)
         {
+            if (parameter.ToString() == "Verwijder")
+            {
+                if (Lijst.Count == 0)
+                {
+                    return false;
+                }
+            }
             return true;
         }
 
