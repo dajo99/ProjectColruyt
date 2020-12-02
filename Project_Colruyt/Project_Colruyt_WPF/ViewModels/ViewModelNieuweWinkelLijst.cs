@@ -70,21 +70,21 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             Producten = new ObservableCollection<ProductAantal>();
             Lijstje = GetListByObjectId(id);
+            Naam = (string)Lijstje.Lijstnaam;
+            foreach (var productQuantity in Lijstje.Producten)
+            {
+                Producten.Add(GetProductAantaltById(productQuantity.AsObjectId));
 
-            //foreach (var productQuantity in Lijstje.Producten)
-            //{
-            //    Producten.Add(GetProductAantaltById(productQuantity.AsObjectId));
+            }
 
-            //}
+            foreach (var product in Producten)
+            {
+                Product item = new Product();
+                item.Price = GetProductPriceById(product.Product.AsObjectId);
+                product.Product = GetProductNameById(product.Product);
 
-            //foreach (var product in Producten)
-            //{
-            //    Product item = new Product();
-            //    item.Price = GetProductPriceById(product.Product.AsObjectId);
-            //    product.Product= GetProductNameById(product.Product);
-
-            //    product.TotalPrice = (double)item.Price * (int)product.Quantity;
-            //}
+                product.TotalPrice = (double)item.Price * (int)product.Quantity;
+            }
 
         }
 
@@ -104,6 +104,12 @@ namespace Project_Colruyt_WPF.ViewModels
                 {
                     MessageBox.Show("succes!");
                 }
+            }
+            else
+            {
+                Lijstje.Lijstnaam = Naam;
+                Lijstje.Datum = DateTime.Now;
+                LijstUpdaten(Lijstje);
             }
         }
 

@@ -112,7 +112,6 @@ namespace Project_Colruyt_WPF.ViewModels
                 {
                     return "Vul een wachtwoord in om aan te melden!";
                 }
-
                 return "";
             }
         }

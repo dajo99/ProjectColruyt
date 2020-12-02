@@ -167,6 +167,26 @@ namespace Project_Colruyt_DAL
             }
 
         }
+        public static bool LijstUpdaten(GebruikerLijst gebruikerLijst)
+        {
+            try
+            {
+
+                IMongoDatabase database = client.GetDatabase("Colruyt");
+                IMongoCollection<GebruikerLijst> collection = database.GetCollection<GebruikerLijst>("Userlists");
+
+                var filter = Builders<GebruikerLijst>.Filter.Eq("_id", gebruikerLijst.Id);
+
+                collection.FindOneAndReplaceAsync(filter, gebruikerLijst);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                FileOperations.Foutloggen(ex);
+                return false;
+            }
+
+        }
 
         public static bool LijstVerwijderen(GebruikerLijst gebruikerLijst, Gebruiker gebruiker)
         {
