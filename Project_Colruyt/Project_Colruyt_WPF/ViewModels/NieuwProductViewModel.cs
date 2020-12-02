@@ -1,12 +1,15 @@
 ﻿using MongoDB.Driver;
 using Project_Colruyt_DAL;
+using Project_Colruyt_DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Project_Colruyt_WPF.ViewModels
 {
@@ -14,7 +17,7 @@ namespace Project_Colruyt_WPF.ViewModels
     {
         private Product _productRecord;
         private string _foutmelding;
-
+        ProductAantal resultaat = new ProductAantal();
 
         IMongoCollection<Product> collectionProducts = DatabaseOperations.GetProducts();
         IMongoCollection<Location> collectionLocations = DatabaseOperations.GetLocations();
@@ -24,13 +27,16 @@ namespace Project_Colruyt_WPF.ViewModels
 
         private ObservableCollection<Location> _locations;
 
-        private ObservableCollection<Product> _products;
+        private ObservableCollection<ProductAantal> _products;
         
 
 
         private Location _geselecteerdeLocation;
         private Location _nieuwLocation;
-        private Product _geselecteerdeProduct;
+        private ProductAantal _geselecteerdeProductAantal;
+       
+        private string _quantity;
+
 
 
         public string Foutmelding
@@ -40,7 +46,7 @@ namespace Project_Colruyt_WPF.ViewModels
         }
 
 
-        public ObservableCollection<Product> Products
+        public ObservableCollection<ProductAantal> Products
         {
             get { return _products; }
             set
@@ -67,6 +73,7 @@ namespace Project_Colruyt_WPF.ViewModels
             set
             {
                 _geselecteerdeLocation = value;
+                
                 Zoeken();
             }
         }
@@ -81,12 +88,24 @@ namespace Project_Colruyt_WPF.ViewModels
             }
         }
 
-        public Product GeselecteerdeProduct
+        public ProductAantal GeselecteerdeProductAantal
         {
-            get { return _geselecteerdeProduct; }
+            get { return _geselecteerdeProductAantal; }
             set
             {
-                _geselecteerdeProduct = value;
+                _geselecteerdeProductAantal = value;
+                
+                
+                
+            }
+        }
+
+        public string Quantity
+        {
+            get { return _quantity; }
+            set
+            {
+                _quantity = value;
                 NotifyPropertyChanged();
 
             }
@@ -106,14 +125,11 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             List<Location> locationList = collectionLocations.AsQueryable().ToList<Location>();
             List<Product> productList = collectionProducts.AsQueryable().ToList<Product>();
-            // Bind result data to WPF view.
-            if (productList.Count() > 0)
+            Update(productList);
+            if (locationList.Count()>0)
             {
-                Products = new ObservableCollection<Product>(productList);
                 Locations = new ObservableCollection<Location>(locationList);
-
             }
-
             ProductRecord = new Product();
 
         }
@@ -129,17 +145,43 @@ namespace Project_Colruyt_WPF.ViewModels
         }
 
 
+        public void Update(List<Product> productList)
+        {
+            List<ProductAantal> productAantalList = new List<ProductAantal>();
+            for (int i = 0; i < productList.Count; i++)
+            {
+                ProductAantal nieuw = new ProductAantal();
+                nieuw.Product = productList[i];
+                nieuw.Quantity = 0;
 
+                productAantalList.Add(nieuw);
+            }
+            // Bind result data to WPF view.
+            if (productAantalList.Count() > 0)
+            {
+                Products = new ObservableCollection<ProductAantal>(productAantalList);
 
+            }
+        }
+        
 
 
        
-        private void Zoeken()
+        public void Zoeken()
         {
             if (GeselecteerdeLocation != null)
             {
-                List<Product> lijstproducts = DatabaseOperations.GetProducts().AsQueryable().Where(x => x.LocationID == GeselecteerdeLocation.LocationID).ToList();
-                Products = new ObservableCollection<Product>(lijstproducts);
+                List<Product> productList = new List<Product>();
+                if (GeselecteerdeLocation.Category == "Alles")
+                {
+                    productList = collectionProducts.AsQueryable().ToList<Product>();
+                }
+                else
+                {
+                    productList = DatabaseOperations.GetProducts().AsQueryable().Where(x => x.LocationID == GeselecteerdeLocation.LocationID).ToList();
+                }
+                
+                Update(productList);
             }
             
         }
@@ -156,7 +198,7 @@ namespace Project_Colruyt_WPF.ViewModels
             if (resultaat == true)
             {
                 List<Product> productList = collectionProducts.AsQueryable().ToList<Product>();
-                Products = new ObservableCollection<Product>(productList);
+                Update(productList);
                 MessageBox.Show($"{product.Name} is toegevoegd!");
             }
             else
@@ -167,32 +209,33 @@ namespace Project_Colruyt_WPF.ViewModels
 
         }
 
-        public void Min()
-        {
-
-        }
-
-        public void Plus()
-        {
-
-        }
-
-
-        
-
-        
-        
-        private void ProductRecordInstellen()
+        public void AanwinkellijstToevoegen()
         {
             
-        }
 
-        public void Wissen()
-        {
-            GeselecteerdeProduct = null;
-            ProductRecordInstellen();
-            Foutmelding = "";
+            if (GeselecteerdeProductAantal != null && GeselecteerdeProductAantal.Quantity != 0)
+            {
+                bool resultaat = DatabaseOperations.ProductAantalToevoegen(GeselecteerdeProductAantal);
+
+                if (resultaat == true)
+                {
+                    MessageBox.Show($"{GeselecteerdeProductAantal.Product.Name} is toegevoegd aan winkellijst!");
+                    List<Location> locationList = collectionLocations.AsQueryable().ToList<Location>();
+                    Locations = new ObservableCollection<Location>(locationList);
+                    List<Product> productList = collectionProducts.AsQueryable().ToList<Product>();
+                    Update(productList);
+                }
+                else
+                {
+                    MessageBox.Show("Error: Fout bij toevoegen!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Error: Niks geselecteerd of het aantal is 0.!");
+            }
         }
+    
 
         public override bool CanExecute(object parameter)
         {
@@ -206,8 +249,7 @@ namespace Project_Colruyt_WPF.ViewModels
             switch (parameter.ToString())
             {
                 case "Toevoegen": Toevoegen(); break;
-                case "Min": Min(); break;
-                case "Plus": Plus(); break;
+                case "AanwinkellijstToevoegen": AanwinkellijstToevoegen() ; break;
                 
             }
         }

@@ -47,10 +47,20 @@ namespace Project_Colruyt_WPF.ViewModels
                 bool check = LijstVerwijderen(lijst, GebruikerStatic.Gebruiker);
                 if (check)
                 {
-                    //rare bug waardoor view niet updatete
-
-                    ControlSwitch.InvokeSwitch(new LijstOverzicht_usercontrol() { DataContext = new LijstOverzichtViewModel() }, "Overzicht");
                     
+                    
+                    List<GebruikerLijst> gebruikerLijst = new List<GebruikerLijst>();
+                    for (int i = 0; i < GebruikerStatic.Gebruiker.lists.Count()-1; i++)
+                    {
+                        List<GebruikerLijst>forlooplijst = LolGetListByObjectId().AsQueryable().Where(x => x.Id == GebruikerStatic.Gebruiker.lists[i]).ToList<GebruikerLijst>();
+                        gebruikerLijst.AddRange(forlooplijst);
+                        
+                    }
+                   
+                    
+
+                    Lijst = new ObservableCollection<GebruikerLijst>(gebruikerLijst);
+
                 }
                 
             }

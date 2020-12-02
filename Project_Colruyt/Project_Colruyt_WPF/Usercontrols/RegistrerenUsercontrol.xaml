@@ -27,19 +27,47 @@
             Width="500"
             Margin="0 20"/>
 
-        <TextBox x:Name="txtWachtwoord"  Text="{Binding Wachtwoord, ValidatesOnDataErrors=True}"
+
+        <StackPanel Grid.Row="1">
+            <local:WachtwoordUsercontrol
+                Wachtwoord="{Binding Wachtwoord,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }"
+                materialDesign:HintAssist.Hint="wachtwoord"      
+                Width="500"
+                Margin="0 20 0 5"/>
+            <Label x:Name="lblWachtwoord"
+                Width="500"
+                Margin="0 0 0 10" 
+                Foreground="red"
+                FontSize="11"
+                Content="{Binding WachtwoordMelding}"/>
+        </StackPanel>
+
+        <!--<TextBox x:Name="txtWachtwoord"  Text="{Binding Wachtwoord, ValidatesOnDataErrors=True}"
             materialDesign:HintAssist.Hint="wachtwoord"
             Grid.Row="1"
             Width="500"
-            Margin="0 20"></TextBox>
-        
-        
+            Margin="0 20"></TextBox>-->
 
-        <TextBox x:Name="txtHerhalingWachtwoord" Text="{Binding Herhaal, ValidatesOnDataErrors=True}"
+
+        <StackPanel Grid.Row="2">
+            <local:WachtwoordUsercontrol
+                Wachtwoord="{Binding Herhaal,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }"
+                materialDesign:HintAssist.Hint="herhaal wachtwoord"      
+                Width="500"
+                Margin="0 20 0 5"/>
+            <Label x:Name="lblHerhaalWachtwoord"
+                Width="500"
+                Margin="0" 
+                Foreground="red"
+                FontSize="11"
+                Content="{Binding HerhaalWachtwoordMelding}"/>
+        </StackPanel>
+
+        <!--<TextBox x:Name="txtHerhalingWachtwoord" Text="{Binding Herhaal, ValidatesOnDataErrors=True}"
             materialDesign:HintAssist.Hint="herhaal wachtwoord"
             Grid.Row="2"
             Width="500"
-            Margin="0 20"/>
+            Margin="0 20"/>-->
 
         <Button Grid.Row="3" Command="{Binding}" CommandParameter="Registreer"
             Margin="0 20"

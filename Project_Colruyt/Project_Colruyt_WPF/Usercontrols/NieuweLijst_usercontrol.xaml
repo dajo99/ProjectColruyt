@@ -56,7 +56,7 @@
         <DataGrid x:Name="border"  Grid.Row="0" ItemsSource="{Binding Producten}" Margin="100 10 100 0" IsReadOnly="True" AutoGenerateColumns="False" BorderThickness="4" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
             <DataGrid.Columns>
                 <DataGridTextColumn                     
-                    Header="Productnaam" Binding="{Binding Product}"/>
+                    Header="Productnaam" Binding="{Binding Product.Name}"/>
                 <DataGridTextColumn
                     Header="Aantal" Binding="{Binding Quantity}" >
                     <DataGridTextColumn.ElementStyle>

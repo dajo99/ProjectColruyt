@@ -14,10 +14,10 @@ namespace Project_Colruyt_DAL
         public BsonObjectId ProductID { get; set; }
 
         [BsonElement("Price")]
-        public BsonDouble Price { get; set; }
+        public double Price { get; set; }
 
         [BsonElement("Name")]
-        public BsonString Name { get; set; }
+        public string Name { get; set; }
 
         [BsonElement("Location")]
         public ObjectId LocationID { get; set; }
