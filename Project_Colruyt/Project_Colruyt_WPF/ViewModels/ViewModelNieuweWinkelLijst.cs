@@ -86,22 +86,26 @@ namespace Project_Colruyt_WPF.ViewModels
             Producten = new ObservableCollection<ProductAantal>();
             Lijstje = GetListByObjectId(id);
             Naam = (string)Lijstje.Lijstnaam;
-            foreach (var productQuantity in Lijstje.Producten)
+            if (Lijstje.Producten != null)
             {
-                Producten.Add(GetProductAantaltById(productQuantity.AsObjectId));
+                foreach (var productQuantity in Lijstje.Producten)
+                {
+                    Producten.Add(GetProductAantaltById(productQuantity.AsObjectId));
+                }
+
+
+                foreach (var product in Producten)
+                {
+                    Product item = new Product();
+
+                    item = GetProductPriceById(product.Product.ProductID);
+                    product.Product = GetProductNameById(product.Product.ProductID);
+
+                    TotalPrice = (double)item.Price * product.Quantity;
+
+                }
             }
-
-
-            foreach (var product in Producten)
-            {
-                Product item = new Product();
-
-                item = GetProductPriceById(product.Product.ProductID);
-                product.Product = GetProductNameById(product.Product.ProductID);
-
-                TotalPrice = (double)item.Price * product.Quantity;
-
-            }
+          
 
         }
 

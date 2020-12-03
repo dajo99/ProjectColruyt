@@ -52,10 +52,10 @@ namespace Project_Colruyt_DAL
             return collection;
 
         }
-        public static ObservableCollection<GebruikerLijst> lijst = new ObservableCollection<GebruikerLijst>();
+        
         public static ObservableCollection<GebruikerLijst> GetListByUserId(BsonObjectId id)
         {
-
+             ObservableCollection<GebruikerLijst> lijst = new ObservableCollection<GebruikerLijst>();
             IMongoDatabase database = client.GetDatabase("Colruyt");
             IMongoCollection<Gebruiker> collection = database.GetCollection<Gebruiker>("Users");
             Gebruiker gebruiker = collection.Find(x => x.Id == id).FirstOrDefault();
@@ -67,7 +67,11 @@ namespace Project_Colruyt_DAL
                 {
                     gbl = list.Find(x => x.Id == item.AsObjectId).SingleOrDefault();
                 }
-                lijst.Add(gbl);
+                if (!lijst.Contains(gbl))
+                {
+                    lijst.Add(gbl);
+                }
+                
             }
             //Environment.Exit(1);
             return lijst;

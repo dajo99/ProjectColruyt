@@ -49,7 +49,7 @@ namespace Project_Colruyt_WPF.ViewModels
                     
                     
                     List<GebruikerLijst> gebruikerLijst = new List<GebruikerLijst>();
-                    for (int i = 0; i < GebruikerStatic.Gebruiker.lists.Count()-1; i++)
+                    for (int i = 0; i <= GebruikerStatic.Gebruiker.lists.Count()-1; i++)
                     {
                         List<GebruikerLijst>forlooplijst = LolGetListByObjectId().AsQueryable().Where(x => x.Id == GebruikerStatic.Gebruiker.lists[i]).ToList<GebruikerLijst>();
                         gebruikerLijst.AddRange(forlooplijst);
