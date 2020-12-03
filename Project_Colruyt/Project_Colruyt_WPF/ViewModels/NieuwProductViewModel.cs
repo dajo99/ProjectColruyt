@@ -1,6 +1,9 @@
 ﻿using MongoDB.Driver;
 using Project_Colruyt_DAL;
 using Project_Colruyt_DAL.Models;
+using Project_Colruyt_WPF.Usercontrols;
+using ProjectColruyt_MODELS;
+using ProjectColruyt_MODELS.UserControlHelp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -215,15 +218,31 @@ namespace Project_Colruyt_WPF.ViewModels
 
             if (GeselecteerdeProductAantal != null && GeselecteerdeProductAantal.Quantity != 0)
             {
-                bool resultaat = DatabaseOperations.ProductAantalToevoegen(GeselecteerdeProductAantal);
+                bool resultaat = false;
+                if (GebruikerStatic.Lijst.Producten != null)
+                {
+                    resultaat = DatabaseOperations.ProductAantalToevoegen(GeselecteerdeProductAantal);
+                    
+                    GebruikerStatic.Lijst.Producten.Append(GeselecteerdeProductAantal.Id);
 
+                }
+                else
+                {
+                    
+                }
                 if (resultaat == true)
                 {
-                    MessageBox.Show($"{GeselecteerdeProductAantal.Product.Name} is toegevoegd aan winkellijst!");
+                    MessageBox.Show($"{GeselecteerdeProductAantal.Product.Name} is toegevoegd aan productaantal!");
+                    
                     List<Location> locationList = collectionLocations.AsQueryable().ToList<Location>();
                     Locations = new ObservableCollection<Location>(locationList);
                     List<Product> productList = collectionProducts.AsQueryable().ToList<Product>();
                     Update(productList);
+
+                    NieuweLijst_usercontrol usc = new NieuweLijst_usercontrol();
+                    ViewModelNieuweWinkelLijst vm = new ViewModelNieuweWinkelLijst(null);
+                    usc.DataContext = vm;
+                    ControlSwitch.InvokeSwitch(usc, "Winkellijstje");
                 }
                 else
                 {

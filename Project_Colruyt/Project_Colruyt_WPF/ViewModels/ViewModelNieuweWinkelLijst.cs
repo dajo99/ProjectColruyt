@@ -78,14 +78,23 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             Producten = new ObservableCollection<ProductAantal>();
             Lijstje = new GebruikerLijst();
+            Lijstje.Producten = new BsonObjectId[] { };
 
         }
 
-        public ViewModelNieuweWinkelLijst(BsonObjectId id)
+        public ViewModelNieuweWinkelLijst(BsonObjectId? id)
         {
             Producten = new ObservableCollection<ProductAantal>();
-            Lijstje = GetListByObjectId(id);
-            Naam = (string)Lijstje.Lijstnaam;
+            if (id != null)
+            {
+                Lijstje = GetListByObjectId(id);
+                Naam = (string)Lijstje.Lijstnaam;
+            }
+            else
+            {
+                Lijstje = GebruikerStatic.Lijst;
+            }
+            
             if (Lijstje.Producten != null)
             {
                 foreach (var productQuantity in Lijstje.Producten)
@@ -140,6 +149,10 @@ namespace Project_Colruyt_WPF.ViewModels
 
             Usercontrols.NieuwProduct_usercontrol usc = new Usercontrols.NieuwProduct_usercontrol();
             usc.DataContext = new NieuwProductViewModel();
+            if (Lijstje.Lijstnaam == null)
+            {
+                Lijstje.Lijstnaam = Naam;
+            }
             GebruikerStatic.Lijst = Lijstje;
             ControlSwitch.InvokeSwitch(usc, "Product toevoegen");
             
