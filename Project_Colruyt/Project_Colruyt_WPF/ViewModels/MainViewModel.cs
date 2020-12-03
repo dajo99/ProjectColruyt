@@ -24,7 +24,10 @@ namespace Project_Colruyt_WPF.ViewModels
         public string SaveVisibility
         {
             get { return _saveVisibility; }
-            set { _saveVisibility = value; }
+            set { 
+                _saveVisibility = value;
+                NotifyPropertyChanged();
+            }
         }
 
 
@@ -110,6 +113,13 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             var datacontext = new FrameworkElement().DataContext;
 
+            BackVisibility = "Collapse";
+
+            if (UserControlStatic.PreviousUsercontrol == null)
+            {
+                UserControlStatic.PreviousUsercontrol = new LijstOverzicht_usercontrol();
+            }
+
             switch (UserControlStatic.PreviousUsercontrol.GetType().Name)
             {
                 case "Aanmelden_usercontrol":
@@ -120,19 +130,33 @@ namespace Project_Colruyt_WPF.ViewModels
                     datacontext = new ViewModels.LijstOverzichtViewModel();
                     WindowTitle = "Winkellijsten";
                     break;
+                case "NieuweLijst_usercontrol":
+                    datacontext = new ViewModels.ViewModelNieuweWinkelLijst();
+                    WindowTitle = "Winkellijst";
+                    BackVisibility = "Visible";
+                    break;
             }
 
-            BackVisibility = "Hidden";
+            
             Control = UserControlStatic.PreviousUsercontrol;
             Control.DataContext = datacontext;
 
             UserControlStatic.PreviousUsercontrol = null;
         }
+
         public void LogOut()
         {
             GebruikerStatic.Gebruiker = null;
             SwitchControl(new Usercontrols.Aanmelden_usercontrol(), "Aanmelden");
         }
+
+        public void Save()
+        {
+
+
+        }
+
+
         public override void Execute(object parameter)
         {
             switch (parameter.ToString())
@@ -144,7 +168,7 @@ namespace Project_Colruyt_WPF.ViewModels
                     LogOut();
                     break;
                 case "Save":
-                    LogOut();
+                    Save();
                     break;
 
             }

@@ -68,6 +68,8 @@ namespace Project_Colruyt_WPF.ViewModels
 
         public void OpenLijstje()
         {
+            UserControlStatic.PreviousUsercontrol = new LijstOverzicht_usercontrol();
+
             NieuweLijst_usercontrol usc = new NieuweLijst_usercontrol();
             ViewModelNieuweWinkelLijst viewModel;
             if (_selectItem != null)
@@ -80,7 +82,10 @@ namespace Project_Colruyt_WPF.ViewModels
             }
             
             usc.DataContext = viewModel;
+
             ControlSwitch.InvokeSwitch(usc, "Winkellijst");
+            ControlSwitch.ChangeNavbuttonsVisibility("Collapse", "logout");
+            ControlSwitch.ChangeNavbuttonsVisibility("Visible", "back");
         }
 
         public override string this[string columnName] => throw new NotImplementedException();

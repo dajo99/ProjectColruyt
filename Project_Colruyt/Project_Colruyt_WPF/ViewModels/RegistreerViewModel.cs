@@ -22,6 +22,29 @@ namespace Project_Colruyt_WPF.ViewModels
         private string _email;
         private string _wachtwoord;
         private string _herhaal;
+        private string _wachtwoordMelding;
+        private string _herhaalwachtwoordMelding;
+
+        public string HerhaalWachtwoordMelding
+        {
+            get { return _herhaalwachtwoordMelding; }
+            set { 
+                _herhaalwachtwoordMelding = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        public string WachtwoordMelding
+        {
+            get { return _wachtwoordMelding; }
+            set { 
+                _wachtwoordMelding = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
 
         public string Email
         {
@@ -86,6 +109,8 @@ namespace Project_Colruyt_WPF.ViewModels
         }
         public void Toevoegen()
         {
+            
+
             if (this.IsGeldig())
             {
                 Gebruiker user = new Gebruiker();
@@ -99,6 +124,7 @@ namespace Project_Colruyt_WPF.ViewModels
                 usc.DataContext = new LijstOverzichtViewModel();
                 ControlSwitch.InvokeSwitch(usc, "Winkellijsten");
             }
+            
         }
         public override string this [string columnName] {
             get
@@ -122,21 +148,27 @@ namespace Project_Colruyt_WPF.ViewModels
                     Foutlogger.FoutLoggen(ex);
                 }
 
+                
+
                 if (Email != null && columnName == "Email" && !Email.Contains("@"))
                 {
                     return "Vul een correct email adress in";
                 }
                 else if (Wachtwoord != null && columnName == "Wachtwoord" && Wachtwoord.Length < 4)
                 {
+                    WachtwoordMelding = "Vul een correct wachtwoord in van minimum 4 karakters";
                     return "Vul een correct wachtwoord in van minimum 4 karakters";
                 }
                 else if (Herhaal != null && columnName == "Herhaal" && Herhaal != Wachtwoord)
                 {
+                    HerhaalWachtwoordMelding = "Zorg ervoor dat beide wachtwoorden overeen komen";
                     return "Zorg ervoor dat beide wachtwoorden overeen komen";
                 }
+
+
                 return "";
             }
-              }
+        }
   
         
 

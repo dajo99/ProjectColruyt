@@ -132,10 +132,13 @@ namespace Project_Colruyt_WPF.ViewModels
 
         public void Openen()
         {
+            UserControlStatic.PreviousUsercontrol = new Usercontrols.NieuweLijst_usercontrol();
+
             Usercontrols.NieuwProduct_usercontrol usc = new Usercontrols.NieuwProduct_usercontrol();
             usc.DataContext = new NieuwProductViewModel();
             GebruikerStatic.Lijst = Lijstje;
             ControlSwitch.InvokeSwitch(usc, "Product toevoegen");
+            
         }
         public override bool CanExecute(object parameter)
         {
