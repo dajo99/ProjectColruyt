@@ -154,7 +154,15 @@ namespace Project_Colruyt_WPF.ViewModels
             usc.DataContext = new NieuwProductViewModel(this);
             if (Lijstje.Lijstnaam == null)
             {
-                Lijstje.Lijstnaam = Naam;
+                if (Naam != null)
+                {
+                    Lijstje.Lijstnaam = Naam;
+                }
+                else
+                {
+                    Lijstje.Lijstnaam = "";
+                }
+                
             }
             GebruikerStatic.Lijst = Lijstje;
             ControlSwitch.InvokeSwitch(usc, "Product toevoegen");

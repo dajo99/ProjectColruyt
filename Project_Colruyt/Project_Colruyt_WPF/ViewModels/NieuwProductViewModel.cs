@@ -128,6 +128,9 @@ namespace Project_Colruyt_WPF.ViewModels
         public NieuwProductViewModel(ViewModelNieuweWinkelLijst vm)
         {
             this.vm = vm;
+            
+            vm.Lijstje.Producten = new List<BsonObjectId>();
+            
             List<Location> locationList = collectionLocations.AsQueryable().ToList<Location>();
             List<Product> productList = collectionProducts.AsQueryable().ToList<Product>();
             Update(productList);
@@ -136,6 +139,7 @@ namespace Project_Colruyt_WPF.ViewModels
                 Locations = new ObservableCollection<Location>(locationList);
             }
             ProductRecord = new Product();
+
 
         }
 
@@ -227,7 +231,7 @@ namespace Project_Colruyt_WPF.ViewModels
                 {
                     MessageBox.Show($"{GeselecteerdeProductAantal.Product.Name} is toegevoegd aan productaantal!");
                     NieuweLijst_usercontrol usc = new NieuweLijst_usercontrol();
-                    vm.Lijstje.Producten.Add((ObjectId)GeselecteerdeProductAantal.Id);
+                    vm.Lijstje.Producten.Add((BsonObjectId)GeselecteerdeProductAantal.Id);
                     List<Location> locationList = collectionLocations.AsQueryable().ToList<Location>();
                     Locations = new ObservableCollection<Location>(locationList);
                     List<Product> productList = collectionProducts.AsQueryable().ToList<Product>();
