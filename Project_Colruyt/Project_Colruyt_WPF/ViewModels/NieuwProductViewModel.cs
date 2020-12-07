@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using Project_Colruyt_DAL;
 using Project_Colruyt_DAL.Models;
 using Project_Colruyt_WPF.Usercontrols;
@@ -26,7 +27,7 @@ namespace Project_Colruyt_WPF.ViewModels
         IMongoCollection<Location> collectionLocations = DatabaseOperations.GetLocations();
 
 
-
+        private ViewModelNieuweWinkelLijst vm { get; set; }
 
         private ObservableCollection<Location> _locations;
 
@@ -97,7 +98,7 @@ namespace Project_Colruyt_WPF.ViewModels
             set
             {
                 _geselecteerdeProductAantal = value;
-                
+                NotifyPropertyChanged();
                 
                 
             }
@@ -124,8 +125,9 @@ namespace Project_Colruyt_WPF.ViewModels
 
             }
         }
-        public NieuwProductViewModel()
+        public NieuwProductViewModel(ViewModelNieuweWinkelLijst vm)
         {
+            this.vm = vm;
             List<Location> locationList = collectionLocations.AsQueryable().ToList<Location>();
             List<Product> productList = collectionProducts.AsQueryable().ToList<Product>();
             Update(productList);
@@ -219,28 +221,20 @@ namespace Project_Colruyt_WPF.ViewModels
             if (GeselecteerdeProductAantal != null && GeselecteerdeProductAantal.Quantity != 0)
             {
                 bool resultaat = false;
-                if (GebruikerStatic.Lijst.Producten != null)
-                {
                     resultaat = DatabaseOperations.ProductAantalToevoegen(GeselecteerdeProductAantal);
                     
-                    GebruikerStatic.Lijst.Producten.Append(GeselecteerdeProductAantal.Id);
-
-                }
-                else
-                {
-                    
-                }
                 if (resultaat == true)
                 {
                     MessageBox.Show($"{GeselecteerdeProductAantal.Product.Name} is toegevoegd aan productaantal!");
-                    
+                    NieuweLijst_usercontrol usc = new NieuweLijst_usercontrol();
+                    vm.Lijstje.Producten.Add((ObjectId)GeselecteerdeProductAantal.Id);
                     List<Location> locationList = collectionLocations.AsQueryable().ToList<Location>();
                     Locations = new ObservableCollection<Location>(locationList);
                     List<Product> productList = collectionProducts.AsQueryable().ToList<Product>();
                     Update(productList);
 
-                    NieuweLijst_usercontrol usc = new NieuweLijst_usercontrol();
-                    ViewModelNieuweWinkelLijst vm = new ViewModelNieuweWinkelLijst(null);
+
+                    vm.Instellen();
                     usc.DataContext = vm;
                     ControlSwitch.InvokeSwitch(usc, "Winkellijstje");
                 }

@@ -78,46 +78,49 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             Producten = new ObservableCollection<ProductAantal>();
             Lijstje = new GebruikerLijst();
-            Lijstje.Producten = new BsonObjectId[] { };
 
         }
 
         public ViewModelNieuweWinkelLijst(BsonObjectId? id)
         {
             Producten = new ObservableCollection<ProductAantal>();
-            if (id != null)
+
+            if (id > 0)
             {
                 Lijstje = GetListByObjectId(id);
                 Naam = (string)Lijstje.Lijstnaam;
             }
-            else
-            {
-                Lijstje = GebruikerStatic.Lijst;
-            }
-            
+
+            Instellen();
+          
+
+        }
+        public void Instellen()
+        {
+         
             if (Lijstje.Producten != null)
             {
                 foreach (var productQuantity in Lijstje.Producten)
                 {
-                    Producten.Add(GetProductAantaltById(productQuantity.AsObjectId));
+                    if (!Producten.Contains(GetProductAantaltById(productQuantity.AsObjectId)))
+                    {
+                        Producten.Add(GetProductAantaltById(productQuantity.AsObjectId));
+                    }
+                    
                 }
 
-
-                foreach (var product in Producten)
-                {
-                    Product item = new Product();
-
-                    item = GetProductPriceById(product.Product.ProductID);
-                    product.Product = GetProductNameById(product.Product.ProductID);
-
-                    TotalPrice = (double)item.Price * product.Quantity;
-
-                }
             }
-          
+            foreach (var product in Producten)
+            {
+                Product item = new Product();
 
+                item = GetProductPriceById(product.Product.ProductID);
+                product.Product = GetProductNameById(product.Product.ProductID);
+
+                TotalPrice = (double)item.Price * product.Quantity;
+
+            }
         }
-
         ///Komende sprints hieraan werken
         public override string this[string columnName] => throw new NotImplementedException();
 
@@ -148,7 +151,7 @@ namespace Project_Colruyt_WPF.ViewModels
             UserControlStatic.PreviousUsercontrol = new Usercontrols.NieuweLijst_usercontrol();
 
             Usercontrols.NieuwProduct_usercontrol usc = new Usercontrols.NieuwProduct_usercontrol();
-            usc.DataContext = new NieuwProductViewModel();
+            usc.DataContext = new NieuwProductViewModel(this);
             if (Lijstje.Lijstnaam == null)
             {
                 Lijstje.Lijstnaam = Naam;

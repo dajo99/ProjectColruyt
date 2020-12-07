@@ -20,7 +20,7 @@ namespace Project_Colruyt_DAL.Models
         public BsonDateTime Datum { get; set; }
 
         [BsonElement("Products")]
-        public BsonObjectId[] Producten { get; set; }
+        public List<BsonObjectId>Producten { get; set; }
 
         /*public TestUserDocument(string username, string password)
         {
