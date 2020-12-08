@@ -1,6 +1,7 @@
 ﻿using MongoDB.Bson;
 using Project_Colruyt_DAL;
 using Project_Colruyt_DAL.Models;
+using Project_Colruyt_WPF.Usercontrols;
 using Project_Colruyt_WPF.Views;
 using ProjectColruyt_MODELS;
 using ProjectColruyt_MODELS.UserControlHelp;
@@ -141,6 +142,9 @@ namespace Project_Colruyt_WPF.ViewModels
                 {
                     Usercontrols.LijstOverzicht_usercontrol usc = new Usercontrols.LijstOverzicht_usercontrol();
                     usc.DataContext = new LijstOverzichtViewModel();
+                    UserControlStatic.PreviousUsercontrol = new LijstOverzicht_usercontrol();
+                    ControlSwitch.ChangeNavbuttonsVisibility("Collapsed", "Back");
+                    ControlSwitch.ChangeNavbuttonsVisibility("Visible", "LogOut");
                     ControlSwitch.InvokeSwitch(usc, "Winkellijsten");
                 }
             }
@@ -154,7 +158,7 @@ namespace Project_Colruyt_WPF.ViewModels
 
         public void Openen()
         {
-            UserControlStatic.PreviousUsercontrol = new Usercontrols.NieuweLijst_usercontrol();
+            UserControlStatic.PreviousUsercontrol = new Usercontrols.LijstOverzicht_usercontrol();
 
             Usercontrols.NieuwProduct_usercontrol usc = new Usercontrols.NieuwProduct_usercontrol();
             usc.DataContext = new NieuwProductViewModel(this);
@@ -171,6 +175,8 @@ namespace Project_Colruyt_WPF.ViewModels
                 
             }
             GebruikerStatic.Lijst = Lijstje;
+            ControlSwitch.ChangeNavbuttonsVisibility("Visible", "back");
+            ControlSwitch.ChangeNavbuttonsVisibility("Collapsed", "Logout");
             ControlSwitch.InvokeSwitch(usc, "Product toevoegen");
             
         }

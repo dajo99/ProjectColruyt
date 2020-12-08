@@ -113,7 +113,7 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             var datacontext = new FrameworkElement().DataContext;
 
-            BackVisibility = "Collapse";
+            BackVisibility = "Collapsed";
 
             if (UserControlStatic.PreviousUsercontrol == null)
             {
@@ -129,6 +129,7 @@ namespace Project_Colruyt_WPF.ViewModels
                 case "LijstOverzicht_usercontrol":
                     datacontext = new ViewModels.LijstOverzichtViewModel();
                     WindowTitle = "Winkellijsten";
+                    LogoutVisibility = "Visible";
                     break;
                 case "NieuweLijst_usercontrol":
                     datacontext = new ViewModels.ViewModelNieuweWinkelLijst();

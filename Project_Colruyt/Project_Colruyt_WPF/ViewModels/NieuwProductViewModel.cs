@@ -242,6 +242,8 @@ namespace Project_Colruyt_WPF.ViewModels
 
                     vm.Instellen();
                     usc.DataContext = vm;
+                    UserControlStatic.PreviousUsercontrol = new LijstOverzicht_usercontrol();
+                    ControlSwitch.ChangeNavbuttonsVisibility("Back", "Collapsed");
                     ControlSwitch.InvokeSwitch(usc, "Winkellijstje");
                 }
                 else

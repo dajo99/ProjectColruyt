@@ -66,6 +66,21 @@ namespace Project_Colruyt_WPF.ViewModels
            
         }
 
+
+        public void VoegNieuweLijstToe()
+        {
+            UserControlStatic.PreviousUsercontrol = new LijstOverzicht_usercontrol();
+
+            NieuweLijst_usercontrol usc = new NieuweLijst_usercontrol();
+            ViewModelNieuweWinkelLijst viewModel = new ViewModelNieuweWinkelLijst();
+
+            usc.DataContext = viewModel;
+
+            ControlSwitch.ChangeNavbuttonsVisibility("Collapsed", "logout");
+            ControlSwitch.ChangeNavbuttonsVisibility("Visible", "back");
+            ControlSwitch.InvokeSwitch(usc, "Winkellijst");
+        }
+
         public void OpenLijstje()
         {
             UserControlStatic.PreviousUsercontrol = new LijstOverzicht_usercontrol();
@@ -75,17 +90,14 @@ namespace Project_Colruyt_WPF.ViewModels
             if (_selectItem != null)
             {
                 viewModel = new ViewModelNieuweWinkelLijst(_selectItem.Id);
+                usc.DataContext = viewModel;
             }
-            else
-            {
-                viewModel = new ViewModelNieuweWinkelLijst();
-            }
-            
-            usc.DataContext = viewModel;
+               
 
-            ControlSwitch.InvokeSwitch(usc, "Winkellijst");
-            ControlSwitch.ChangeNavbuttonsVisibility("Collapse", "logout");
+            ControlSwitch.ChangeNavbuttonsVisibility("Collapsed", "logout");
             ControlSwitch.ChangeNavbuttonsVisibility("Visible", "back");
+            ControlSwitch.InvokeSwitch(usc, "Winkellijst");
+            
         }
 
         public override string this[string columnName] => throw new NotImplementedException();
@@ -111,11 +123,15 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             if (parameter.ToString() == "VoegToe")
             {
-                OpenLijstje();
+                VoegNieuweLijstToe();
             }
             if (parameter.ToString() == "Verwijder")
             {
                 Verwijder();
+            }
+            if (parameter.ToString() == "Open")
+            {
+                OpenLijstje();
             }
         }
     }
