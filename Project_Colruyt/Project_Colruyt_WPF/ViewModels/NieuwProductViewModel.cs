@@ -208,6 +208,8 @@ namespace Project_Colruyt_WPF.ViewModels
             {
                 List<Product> productList = collectionProducts.AsQueryable().ToList<Product>();
                 Update(productList);
+                List<Location> locationList = collectionLocations.AsQueryable().ToList<Location>();
+                Locations = new ObservableCollection<Location>(locationList);
                 MessageBox.Show($"{product.Name} is toegevoegd!");
             }
             else

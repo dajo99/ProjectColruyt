@@ -25,6 +25,8 @@ namespace Project_Colruyt_WPF.ViewModels
         public  GebruikerLijst _lijstje;
         private string _naam;
 
+        List<BsonObjectId> producten = new List<BsonObjectId>();
+
         private double _totalPrice;
 
         public double TotalPrice
@@ -100,6 +102,7 @@ namespace Project_Colruyt_WPF.ViewModels
          
             if (Lijstje.Producten != null)
             {
+                producten.AddRange(Lijstje.Producten);
                 foreach (var productQuantity in Lijstje.Producten)
                 {
                     if (!Producten.Contains(GetProductAantaltById(productQuantity.AsObjectId)))
@@ -132,10 +135,13 @@ namespace Project_Colruyt_WPF.ViewModels
                 Lijstje.Id = new BsonObjectId(ObjectId.GenerateNewId());
                 Lijstje.Datum = DateTime.Now;
                 Lijstje.Lijstnaam = Naam;
+                Lijstje.Producten = producten;
                 bool check = LijstToevoegen(Lijstje, GebruikerStatic.Gebruiker);
                 if (check)
                 {
-                    MessageBox.Show("succes!");
+                    Usercontrols.LijstOverzicht_usercontrol usc = new Usercontrols.LijstOverzicht_usercontrol();
+                    usc.DataContext = new LijstOverzichtViewModel();
+                    ControlSwitch.InvokeSwitch(usc, "Winkellijsten");
                 }
             }
             else
