@@ -15,7 +15,7 @@ using static Project_Colruyt_DAL.DatabaseOperations;
 
 namespace Project_Colruyt_WPF.ViewModels
 {
-    class AanmeldenViewModel: BasisViewModel
+    public class AanmeldenViewModel: BasisViewModel
     {
         //IMongoCollection<Gebruiker> collection = DatabaseOperations.GetUsers();
 
