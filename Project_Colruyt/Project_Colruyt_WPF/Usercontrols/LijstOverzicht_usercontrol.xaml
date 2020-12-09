@@ -28,7 +28,7 @@
             </DataGrid.InputBindings>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Lijstnaam" Binding="{Binding Lijstnaam}" Width="*"/>
-                <DataGridTextColumn Header="Datum" Binding="{Binding Datum,  StringFormat={}{0:g}}" Width="*">
+                <DataGridTextColumn Header="Datum" Binding="{Binding Datum, StringFormat='dd/MM/yyyy'}" Width="*">
                     <DataGridTextColumn.HeaderStyle>
                         <Style
                               TargetType="{x:Type DataGridColumnHeader}"

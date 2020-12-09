@@ -30,6 +30,18 @@ namespace Project_Colruyt_WPF.ViewModels
 
         private double _totalPrice;
 
+        private ProductAantal _selectedProduct;
+
+        public ProductAantal SelectedProduct
+        {
+            get { return _selectedProduct; }
+            set { 
+                _selectedProduct = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
         public double TotalPrice
         {
             get
@@ -180,6 +192,26 @@ namespace Project_Colruyt_WPF.ViewModels
             ControlSwitch.InvokeSwitch(usc, "Product toevoegen");
             
         }
+
+
+        public void VerwijderProduct()
+        {
+            if (SelectedProduct != null)
+            {
+
+                foreach (var product in Producten)
+                {
+                    if (product == SelectedProduct)
+                    {
+                        MessageBox.Show("verwijderd");
+                    }
+                }
+
+            }
+
+        }
+
+
         public override bool CanExecute(object parameter)
         {
             switch (parameter.ToString())
@@ -211,6 +243,10 @@ namespace Project_Colruyt_WPF.ViewModels
                 
                 case "ProductToevoegen":
                     Openen();
+                    break;
+
+                case "VerwijderProduct":
+                    VerwijderProduct();
                     break;
                     
             }

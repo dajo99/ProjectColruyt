@@ -38,6 +38,7 @@ namespace Project_Colruyt_WPF.ViewModels
                 NotifyPropertyChanged();
             }
         }
+
         public void Verwijder()
         {
             if (SelectItem != null)

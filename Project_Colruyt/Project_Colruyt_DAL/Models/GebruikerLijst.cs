@@ -17,7 +17,7 @@ namespace Project_Colruyt_DAL.Models
         public BsonString Lijstnaam { get; set; }
 
         [BsonElement("Date")]
-        public BsonDateTime Datum { get; set; }
+        public DateTime Datum { get; set; }
 
         [BsonElement("Products")]
         public List<BsonObjectId>Producten { get; set; }
