@@ -86,7 +86,7 @@ namespace Project_Colruyt_WPF.ViewModels
         }
 
         
-        public static string EncryptString(string encr)
+        public string EncryptString(string encr)
         {
             //array van bytes (tussen 0 en 255) opvullen met een code van chars in bytes
             byte[] bytes = UTF8Encoding.UTF8.GetBytes(encr);
