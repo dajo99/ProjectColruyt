@@ -161,6 +161,7 @@ namespace Project_Colruyt_WPF.ViewModels
             {
                 Lijstje.Lijstnaam = Naam;
                 Lijstje.Datum = DateTime.Now;
+                Lijstje.Producten = producten;
                 LijstUpdaten(Lijstje);
             }
 
