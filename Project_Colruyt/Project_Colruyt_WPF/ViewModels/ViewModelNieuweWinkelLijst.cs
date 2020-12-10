@@ -150,14 +150,11 @@ namespace Project_Colruyt_WPF.ViewModels
                 Lijstje.Lijstnaam = Naam;
                 Lijstje.Producten = producten;
                 bool check = LijstToevoegen(Lijstje, GebruikerStatic.Gebruiker);
-                if (check)
+
+                if (!check)
                 {
-                    Usercontrols.LijstOverzicht_usercontrol usc = new Usercontrols.LijstOverzicht_usercontrol();
-                    usc.DataContext = new LijstOverzichtViewModel();
-                    UserControlStatic.PreviousUsercontrol = new LijstOverzicht_usercontrol();
-                    ControlSwitch.ChangeNavbuttonsVisibility("Collapsed", "Back");
-                    ControlSwitch.ChangeNavbuttonsVisibility("Visible", "LogOut");
-                    ControlSwitch.InvokeSwitch(usc, "Winkellijsten");
+                    MessageBox.Show("Er liep iets mis bij het opslaan van het winkellijstjes");
+                    return;
                 }
             }
             else
@@ -166,6 +163,13 @@ namespace Project_Colruyt_WPF.ViewModels
                 Lijstje.Datum = DateTime.Now;
                 LijstUpdaten(Lijstje);
             }
+
+            Usercontrols.LijstOverzicht_usercontrol usc = new Usercontrols.LijstOverzicht_usercontrol();
+            usc.DataContext = new LijstOverzichtViewModel();
+            UserControlStatic.PreviousUsercontrol = new LijstOverzicht_usercontrol();
+            ControlSwitch.ChangeNavbuttonsVisibility("Collapsed", "Back");
+            ControlSwitch.ChangeNavbuttonsVisibility("Visible", "LogOut");
+            ControlSwitch.InvokeSwitch(usc, "Winkellijsten");
         }
 
         public void Openen()

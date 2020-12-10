@@ -57,18 +57,26 @@
             <DataGrid.Columns>
                 <DataGridTextColumn                     
                     Header="Productnaam" Binding="{Binding Product.Name}"
-                    Width="2*"/>
+                    Width="2*">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style  TargetType="{x:Type DataGridColumnHeader}"
+                              BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                        </Style>
+                    </DataGridTextColumn.HeaderStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn
                     Header="Aantal" Binding="{Binding Quantity}"
                     Width="2*">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
+                    <DataGridTextColumn.HeaderStyle>
+                        <Style  TargetType="{x:Type DataGridColumnHeader}"
+                              BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
                             <Setter Property="HorizontalAlignment" Value="Center" />
                         </Style>
-                    </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn.HeaderStyle>
                 </DataGridTextColumn>
-           
-                <DataGridTextColumn
+
+                <!--<DataGridTextColumn
                     Header="Totaal prijs" Binding="{Binding TotalPrice}"
                     Width="2*">
                     <DataGridTextColumn.ElementStyle>
@@ -76,18 +84,7 @@
                             <Setter Property="HorizontalAlignment" Value="Center" />
                         </Style>
                     </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                
-                <DataGridTemplateColumn Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Margin="20 0 0 0" Command="{Binding}" CommandParameter="VerwijderProduct"
-                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
-                                <materialDesign:PackIcon Kind="TrashCanOutline" Height="24" Width="24"/>
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTextColumn>-->
 
             </DataGrid.Columns>
         </DataGrid>

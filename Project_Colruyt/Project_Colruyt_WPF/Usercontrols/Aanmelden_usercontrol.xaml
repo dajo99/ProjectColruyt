@@ -17,9 +17,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
@@ -60,7 +58,7 @@
             Width="500"
             Margin="0 20"/>-->
 
-        <Button x:Name="txtWachtoordVergeten"
+        <!--<Button x:Name="txtWachtoordVergeten"
             Command="{Binding}" CommandParameter="WachtwoordVergeten"
             Padding="2"
             Content="wachtwoord vergeten"
@@ -73,7 +71,7 @@
             materialDesign:ShadowAssist.ShadowDepth="Depth0"
             Grid.Row="2"
             Width="Auto"
-            Margin="0 20 0 5"/>
+            Margin="0 20 0 5"/>-->
 
         <Button x:Name="txtRegistreren"
             Command="{Binding}" CommandParameter="Registreer"
@@ -86,7 +84,7 @@
             HorizontalAlignment="Center"
             HorizontalContentAlignment="Left"
             materialDesign:ShadowAssist.ShadowDepth="Depth0"
-            Grid.Row="3"
+            Grid.Row="2"
             Width="Auto"
             Margin="0 5"/>
 
@@ -98,8 +96,5 @@
             Content="Aanmelden"
             FontSize="18"/>
 
-        <TextBlock Grid.Row="5"
-            Text="{Binding Melding}"
-            Width="400" Height="50"/>
     </Grid>
 </UserControl>
