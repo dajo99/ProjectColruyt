@@ -151,10 +151,12 @@
     <Compile Include="Usercontrols\RegistrerenUsercontrol.xaml.cs">
       <DependentUpon>RegistrerenUsercontrol.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="Usercontrols\WachtwoordUsercontrol.xaml.cs">
       <DependentUpon>WachtwoordUsercontrol.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AanmeldenViewModel.cs" />
+
     <Compile Include="ViewModels\BasisViewModel.cs" />
     <Compile Include="ViewModels\LijstOverzichtViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -210,10 +212,12 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Usercontrols\RegistrerenUsercontrol.xaml">
-      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      
     </Page>
     <Page Include="Usercontrols\WachtwoordUsercontrol.xaml">
+
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
