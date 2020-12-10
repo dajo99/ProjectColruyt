@@ -203,15 +203,22 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             if (SelectedProduct != null)
             {
+                GebruikerLijst document = null;
 
-                foreach (var product in Producten)
+                if (document == VerwijderProductUitGebruikerslijst(Lijstje.Id, SelectedProduct.Id))
                 {
-                    if (product == SelectedProduct)
-                    {
-                        MessageBox.Show("verwijderd");
-                    }
+                    MessageBox.Show(document.ToString());
+                    Producten.Remove(SelectedProduct);
+                }
+                else
+                {
+                    MessageBox.Show("fout bij het verwijderen van product.");
                 }
 
+            }
+            else
+            {
+                MessageBox.Show("Selecteer eerst een product om te verwijderen.");
             }
 
         }
