@@ -1,4 +1,10 @@
-﻿using Project_Colruyt_WPF.Views;
+﻿using MongoDB.Bson;
+using Project_Colruyt_DAL;
+using Project_Colruyt_DAL.Models;
+using Project_Colruyt_WPF.Usercontrols;
+using Project_Colruyt_WPF.Views;
+using ProjectColruyt_MODELS;
+using ProjectColruyt_MODELS.UserControlHelp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,17 +15,57 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using static Project_Colruyt_DAL.DatabaseOperations;
 
 namespace Project_Colruyt_WPF.ViewModels
 {
     public class ViewModelNieuweWinkelLijst : BasisViewModel
     {
 
-        private string _selectItem;
-        public ObservableCollection<string> _lijstje;
+        private ObservableCollection<ProductAantal> _producten;
+        public  GebruikerLijst _lijstje;
+        private string _naam;
 
+        List<BsonObjectId> producten = new List<BsonObjectId>();
+
+        private double _totalPrice;
+
+        private ProductAantal _selectedProduct;
+
+        public ProductAantal SelectedProduct
+        {
+            get { return _selectedProduct; }
+            set { 
+                _selectedProduct = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        public double TotalPrice
+        {
+            get
+            {
+                return _totalPrice;
+            }
+            set
+            {
+                _totalPrice = value;
+                NotifyPropertyChanged();
+            }
+        }
+        public string Naam
+        {
+            get
+            { return _naam; }
+            set
+            {
+                _naam = value;
+                NotifyPropertyChanged();
+            }
+        }
         //Properties
-        public ObservableCollection<string> Lijstje
+        public GebruikerLijst Lijstje
         {
             get { return _lijstje; }
             set { 
@@ -28,58 +74,165 @@ namespace Project_Colruyt_WPF.ViewModels
             }
         }
 
-        public string SelectItem
+
+        public ObservableCollection<ProductAantal> Producten
         {
-            get { return _selectItem; }
+            get 
+            { 
+                return _producten; 
+            }
             set
             {
-                _selectItem = value;
+                _producten = value;
                 NotifyPropertyChanged();
             }
         }
 
+
         public ViewModelNieuweWinkelLijst()
         {
+            Producten = new ObservableCollection<ProductAantal>();
+            Lijstje = new GebruikerLijst();
 
         }
 
+        public ViewModelNieuweWinkelLijst(BsonObjectId? id)
+        {
+            Producten = new ObservableCollection<ProductAantal>();
+
+            if (id > 0)
+            {
+                Lijstje = GetListByObjectId(id);
+                Naam = (string)Lijstje.Lijstnaam;
+            }
+
+            Instellen();
+          
+
+        }
+        public void Instellen()
+        {
+         
+            if (Lijstje.Producten != null)
+            {
+                producten.AddRange(Lijstje.Producten);
+                foreach (var productQuantity in Lijstje.Producten)
+                {
+                    if (!Producten.Contains(GetProductAantaltById(productQuantity.AsObjectId)))
+                    {
+                        Producten.Add(GetProductAantaltById(productQuantity.AsObjectId));
+                    }
+                    
+                }
+
+            }
+            foreach (var product in Producten)
+            {
+                Product item = new Product();
+
+                item = GetProductPriceById(product.Product.ProductID);
+                product.Product = GetProductNameById(product.Product.ProductID);
+
+                TotalPrice = (double)item.Price * product.Quantity;
+
+            }
+        }
         ///Komende sprints hieraan werken
         public override string this[string columnName] => throw new NotImplementedException();
 
-
-
-        public void OpenToevoegen()
+        public void Opslagen()
         {
-            ///Code usercontroles en de context van mainview te vernieuwen
-            MainView view = (MainView)Application.Current.MainWindow;
-            MainViewModel mainModel = new MainViewModel();
-            mainModel.WindowTitle = "Producten toevoegen";
-            view.DataContext = mainModel;
-            view.GridMain.Children.Clear();
+            if (Lijstje.Id == null)
+            {
+                ///enkel nog product toevoegen hierin regelen
+                Lijstje.Id = new BsonObjectId(ObjectId.GenerateNewId());
+                Lijstje.Datum = DateTime.Now;
+                Lijstje.Lijstnaam = Naam;
+                Lijstje.Producten = producten;
+                bool check = LijstToevoegen(Lijstje, GebruikerStatic.Gebruiker);
 
-            //user control voor nieuwe lijst initialiseren en datacontext instellen
-            /*voorbeeld
-              UsercontrolToevoegen usc = new UsercontrolToevoegen();
-              ViewModelToevoegen vm = new ViewModelToevoegen();
-              usc.datacontext = vm;
-              view.GridMain.Children.Add(usc);
-            */
+                if (!check)
+                {
+                    MessageBox.Show("Er liep iets mis bij het opslaan van het winkellijstjes");
+                    return;
+                }
+            }
+            else
+            {
+                Lijstje.Lijstnaam = Naam;
+                Lijstje.Datum = DateTime.Now;
+                Lijstje.Producten = producten;
+                LijstUpdaten(Lijstje);
+            }
+
+            Usercontrols.LijstOverzicht_usercontrol usc = new Usercontrols.LijstOverzicht_usercontrol();
+            usc.DataContext = new LijstOverzichtViewModel();
+            UserControlStatic.PreviousUsercontrol = new LijstOverzicht_usercontrol();
+            ControlSwitch.ChangeNavbuttonsVisibility("Collapsed", "Back");
+            ControlSwitch.ChangeNavbuttonsVisibility("Visible", "LogOut");
+            ControlSwitch.InvokeSwitch(usc, "Winkellijsten");
         }
 
-        public void Verwijderen()
+        public void Openen()
         {
-            ///Code die een item uit het huidige lijstje verwijdert. kan nog meer in komen te staan
-            Lijstje.Remove(SelectItem);
+            UserControlStatic.PreviousUsercontrol = new Usercontrols.LijstOverzicht_usercontrol();
+
+            Usercontrols.NieuwProduct_usercontrol usc = new Usercontrols.NieuwProduct_usercontrol();
+            usc.DataContext = new NieuwProductViewModel(this);
+            if (Lijstje.Lijstnaam == null)
+            {
+                if (Naam != null)
+                {
+                    Lijstje.Lijstnaam = Naam;
+                }
+                else
+                {
+                    Lijstje.Lijstnaam = "";
+                }
+                
+            }
+            GebruikerStatic.Lijst = Lijstje;
+            ControlSwitch.ChangeNavbuttonsVisibility("Visible", "back");
+            ControlSwitch.ChangeNavbuttonsVisibility("Collapsed", "Logout");
+            ControlSwitch.InvokeSwitch(usc, "Product toevoegen");
+            
         }
+
+
+        public void VerwijderProduct()
+        {
+            if (SelectedProduct != null)
+            {
+
+                foreach (var product in Producten)
+                {
+                    if (product == SelectedProduct)
+                    {
+                        MessageBox.Show("verwijderd");
+                    }
+                }
+
+            }
+
+        }
+
+
         public override bool CanExecute(object parameter)
         {
             switch (parameter.ToString())
             {
-                case "Toevoegen":
+                case "Opslagen":
                     return true;
+                
 
                 case "Verwijderen":
-                    return true;
+                    if (Lijstje.Id != null)
+                    {
+                        return true;
+                    }
+                    return false;
+                    
+                    
             }
             return true;
         }
@@ -88,11 +241,17 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             switch (parameter.ToString())
             {
-                case "Toevoegen":
-                    OpenToevoegen();
+                case "Opslagen":
+                    Opslagen();
+
                     break;
-                case "Verwijderen":
-                    Verwijderen();
+                
+                case "ProductToevoegen":
+                    Openen();
+                    break;
+
+                case "VerwijderProduct":
+                    VerwijderProduct();
                     break;
                     
             }
