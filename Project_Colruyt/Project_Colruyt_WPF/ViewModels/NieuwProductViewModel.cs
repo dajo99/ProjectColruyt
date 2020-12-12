@@ -132,7 +132,7 @@ namespace Project_Colruyt_WPF.ViewModels
             vm.Lijstje.Producten = new List<BsonObjectId>();
             
             List<Location> locationList = collectionLocations.AsQueryable().ToList<Location>();
-            List<Product> productList = collectionProducts.AsQueryable().ToList<Product>();
+            List<Product> productList = collectionProducts.AsQueryable().OrderBy(x => x.LocationID).ToList<Product>();
             Update(productList);
             if (locationList.Count()>0)
             {
@@ -206,7 +206,7 @@ namespace Project_Colruyt_WPF.ViewModels
 
             if (resultaat == true)
             {
-                List<Product> productList = collectionProducts.AsQueryable().ToList<Product>();
+                List<Product> productList = collectionProducts.AsQueryable().OrderBy(x => x.LocationID).ToList<Product>();
                 Update(productList);
                 List<Location> locationList = collectionLocations.AsQueryable().ToList<Location>();
                 Locations = new ObservableCollection<Location>(locationList);

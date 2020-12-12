@@ -14,14 +14,10 @@ namespace Project_Colruyt_DAL
     public static class DatabaseOperations
     {
 
-        // CONNECTIONSTRING TOEVOEGEN VOOR HET STARTEN VAN DATABASEOPERATIONS (connectionstring.txt)!!! 
-
-
         public static string Connectionstring = "mongodb+srv://dbdajo:vandoninck@cluster0.zvqn2.gcp.mongodb.net/Colruyt?retryWrites=true&w=majority";
         public static MongoClient client = new MongoClient(Connectionstring);
         public static IMongoCollection<Gebruiker> GetUsers()
         {
-
 
             IMongoDatabase database = client.GetDatabase("Colruyt");
             IMongoCollection<Gebruiker> collection = database.GetCollection<Gebruiker>("Users");
@@ -250,7 +246,35 @@ namespace Project_Colruyt_DAL
 
         }
 
-        
+        public static GebruikerLijst VerwijderProductUitGebruikerslijst(BsonObjectId gebruikerslijstId, BsonObjectId ProductAantalId)
+        {
+            try
+            {
+                IMongoDatabase database = client.GetDatabase("Colruyt");
+                IMongoCollection<ProductAantal> productAantalLijsten = database.GetCollection<ProductAantal>("ProductQuantitys");
+                IMongoCollection<GebruikerLijst> gebruikersLijsten = database.GetCollection<GebruikerLijst>("Userlists");
+
+
+                var filterGerbruikersLijst = Builders<GebruikerLijst>.Filter.Eq("_id", gebruikerslijstId);
+                var update = Builders<GebruikerLijst>.Update.Pull<BsonObjectId>(e => e.Producten, ProductAantalId);
+
+                var document = gebruikersLijsten.FindOneAndUpdate(filterGerbruikersLijst, update);
+
+                var filterProductAantal = Builders<ProductAantal>.Filter.Eq("_id", ProductAantalId);
+                productAantalLijsten.DeleteOne(filterProductAantal);
+
+
+                return document;
+            }
+            catch (Exception ex)
+            {
+                FileOperations.Foutloggen(ex);
+                return null;
+            }
+            
+        }
+
+
     }
 }
 
