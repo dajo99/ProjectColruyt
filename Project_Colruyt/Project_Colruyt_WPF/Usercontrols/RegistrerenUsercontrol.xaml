@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="Project_Colruyt_WPF.Usercontrols.RegistrerenUsercontrol"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Project_Colruyt_WPF.Usercontrols"
+             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+             Background="{DynamicResource MaterialDesignPaper}"
+             TextElement.FontWeight="Medium"
+             TextElement.FontSize="14"
+             FontFamily="{materialDesign:MaterialDesignFont}"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="0 50">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBox x:Name="txtEmail"  Text="{Binding Email, ValidatesOnDataErrors=True}"
+            materialDesign:HintAssist.Hint="e-mail adres"
+            Grid.Row="0"
+            Width="500"
+            Margin="0 20"/>
+
+
+        <StackPanel Grid.Row="1">
+            <local:WachtwoordUsercontrol
+                Wachtwoord="{Binding Wachtwoord,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }"
+                materialDesign:HintAssist.Hint="wachtwoord"      
+                Width="500"
+                Margin="0 20 0 5"/>
+            <Label x:Name="lblWachtwoord"
+                Width="500"
+                Margin="0 0 0 10" 
+                Foreground="red"
+                FontSize="11"
+                Content="{Binding WachtwoordMelding}"/>
+        </StackPanel>
+
+        <!--<TextBox x:Name="txtWachtwoord"  Text="{Binding Wachtwoord, ValidatesOnDataErrors=True}"
+            materialDesign:HintAssist.Hint="wachtwoord"
+            Grid.Row="1"
+            Width="500"
+            Margin="0 20"></TextBox>-->
+
+
+        <StackPanel Grid.Row="2">
+            <local:WachtwoordUsercontrol
+                Wachtwoord="{Binding Herhaal,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay }"
+                materialDesign:HintAssist.Hint="herhaal wachtwoord"      
+                Width="500"
+                Margin="0 20 0 5"/>
+            <Label x:Name="lblHerhaalWachtwoord"
+                Width="500"
+                Margin="0" 
+                Foreground="red"
+                FontSize="11"
+                Content="{Binding HerhaalWachtwoordMelding}"/>
+        </StackPanel>
+
+        <!--<TextBox x:Name="txtHerhalingWachtwoord" Text="{Binding Herhaal, ValidatesOnDataErrors=True}"
+            materialDesign:HintAssist.Hint="herhaal wachtwoord"
+            Grid.Row="2"
+            Width="500"
+            Margin="0 20"/>-->
+
+        <Button Grid.Row="3" Command="{Binding}" CommandParameter="Registreer"
+            Margin="0 20"
+            Width="400" Height="50"
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            Content="Registreer"
+            FontSize="18"/>
+        
+    </Grid>
+</UserControl>

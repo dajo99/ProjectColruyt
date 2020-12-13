@@ -1,4 +1,5 @@
-﻿using Project_Colruyt_WPF.ViewModels;
+﻿using Project_Colruyt_DAL;
+using Project_Colruyt_WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,12 +17,27 @@ namespace Project_Colruyt_WPF
     public partial class App : Application
     {
          private void Application_Startup(object sender, StartupEventArgs e)
-        {
+         {
             MainViewModel viewmodel = new MainViewModel();
             Views.MainView view = new Views.MainView();
+
+            //Usercontrols.NieuwProduct_usercontrol usc = new Usercontrols.NieuwProduct_usercontrol();
+            //usc.DataContext = new NieuwProductViewModel();
+
+            Usercontrols.Aanmelden_usercontrol usc = new Usercontrols.Aanmelden_usercontrol();
+            usc.DataContext = new AanmeldenViewModel();
+
+            viewmodel.WindowTitle = "Welkom";
+            viewmodel.LogoutVisibility = "Collapsed";
+            viewmodel.BackVisibility = "Collapsed";
+            viewmodel.SaveVisibility = "Collapsed";
+
+            //Usercontrols.RegistrerenUsercontrol usc = new Usercontrols.RegistrerenUsercontrol();
+            //usc.DataContext = new RegistreerViewModel();
+            viewmodel.Control = usc;
             view.DataContext = viewmodel;
             view.Show();
 
-        }
+         }
     }
 }
