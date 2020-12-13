@@ -144,6 +144,11 @@ namespace Project_Colruyt_WPF.ViewModels
         {
             if (Lijstje.Id == null)
             {
+                if (string.IsNullOrWhiteSpace(Naam))
+                {
+                    Naam = "winkellijst";
+                }
+
                 ///enkel nog product toevoegen hierin regelen
                 Lijstje.Id = new BsonObjectId(ObjectId.GenerateNewId());
                 Lijstje.Datum = DateTime.Now;
@@ -199,29 +204,29 @@ namespace Project_Colruyt_WPF.ViewModels
         }
 
 
-        public void VerwijderProduct()
-        {
-            if (SelectedProduct != null)
-            {
-                GebruikerLijst document = null;
+        //public void VerwijderProduct()
+        //{
+        //    if (SelectedProduct != null)
+        //    {
+        //        GebruikerLijst document = null;
 
-                if (document == VerwijderProductUitGebruikerslijst(Lijstje.Id, SelectedProduct.Id))
-                {
-                    MessageBox.Show(document.ToString());
-                    Producten.Remove(SelectedProduct);
-                }
-                else
-                {
-                    MessageBox.Show("fout bij het verwijderen van product.");
-                }
+        //        if (document == VerwijderProductUitGebruikerslijst(Lijstje.Id, SelectedProduct.Id))
+        //        {
+        //            MessageBox.Show(document.ToString());
+        //            Producten.Remove(SelectedProduct);
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("fout bij het verwijderen van product.");
+        //        }
 
-            }
-            else
-            {
-                MessageBox.Show("Selecteer eerst een product om te verwijderen.");
-            }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Selecteer eerst een product om te verwijderen.");
+        //    }
 
-        }
+        //}
 
 
         public override bool CanExecute(object parameter)
@@ -257,9 +262,9 @@ namespace Project_Colruyt_WPF.ViewModels
                     Openen();
                     break;
 
-                case "VerwijderProduct":
-                    VerwijderProduct();
-                    break;
+                //case "VerwijderProduct":
+                //    VerwijderProduct();
+                //    break;
                     
             }
         }
